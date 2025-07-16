@@ -3,7 +3,7 @@ from django.http import HttpRequest, HttpResponse
 
 # Home Page
 def home_view (request: HttpRequest):
-    return render (request, "main/index.html")
+    return render (request, "base.html")
 
 
 # Contact Page
