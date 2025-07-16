@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}{{ plant.name }} - Planteer{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Plant Info Section -->
+  <div class="row align-items-center mb-5">
+    <!-- Image -->
+    <div class="col-md-6 mb-4 mb-md-0">
+      <img src="{{ plant.image.url }}" alt="{{ plant.name }}" class="img-fluid rounded detail-image">
+    </div>
+
+    <!-- Details -->
+    <div class="col-md-6">
+      <h2 class="fw-bold">{{ plant.name }}</h2>
+      <p class="text-muted mb-1"><strong>Category:</strong> {{ plant.category }}</p>
+      <p><strong>About:</strong> {{ plant.about }}</p>
+      <p><strong>Used For:</strong> {{ plant.used_for }}</p>
+      <p><strong>Edible:</strong> {{ plant.is_edible|yesno:"Yes,No" }}</p>
+    </div>
+  </div>
+
+  <!-- Related Plants -->
+  <div class="related-plants mt-5">
+    <h4 class="mb-4">Related Plants</h4>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for related in related_plants %}
+        <div class="col">
+          <a href="{% url 'plants:plant_detail' related.id %}" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow-sm">
+              <img src="{{ related.image.url }}" class="card-img-top" alt="{{ related.name }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ related.name }}</h5>
+                <p class="card-text text-muted">{{ related.category }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}All Plants - Planteer{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">All Plants</h2>
+
+<!-- Filter Form -->
+<form method="get" class="row row-cols-lg-auto g-3 align-items-center mb-4">
+  <div class="col-12">
+    <select name="category" class="form-select">
+      <option value="">All Categories</option>
+      <option value="Tree">Tree</option>
+      <option value="Fruit">Fruit</option>
+      <option value="Vegetable">Vegetable</option>
+      <option value="Flower">Flower</option>
+      <option value="Herb">Herb</option>
+    </select>
+  </div>
+  <div class="col-12">
+    <select name="is_edible" class="form-select">
+      <option value="">Edibility</option>
+      <option value="true">Edible</option>
+      <option value="false">Not Edible</option>
+    </select>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-dark">Filter</button>
+  </div>
+</form>
+
+<!-- Plant Grid -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for plant in plants %}
+  <div class="col">
+    <a href="{% url 'plants:plant_detail' plant.id %}" class="text-decoration-none text-dark">
+      <div class="card h-100">
+        <img src="{{ plant.image.url }}" alt="{{ plant.name }}" class="plant-image">
+        <div class="card-body">
+          <h5 class="card-title">{{ plant.name }}</h5>
+          <p class="card-text small text-muted">{{ plant.about|truncatechars:60 }}</p>
+          <span class="badge bg-light text-dark">{{ plant.category }}</span>
+          {% if plant.is_edible %}
+          <span class="badge bg-success text-white">Edible</span>
+          {% else %}
+          <span class="badge bg-secondary text-white">Not Edible</span>
+          {% endif %}
+        </div>
+      </div>
+    </a>
+    
+  </div>
+  {% empty %}
+  <p>No plants found.</p>
+  {% endfor %}
+</div>
+{% endblock %}

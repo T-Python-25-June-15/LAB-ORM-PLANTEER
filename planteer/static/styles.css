@@ -1,0 +1,248 @@
+/* Body and global font */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+header,
+footer,
+.hero-section,
+.card,
+.form-control {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: none;
+  box-shadow: none;
+}
+
+/* Header */
+header {
+  background-color: #ffffff;
+  border-bottom: none !important;
+}
+
+header h2 {
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Footer */
+footer {
+  background-color: #ffffff !important;
+  color: #000000;
+  font-size: 14px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid #ddd !important;
+}
+
+
+/* === Text === */
+body h1, body h2, body h3, body h4, body h5, body h6,
+body p, body span, body label {
+  color: #000000;
+}
+
+footer h5 {
+  color: #000000;
+  font-weight: bold;
+}
+
+footer ul {
+  padding-left: 0;
+}
+
+footer ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Hero section */
+.hero-section {
+  background-image: url("/static/main/images/hero5.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.203); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.421);
+}
+
+
+.hero-section h1 {
+  color: #ffffff;
+}
+.hero-section h2{
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+.hero-search-input {
+  border-radius: 12px;  
+  padding: 0.75rem 1.25rem;
+  width: 600px;
+  max-width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #000;
+  border: none;
+}
+
+.hero-search-btn {
+  border-radius: 12px;  
+  background-color: #000;
+  color: #fff;
+  height: 56px;  
+  border: none;
+}
+
+.hero-search-btn:hover {
+  background-color: #333;
+}
+
+.hero-search-form .btn {
+  height: 56px; 
+}
+
+.hero-section input::placeholder {
+  color: #777;
+}
+
+/* more buttton */
+.more-btn {
+  display: inline-block;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  padding: 0.1rem 1.1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.more-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+
+
+/* Cards */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border: 1px solid #eaeaea;
+  box-shadow: none;
+}
+
+.card-img-top,
+.plant-image {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+
+/* === Buttons === */
+.btn-dark {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #333333 !important;
+}
+
+/* Forms */
+form input,
+form select,
+form textarea {
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+/* ==== Add plant page ==== */
+
+.form-container {
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Form fields */
+.plant-form input,
+.plant-form select,
+.plant-form textarea {
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;     
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-bottom: 0.75rem;      
+  font-size: 0.95rem;
+}
+
+.plant-form textarea {
+  height: 100px;        
+  resize: vertical;     
+}
+
+
+/* Button */
+.plant-form button {
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+
+/* ==== Plant details page ==== */
+
+.detail-image {
+  max-height: 400px;
+  object-fit:contain;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+
+
+
+
+
+
+/* Responsive tweak */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 1rem;
+  }
+
+
+  .hero-section .overlay {
+    padding: 2rem;
+  }
+}

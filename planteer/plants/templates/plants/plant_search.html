@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Search - Planteer{% endblock %}
+
+{% block content %}
+<h2>Search Results</h2>
+
+{% if query %}
+  <p>Results for: <strong>{{ query }}</strong></p>
+{% endif %}
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+  {% for plant in results %}
+  <div class="col">
+    <div class="card h-100">
+      <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ plant.name }}</h5>
+        <p class="text-muted small">{{ plant.about|truncatechars:60 }}</p>
+        <span class="badge bg-light text-dark">{{ plant.category }}</span>
+        {% if plant.is_edible %}
+        <span class="badge bg-success text-white">Edible</span>
+        {% else %}
+        <span class="badge bg-secondary text-white">Not Edible</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>No matching plants found.</p>
+  {% endfor %}
+</div>
+{% endblock %}
