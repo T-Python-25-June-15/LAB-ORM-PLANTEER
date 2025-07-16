@@ -1,0 +1,175 @@
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+}
+
+main #form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: row-reverse;
+    gap: 50px;
+    padding: 30px 70px;
+    background-image: url('../image/plants-b.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 100% center;
+}
+
+main #form-container div {
+    width: 50%;
+    text-align: start;
+}
+main #form-container > div h1 {
+    margin: 20px;
+}
+
+main #form-container > div p {
+    color: black;
+    background-color: #ffffffa4;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+main #form-container form {
+    box-shadow: 1px 1px 5px lightgray;
+    width: 50%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+main #form-container form label {
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 800px) {
+    main #form-container {
+        flex-direction: column;
+    }
+
+    main #form-container form,
+    main #form-container>div {
+        width: 100%;
+    }
+
+}
+
+
+/*   all page     */
+
+main .grid_countainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    padding: 70px;
+    gap: 30px;
+}
+main .grid_countainer .grid_card {
+    text-decoration: none;
+    color: black;
+}
+main .grid_countainer .grid_card img{
+    max-height: 300px;
+    border-radius: 10px;
+}
+
+main .grid_countainer .grid_card > div {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    main .grid_countainer {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+/*   detail page   */
+
+main .detail-container {
+    width: 100%;
+    padding: 70px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main .detail-container .top_detail {
+    display: flex;
+    gap: 70px;
+}
+
+main .detail-container .top_detail h1 {
+    width: 100%;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px lightgray solid;
+}
+
+main .detail-container .top_detail img{
+    width: 50%;
+    border-radius: 10px;
+    height: auto;
+}
+
+main .detail-container .top_detail p:last-child {
+    padding: 10px 0;
+    border-top: 1px lightgray solid;
+    width: 100%;
+}
+
+main .detail-container .top_detail .btns {
+    display: flex;
+    width: 100%;
+    padding: 30px;
+    justify-content: end;
+    gap: 20px;
+}
+main .detail-container .gray {
+    color: gray;
+}
+
+main .related_plant {
+    margin-top: 50px;
+    width: 100%;
+}
+
+main .related_plant h3 {
+    width: 100%;
+    border-bottom: 1px lightgray solid;
+    padding: 20px 0;
+}
+main .related_plant .related {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+
+main .related_plant .related a {
+    width: 33%;
+    text-decoration: none;
+    color: black;
+}
+
+main .related_plant .related a img {
+    width: 100%;
+    border-radius: 10px;
+}
+main .related_plant .related a div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

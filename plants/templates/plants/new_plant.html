@@ -1,0 +1,30 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/palnts_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+<main>
+    <div id="form-container">
+        <div>
+            <h1>Add New Plant</h1>
+            <p>Plants are vital to life on Earth. They provide us with oxygen, food, medicine, and beauty. Each plant
+                has unique characteristics and benefits, whether it is used for decoration, healing, or even cooking.
+                <br>
+                Please fill out the form below to add a new plant to the system. Make sure to provide a clear name, a
+                detailed description, and indicate whether the plant is edible or not. You can also upload an image and
+                categorize the plant based on its type and usage.<br>
+                Accurate information helps others understand the importance and proper care of each plant.
+            </p>
+        </div>
+        <form action="{% url 'plants:new_plants_view' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ plant_form.as_p }}
+            <input type="submit" value="Add" class="btn btn-outline-success">
+        </form>
+    </div>
+</main>
+{% endblock content %}

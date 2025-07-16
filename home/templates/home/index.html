@@ -1,0 +1,53 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/palnts_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+<main>
+  <div class="home_countainer">
+    <h1>Planteer</h1>
+    <h3>Plant Database For Plants Lovers</h3>
+    <div class="search">
+      <form action="{% url 'home:search_view' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Search For Plant..." class="form-control" name="search">
+        <button class="btn btn-dark">Search</button>
+      </form>
+    </div>
+  </div>
+  <div class="bottom_section">
+
+
+    <div class="detail-container" style="width: 80%; justify-self: center;">
+      <div class="related_plant">
+        <h3 style="width: 100%; display: flex; justify-content: space-between;">Related Plants <a
+            style="background-color: lightgreen; font-weight: 500;" class="btn"
+            href="{% url 'plants:all_plants_view' %}">More <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+              viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
+              <path
+                d="M71.87-234.5v-491h91v491h-91Zm568.61 2.15L575.59-296l138.74-138.5H242.87v-91h471.46L576.83-664l63.65-63.65L888.13-480 640.48-232.35Z" />
+            </svg></a></h2>
+          <div class="related">
+            {% for plant in plants %}
+            <a href="{% url 'plants:detail_plant_view' plant.id %}">
+              <img src="{{ plant.image.url }}" class="w-100" alt="">
+              <div style="margin-top: 20px;">
+                <strong>{{ plant.name }}</strong>
+                <span>{{ plant.about }}</span>
+                <strong>{{ plant.category }}</strong>
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+      </div>
+    </div>
+
+
+  </div>
+</main>
+{% endblock content %}
