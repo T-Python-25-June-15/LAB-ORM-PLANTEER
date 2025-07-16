@@ -7,6 +7,7 @@
     <title>{% block title %}Base Page{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css'%}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta http-equiv="refresh" content="5">
     {% block fileStyle %}
 
     {% endblock %}
@@ -24,7 +25,7 @@
                 <div class="top-right-nav">
                     <a href="">All Plants</a>
                     <a href="">Contact Us</a>
-                    <a href="">Add Plant</a>
+                    <a href="" class="btn">Add Plant</a>
                 </div>
             </nav>
 
@@ -37,12 +38,12 @@
         </main>
         <footer>
             <nav class="bottom-left-nav">
-                <a href="">Planteer</a>
+                <a href="" class="site-name">Planteer</a>
                 <div class="social-media">
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-linkedin"></i>
-                    <i class="fa-brands fa-youtube"></i>
-                    <i class="fa-brands fa-instagram"></i>
+                    <a href=""><i class="fa-brands fa-facebook"></i></a>
+                    <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                    <a href=""><i class="fa-brands fa-youtube"></i></a>
+                    <a href="" class="insta"><i class="fa-brands fa-instagram"></i></a>
                 </div>
             </nav>
             <nav class="bottom-right-nav">
