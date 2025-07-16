@@ -4,12 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block title %}Base Page{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% block fileStyle %}
+
+    {% endblock %}
+
 </head>
 <body>
 
-    <h1>Base Page</h1>
+    <div class="container">
+
+        <header>
+            <nav>
+                <div class="logo-div">
+                    <a href="#">Planteer</a>
+                </div>
+                <div class="top-right-nav">
+                    <a href="">All Plants</a>
+                    <a href="">Contact Us</a>
+                    <a href="">Add Plant</a>
+                </div>
+            </nav>
+
+        </header>
+        <main>
+            {% block content %}
+
+            {% endblock %}
+
+        </main>
+        <footer>
+            <nav class="bottom-left-nav">
+                <a href="">Planteer</a>
+                <div class="social-media">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </nav>
+            <nav class="bottom-right-nav">
+                <div class="left-col">
+                    <p>About</p>
+                    <a href="">About Planteer</a>
+                    <a href="">Our Vision</a>
+                    <a href="">Contact Us</a>
+                </div>
+                <div class="middle-col">
+                    <p>Plant Categories</p>
+                    <a href="">Indoor Plants</a>
+                    <a href="">Outdoor Plants</a>
+                    <a href="">Edible Plants</a>
+                </div>
+                <div class="right-col">
+                    <p>Learn</p>
+                    <a href="">Planting Tips</a>
+                    <a href="">Care Guide</a>
+                    <a href="">Plant importance</a>
+                </div>
+
+            </nav>
+            
+        </footer>
+    </div>
     
 </body>
 </html>
