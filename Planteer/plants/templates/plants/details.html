@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
-{% block title %}Home{% endblock %}
+{% block title %}Details{% endblock %}
 
 {% block content %}
     <div class="detail">
@@ -21,7 +21,33 @@
         
     </div>
     <!-- Button trigger modal -->
+    <hr>
+    <h2>Comments ({{comments.count}})</h2>
+    <div class="d-flex flex-column gap-3">
+      {% for comment in comments %}
+      <div class="d-flex flex-column p-3 shadow">
+        <h4>{{comment.full_name}}</h4>
+        <p>{{comment.content}}</p>
+        <p class="text-muted">{{comment.created_at}}</p>
+      </div>
+      {% endfor%}
+    </div>
+    <h2>Add Comment</h2>
+    <form class="d-flex flex-column gap-2 mt-4" action="{% url 'plants:comment_views' plants.id %}" method="POST">
+      {% csrf_token %}
+            <div class="form-group">
+                <label for="full_name">Full Name: </label>
+                <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+                <label for="content">Comment:</label>
+                <br>
+                <textarea placeholder="Your comment" name="content" class="form-control" id="content" rows="3" required></textarea>
+            </div>
 
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
