@@ -5,28 +5,29 @@
 <h2 class="mb-3">All Plants</h2>
 
 <!-- Filter Form -->
-<form method="get" class="row row-cols-lg-auto g-3 align-items-center mb-4">
-  <div class="col-12">
+<form method="get" class="row g-3 mb-4">
+  <div class="col-md-4">
     <select name="category" class="form-select">
       <option value="">All Categories</option>
-      <option value="Tree">Tree</option>
-      <option value="Fruit">Fruit</option>
-      <option value="Vegetable">Vegetable</option>
-      <option value="Flower">Flower</option>
-      <option value="Herb">Herb</option>
+      {% for choice in plants.paginator.object_list.model.Category.choices %}
+        <option value="{{ choice.0 }}" {% if category == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+      {% endfor %}
     </select>
   </div>
-  <div class="col-12">
+
+  <div class="col-md-4">
     <select name="is_edible" class="form-select">
-      <option value="">Edibility</option>
-      <option value="true">Edible</option>
-      <option value="false">Not Edible</option>
+      <option value="">All Edibility</option>
+      <option value="true" {% if is_edible == 'true' %}selected{% endif %}>Edible</option>
+      <option value="false" {% if is_edible == 'false' %}selected{% endif %}>Not Edible</option>
     </select>
   </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-dark">Filter</button>
+
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-dark w-100">Filter</button>
   </div>
 </form>
+
 
 <!-- Plant Grid -->
 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -54,36 +55,32 @@
   {% endfor %}
 
   <!-- Pagination Controls -->
-  <div class="mt-5 d-flex justify-content-center">
-    <nav aria-label="Page navigation">
-      <ul class="pagination flex-wrap justify-content-center">
-        {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">«</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled"><span class="page-link">«</span></li>
-        {% endif %}
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?category={{ category }}&is_edible={{ is_edible }}&page={{ page_obj.previous_page_number }}">
+            Previous
+          </a>
+        </li>
+      {% endif %}
   
-        {% for num in page_obj.paginator.page_range %}
-          {% if page_obj.number == num %}
-            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-            </li>
-          {% endif %}
-        {% endfor %}
+      {% for page_num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == page_num %}active{% endif %}">
+          <a class="page-link" href="?category={{ category }}&is_edible={{ is_edible }}&page={{ page_num }}">
+            {{ page_num }}
+          </a>
+        </li>
+      {% endfor %}
   
-        {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}">»</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled"><span class="page-link">»</span></li>
-        {% endif %}
-      </ul>
-    </nav>
-  </div>
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?category={{ category }}&is_edible={{ is_edible }}&page={{ page_obj.next_page_number }}">
+            Next
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>  
 </div>
 {% endblock %}

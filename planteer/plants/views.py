@@ -8,27 +8,30 @@ from django.core.paginator import Paginator
 
 def plant_list_view(request):
     plants = Plant.objects.all()
+
+    # GET filter values
     category = request.GET.get('category')
     is_edible = request.GET.get('is_edible')
-    plant_list = Plant.objects.all()
-    paginator = Paginator(plant_list, 6)
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
+    # Filter if selected
     if category:
         plants = plants.filter(category=category)
 
-    if is_edible == "true":
+    if is_edible == 'true':
         plants = plants.filter(is_edible=True)
-    elif is_edible == "false":
+    elif is_edible == 'false':
         plants = plants.filter(is_edible=False)
 
+    # Paginate
+    paginator = Paginator(plants, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'plants': plants,
-        'page_obj': page_obj,
         'plants': page_obj,
-        
+        'page_obj': page_obj,
+        'category': category,
+        'is_edible': is_edible,
     }
     return render(request, 'plants/plant_list.html', context)
 
