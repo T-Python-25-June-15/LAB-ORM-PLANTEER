@@ -18,6 +18,11 @@
       <p><strong>Used For:</strong> {{ plant.used_for }}</p>
       <p><strong>Edible:</strong> {{ plant.is_edible|yesno:"Yes,No" }}</p>
     </div>
+    <!-- Buttons -->
+<div class="mt-4">
+  <a href="{% url 'plants:plant_update' plant.id %}" class="btn btn-dark me-2">Edit</a>
+  <a href="{% url 'plants:plant_delete' plant.id %}" class="btn btn-outline-danger">Delete</a>
+</div>
   </div>
 
   <!-- Related Plants -->

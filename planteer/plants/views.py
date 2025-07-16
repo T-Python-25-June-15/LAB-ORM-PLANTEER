@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Plant
 from .forms import PlantForm 
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -9,6 +10,11 @@ def plant_list_view(request):
     plants = Plant.objects.all()
     category = request.GET.get('category')
     is_edible = request.GET.get('is_edible')
+    plant_list = Plant.objects.all()
+    paginator = Paginator(plant_list, 6)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     if category:
         plants = plants.filter(category=category)
@@ -20,6 +26,9 @@ def plant_list_view(request):
 
     context = {
         'plants': plants,
+        'page_obj': page_obj,
+        'plants': page_obj,
+        
     }
     return render(request, 'plants/plant_list.html', context)
 
@@ -35,21 +44,33 @@ def plant_create_view(request):
     return render(request, 'plants/plant_form.html', {'form': form})
 
 def plant_search_view(request):
-    query = request.GET.get("q")
-    results = []
+    query = request.GET.get('q')
+    category = request.GET.get('category')
+    is_edible = request.GET.get('is_edible')
+
+    plants = Plant.objects.all()
 
     if query:
-        results = Plant.objects.filter(
-            Q(name__icontains=query) |
-            Q(about__icontains=query) |
-            Q(used_for__icontains=query) |
-            Q(category__icontains=query)
-        )
+        plants = plants.filter(Q(name__icontains=query) | Q(about__icontains=query))
 
-    return render(request, 'plants/plant_search.html', {
+    if category and category != 'all':
+        plants = plants.filter(category=category)
+
+    if is_edible == 'true':
+        plants = plants.filter(is_edible=True)
+    elif is_edible == 'false':
+        plants = plants.filter(is_edible=False)
+
+    categories = Plant._meta.get_field('category').choices
+
+    context = {
+        'plants': plants,
         'query': query,
-        'results': results
-    })
+        'category': category,
+        'is_edible': is_edible,
+        'categories': categories,
+    }
+    return render(request, 'plants/plant_search.html', context)
 
 def plant_detail_view(request, plant_id):
     plant = get_object_or_404(Plant, id=plant_id)
