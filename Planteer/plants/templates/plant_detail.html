@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Contactus - messages {% endblock %}
+
+{% block content %} 
+<div class="p-1 md:p-10">
+    <div class="flex flex-col md:flex-row justify-between gap-6 md:gap-20">
+        <div class="w-full md:w-1/2">
+            <img src="{{ plant.image.url }}" class="w-full h-150 rounded-lg">
+        </div>
+        <div class="w-full md:w-1/2 md:pl-10">
+            <h2 class="text-xl md:text-2xl font-bold mb-4">{{ plant.name }}</h2>
+            <p class="text-md md:text-lg mb-2 text-gray-500">{{ plant.category }}</p>
+            <p class="text-md md:text-lg mb-2 text-gray-400">{{ plant.about }}</p>
+            <p class="text-md md:text-lg font-bold">Native to:<br> Saudi Arabia, Kuwait, USA</p>
+            <p class="text-md md:text-lg font-bold">Is Edible: {% if plant.is_edible %} Yes {% else %} No {% endif %}</p>
+            <p class="text-md md:text-lg font-bold">Used for:<br> {{ plant.used_for }}</p>
+            <br>
+            <div class="flex flex-wrap gap-2">
+                <a href="{% url 'plants:update_plant_view' plant.id %}" class="bg-orange-300 p-3 rounded-xl text-white flex items-center">
+                    <i class="fa fa-pencil"></i>
+                    <span class="ml-2">Update</span>
+                </a>
+                <a href="{% url 'plants:delete_plant_view' plant.id %}" class="bg-red-300 p-3 rounded-xl text-white flex items-center">
+                    <i class="fa fa-trash"></i>
+                    <span class="ml-2">Delete</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<h3 class="mt-20 text-3xl font-bold">Comments</h3>
+<div class="mt-5">
+    <form method="POST" action="{% url 'plants:add_plant_comment_view' plant.id %}">
+        {% csrf_token %}
+        <input name="full_name" class="w-full p-2 border rounded-lg" placeholder="write your full name">
+
+        <br><br>
+
+        <textarea name="content" rows="4" class="w-full p-2 border rounded-lg" placeholder="Add your comment here..."></textarea>
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg mt-2">Submit</button>
+    </form>
+</div>
+<div class="mt-10">
+    {% for comment in plant_comments %}
+    <div class="border-b pb-4 mb-4">
+        <p class="text-lg font-semibold">{{ comment.full_name }}</p>
+        <p class="text-gray-600">{{ comment.content }}</p>
+        <p class="text-sm text-gray-400">{{ comment.created_at }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<h3 class="mt-20 text-3xl font-bold">Related Plants</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-10">
+    {% for p in related_plants %}
+    <a href="{% url 'plants:plant_details_view' p.id %}">
+        <div class="flex flex-col mx-2">
+            <img src="{{p.image.url}}" class="rounded-xl h-70">
+            <div class="mt-2 mx-2">
+                <h3 class="font-semibold text-xl">{{p.name}}</h3>
+                <p class="text-gray-500">{{p.about}}</p>
+                <h3 class="font-semibold">{{p.category}}</h3>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
