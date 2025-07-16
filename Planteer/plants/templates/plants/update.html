@@ -1,0 +1,75 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Add plant{% endblock %}
+
+{% block content %}
+<h1>Update {{plants.title}}</h1>
+
+<div class="row">
+
+    <div class="col-6">
+
+        <form class="form" action="{% url 'plants:update_views' plants.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name: </label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name of the plant" value="{{plants.name}}">
+            </div>
+            <div class="form-group">
+                <label for="about">About the plant:</label>
+                <br>
+                <textarea placeholder="Description about the plant" name="about" class="form-control" id="about" rows="3"  required>{{plants.about}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="user_for">The plant used for:</label>
+                <textarea placeholder="what the plant used for" name="user_for" class="form-control" id="user_for" required>{{plants.user_for}}</textarea>
+            </div>
+            <div class="form-group">
+                <div class="check_img">
+                    <img src="{{plants.image.url}}" />
+                    <div class="check_img_right">
+                        <label for="image">Upload Image:</label>
+                        <input type="file" name="image" class="form-control" id="image" accept="image/*"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Category: </label>
+                <div class="form-control">
+                    
+
+                    <select class="form-select" name="category">
+                        <option value="Algae" {% if plants.category == "Algae" %}selected{% endif %}>Algae</option>
+                        <option value="Bryophytes" {% if plants.category == "Bryophytes" %}selected{% endif %}>Bryophytes</option>
+                        <option value="Pteridophytes" {% if plants.category == "Pteridophytes" %}selected{% endif %}>Pteridophytes</option>
+                        <option value="Gymnosperms" {% if plants.category == "Gymnosperms" %}selected{% endif %}>Gymnosperms</option>
+                        <option value="Angiosperms" {% if plants.category == "Angiosperms" %}selected{% endif %}>Angiosperms</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Is edible:</label><br>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="is_edible" value="True" {% if plants.is_edible == True %}checked{% endif %} class="form-check-input" required>
+                    <label class="form-check-label">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="is_edible" value="False" {% if plants.is_edible == False %}checked{% endif %} class="form-check-input" required>
+                    <label class="form-check-label">No</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="created_at">Created at:</label>
+                <input type="date" name="created_at" class="form-control" value="{{plants.created_at.isoformat|slice:':10'}}" required/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update plant</button>
+
+        </form>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

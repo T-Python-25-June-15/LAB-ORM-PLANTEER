@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="image_container">
+        <img src="{% static 'images/background.jpg' %}" alt="background image">
+        <div class="search">
+            <h1>Planteer</h1>
+            <h2>Plant Database For Plants Lover</h2>
+            <div class="search_bar">
+                <form role="search" method="get" action="{% url 'plants:search_views' %}">
+                    <input type="text" name="search" class="search_input" placeholder="Search For Plant..." value="{{request.GET.search}}" required minlength="3" aria-label="Search">
+                    <button class="btn">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom_image_container">
+        <div class="bottom_header">
+            <div class="bottom_image_container_text">
+                <h3>Plants</h3>
+                <p>Learn more about plants</p>
+            </div>
+            <div class="more">
+                <a href="{% url 'plants:all_views' %}"><span>More &rarr;</span></a>
+            </div>
+        </div>
+        <div class="last_three_imgs">
+                {% for plant in plants %}
+                    <div class="last_three_img">
+                        <img src="{{plant.image.url}}">
+                        <h6>{{plant.name}}</h6>
+                        <a href="{% url 'plants:details_views' plant.id %}"><p>Brief about plant</p></a>
+                        <h6>{{plant.category}}</h6>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

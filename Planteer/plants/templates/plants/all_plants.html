@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="all_plants">
+        <h1>All Plants</h1>
+        <div class="last_three_imgs">
+                        {% for plant in plants %}
+                            <div class="last_three_img">
+                                <img src="{{plant.image.url}}">
+                                <h6>{{plant.name}}</h6>
+                                <a href="{% url 'plants:details_views' plant.id %}"><p>Brief about plant</p></a>
+                                <h6>{{plant.category}}</h6>
+                            </div>
+                        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

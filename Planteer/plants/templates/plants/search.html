@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if plants %}
+<h1>Search Results ({{plants.count}})</h1>
+<h5>results for: {{request.GET.search}}</h5>
+<div class="d-flex justify-content-end">
+    <form action="{% url 'plants:search_views' %}" method="GET" >
+
+        <div class="d-flex gap-3">
+            <input type="search" class="form-control" value="{{request.GET.search}}" name="search" required />
+           <select class="form-select" name="category">
+                        <option value="">Category</option>
+                        <option value="Algae" {% if request.GET.category == "Algae" %}selected{% endif %}>Algae</option>
+                        <option value="Bryophytes" {% if request.GET.category == "Bryophytes" %}selected{% endif %}>Bryophytes</option>
+                        <option value="Pteridophytes" {% if request.GET.category == "Pteridophytes" %}selected{% endif %}>Pteridophytes</option>
+                        <option value="Gymnosperms" {% if request.GET.category == "Gymnosperms" %}selected{% endif %}>Gymnosperms</option>
+                        <option value="Angiosperms" {% if request.GET.category == "Angiosperms" %}selected{% endif %}>Angiosperms</option>
+            </select>
+            <select name="is_edible" class="form-select">
+                <option value="">Is edible</option>
+                <option value="True" {% if request.GET.is_edible == 'True'%} selected {% endif %}>Yes</option>
+                <option value="False" {% if request.GET.is_edible == 'False'%} selected {% endif %}>No</option>
+            </select>
+    
+            <input type="submit" value="apply" class="btn btn-primary"/>
+        </div>
+
+    </form>
+</div>
+
+{% else %}
+    <p class="bg-warning p-3 rounded">No results found for your search "{{request.GET.search}}"</p>
+{% endif %}
+
+<div class="row mt-2 row-cols-1 row-cols-md-3 g-4">
+
+    {% for plant in plants %}
+      <div class="col">
+          
+          <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2">
+            <div class="d-flex align-items-center">
+                <h5 class="m-0 p-0">{{plant.rating}}</h5>
+            </div>
+            <img src="{{plant.image.url}}" class="w-100 poster-thumb object-fit-cover"/>
+            <h3>{{plant.name}}</h3>
+            <a href="{% url 'plants:details_views' plant.id %}"><p>Brief about plant</p></a>
+            <h6>{{plant.category}}</h6>
+          </div>
+      </div>
+    {% endfor %}
+  
+  
+  </div>
+{% endblock %}
