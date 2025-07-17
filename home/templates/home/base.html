@@ -22,7 +22,8 @@
         <h4><a style="text-decoration: none; color: black;" href="{% url 'home:home_view' %}">Planteer</a></h4>
         <div id="menu">
             <a href="{% url 'plants:all_plants_view' %}">All Plants</a>
-            <a href="">Contact Us</a>
+            <a href="{% url 'contact:contact_view' %}">Contact Us</a>
+            <a href="{% url 'contact:all_contact' %}">ِAll Messages</a>
             <a href="{% url 'plants:new_plants_view' %}" class="btn btn-dark">Add Plant</a>
         </div>
         <svg id="menu_btn" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px"

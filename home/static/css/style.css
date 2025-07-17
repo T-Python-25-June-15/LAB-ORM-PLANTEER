@@ -52,13 +52,14 @@ header svg {
     header div {
         position: absolute;
         flex-direction: column;
-        top: -250px;
+        top: -300px;
         right: 10%;
         background-color: white;
         padding: 30px 20px;
         border-radius: 10px;
         width: 40%;
         transition: all 0.2s ease-in-out;
+        z-index: 1000;
     }
 
     header svg {

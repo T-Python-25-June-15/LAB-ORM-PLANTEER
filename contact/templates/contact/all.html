@@ -1,0 +1,38 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/palnts_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+<main>
+
+
+    <div class="container my-5">
+        <h2 class="mb-4 text-center">All Messages</h2>
+        <div class="row">
+            {% for contact in contacts %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ contact.first_name }} {{ contact.last_name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ contact.email }}</h6>
+                        <p class="card-text">{{ contact.message }}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ contact.created_at|date:"M d, Y H:i" }}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No messages found.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+</main>
+{% endblock content %}

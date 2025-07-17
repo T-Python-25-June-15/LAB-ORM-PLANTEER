@@ -7,7 +7,7 @@ menu_btn = document.querySelector('#menu_btn').addEventListener('click', ()=>{
         menu.style.top = '100px'
         menu_state = !menu_state
     }else {
-        menu.style.top = '-250%'
+        menu.style.top = '-300%'
         menu_state = !menu_state
     }
 })

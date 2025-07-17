@@ -1,0 +1,23 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/palnts_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+<main>
+    <div id="form-container" style="flex-direction: row;">
+        <div style="width: 30%;">
+            <img src="{% static 'image/image.png' %}" alt="" style="width: 100%;">
+        </div>
+
+        <form action="{% url 'contact:contact_view' %}" method="post" style="width: 70%;">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Send" class="btn btn-outline-success">
+        </form>
+    </div>
+</main>
+{% endblock content %}
