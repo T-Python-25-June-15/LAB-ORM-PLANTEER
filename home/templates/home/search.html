@@ -14,7 +14,7 @@
     <div class="search">
       <form action="{% url 'home:search_view' %}" method="post">
         {% csrf_token %}
-        <input type="text" placeholder="Search For Plant..." class="form-control">
+        <input type="text" placeholder="Search For Plant..." class="form-control" name="search">
         <button class="btn btn-dark">Search</button>
       </form>
     </div>

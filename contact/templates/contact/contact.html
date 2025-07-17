@@ -10,7 +10,7 @@
 <main>
     <div id="form-container" style="flex-direction: row;">
         <div style="width: 30%;">
-            <img src="{% static 'image/image.png' %}" alt="" style="width: 100%;">
+            <img src="{% static 'image/image.png' %}" alt="" style="width: 100%; border-radius: 10px;">
         </div>
 
         <form action="{% url 'contact:contact_view' %}" method="post" style="width: 70%;">
