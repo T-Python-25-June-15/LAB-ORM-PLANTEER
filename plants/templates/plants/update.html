@@ -1,0 +1,19 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/palnts_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+<main>
+    <div id="form-container">
+        <form action="{% url 'plants:update_plant_view' plant.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ plant_form.as_p }}
+            <input type="submit" value="Update" class="btn btn-outline-success">
+        </form>
+    </div>
+</main>
+{% endblock content %}

@@ -1,0 +1,113 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/palnts_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+<main>
+    <div class="detail-container">
+        <div class="top_detail">
+            <img src="{{ plant.image.url }}" alt="">
+            <div>
+                <h1>{{ plant.name }}</h1>
+                <h5 class="gray">Category</h5>
+                <span class="gray">{{ plant.about }}</span>
+                <p>is Edible: {{plant.is_edible}}</p>
+                <h5>Used for</h5>
+                <p>{{ plant.used_for }}</p>
+                <div class="btns">
+                    <a href="{% url 'plants:update_plant_view' plant.id %}" class="btn btn-outline-primary">Update</a>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Delete
+                    </button>
+                </div>
+                <p class="gray">
+                    <em>craeted at: {{ plant.created_at }}</em>
+                </p>
+            </div>
+        </div>
+
+        <div class="comments mt-4">
+            <div>
+                <h5>Comments</h5>
+                <button class="btn btn-outline-success" id="add_comment" onclick="open_form()">Add Comment</button>
+            </div>
+            <form action="" method="post" id="comment_form">
+                <span id="cancel_comment" onclick="cancel()">X</span>
+                {% csrf_token %}
+                {{ form_comment.as_p }}
+                <button type="submit" class="btn btn-success">Add</button>
+            </form>
+            <div class="all_comments">
+                {% for c in all_comments %}
+                <div>
+                    <h5>{{ c.name }}</h5>
+                    <p>{{ c.comment }}</p>
+                    <p class="gray"><em>{{ c.created_at }}</em></p>
+                </div>
+                {% empty %}
+                <p>no comments</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="related_plant">
+            <h3>Related Plants</h2>
+                <div class="related">
+                    {% for plant in related_plant %}
+                    <a href="{% url 'plants:detail_plant_view' plant.id %}">
+                        <img src="{{ plant.image.url }}" class="w-100" alt="">
+                        <div>
+                            <strong>{{ plant.name }}</strong>
+                            <span>{{ plant.about }}</span>
+                            <strong>{{ plant.category }}</strong>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete {{ plant.name }}?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-oultline-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{% url 'plants:delete_plant' plant.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        form = document.querySelector('#comment_form')
+
+        function open_form() {
+            console.log('clicked')
+            form.style.display = 'block';
+        }
+
+        function cancel() {
+            console.log('clicked')
+
+            form.style.display = 'none';
+        }
+
+    </script>
+</main>
+{% endblock content %}

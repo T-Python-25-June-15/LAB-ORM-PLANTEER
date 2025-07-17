@@ -1,0 +1,39 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/palnts_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+<main>
+  <div class="search_container">
+    <p >Your Search: '{{ search }}'</p>
+    <div class="search">
+      <form action="{% url 'home:search_view' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Search For Plant..." class="form-control" name="search">
+        <button class="btn btn-dark">Search</button>
+      </form>
+    </div>
+  </div>
+  <div class="grid_countainer">
+    {% for plant in plants %}
+    <a class="grid_card" href="{% url 'plants:detail_plant_view' plant.id %}">
+      <img src="{{ plant.image.url }}" class="w-100" alt="">
+      <div>
+        <strong>{{ plant.name }}</strong>
+        <span>{{ plant.about }}</span>
+        <strong>{{ plant.category }}</strong>
+      </div>
+    </a>
+    {% empty %}
+    <a class="grid_card">
+      <p>There are no results matching your search.</p>
+    </a>
+    {% endfor %}
+  </div>
+</main>
+{% endblock content %}
