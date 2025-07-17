@@ -7,9 +7,20 @@
 {% endblock style %}
 
 {% block content %}
+<style>
+    @media screen and (max-width: 800px){
+        #img {
+            display: none;
+        }
+
+        #form-container {
+            width: 90vw;
+        }
+    }
+</style>
 <main>
     <div id="form-container" style="flex-direction: row-reverse;">
-        <div style="width: 30%;">
+        <div id="img" style="width: 30%;">
             <!-- <img src="{% static 'image/image.png' %}" alt="" style="width: 100%; border-radius: 10px;"> -->
         </div>
 
