@@ -52,18 +52,33 @@ header svg {
     header div {
         position: absolute;
         flex-direction: column;
-        top: 100px;
+        top: -250px;
         right: 10%;
         background-color: white;
         padding: 30px 20px;
         border-radius: 10px;
-        width: 30%;
+        width: 40%;
         transition: all 0.2s ease-in-out;
     }
 
     header svg {
         display: block;
         cursor: pointer;
+    }
+
+    footer .footerl-row {
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+    }
+
+    footer .left_side {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    * {
+        font-size: 0.8rem;
     }
 
 }
@@ -78,17 +93,36 @@ footer .row {
     padding: 40px 0 0 0;
 }
 
+footer .footerl-row {
+    display: flex;
+}
+
 footer .left_side {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: start;
+    align-items: center;
+}
+
+footer .left_side .icons {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    justify-content: center;
 }
 
 footer .right_side {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+footer .right_side div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
 }
 
 footer .right_side div ul {
@@ -110,6 +144,7 @@ footer .right_side div ul li a {
     color: black;
     padding: 5px;
 }
+
 
 main {
     width: 100%;
@@ -149,6 +184,7 @@ main .home_countainer h3 {
     font-size: 1.7rem;
     font-weight: 500;
     color: #e7ffbd;
+    text-align: center;
 }
 
 main .home_countainer .search {

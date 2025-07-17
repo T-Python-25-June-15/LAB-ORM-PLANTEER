@@ -107,6 +107,7 @@ main .detail-container {
 
 main .detail-container .top_detail {
     display: flex;
+    flex-direction: row;
     gap: 70px;
 }
 
@@ -172,4 +173,14 @@ main .related_plant .related a div {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+@media screen and (max-width: 800px){
+    main .detail-container .top_detail{
+        flex-direction: column;
+    }
+
+    main .detail-container .top_detail img {
+        width: 100%;
+    }
 }

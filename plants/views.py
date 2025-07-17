@@ -50,12 +50,15 @@ def update_plant_view(request:HttpRequest, plant_id):
         plant = Plant.objects.get(pk = plant_id)
         
         if request.method == 'POST':
-            plant_form = PlantForm(request.POST, request.FILES)
+            print('inside post')
+            plant_form = PlantForm(request.POST, request.FILES, instance=plant)
             if plant_form.is_valid():
+                print('valied')
                 plant_form.save()
                 return redirect('/plants/{}/detail/'.format(plant.id))
             else:
-                return redirect('')
+                print("invailed")
+                return redirect('/')
             
         plant_form = PlantForm(instance=plant)
         return render(request, 'plants/update.html', {'plant_form': plant_form, 'plant': plant})
