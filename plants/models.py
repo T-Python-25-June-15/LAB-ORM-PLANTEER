@@ -29,3 +29,10 @@ class Plant(models.Model):
     category = models.CharField(choices=PlantCategory.choices)
     is_edible = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    
+class Comment(models.Model):
+    plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

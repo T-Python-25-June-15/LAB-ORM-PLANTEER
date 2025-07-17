@@ -141,6 +141,92 @@ main .detail-container .gray {
     color: gray;
 }
 
+
+main .comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    gap: 20px;
+}
+
+main .comments > div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0px;
+    border-bottom: 1px lightgray solid;
+}
+
+main .comments form {
+    width: 100%;
+    padding: 30px;
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px lightgray;
+    margin: 20px 0px;
+    display: none;
+}
+
+main .comments form span {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: lightcoral;
+    color: darkred;
+    font-weight: 1000;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+}
+
+main .comments .all_comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+}
+
+main .comments .all_comments div {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 1px 1px 5px lightgray;
+    padding: 20px 20px 30px 20px;
+    position: relative;
+}
+
+main .comments .all_comments div h5 {
+    width: 100%;
+    padding: 0 0 10px 0;
+    border-bottom: 1px lightgray solid;
+}
+
+main .comments .all_comments div p:last-child {
+    border:1.5px solid lightgray;
+    background-color: white;
+    padding: 2px 10px;
+    border-radius: 50px;
+    position: absolute;
+    bottom: -30px;
+    right: 50%;
+    width: 70%;
+    text-align: center;
+    transform: translateX(50%);  
+}
+
 main .related_plant {
     margin-top: 50px;
     width: 100%;
