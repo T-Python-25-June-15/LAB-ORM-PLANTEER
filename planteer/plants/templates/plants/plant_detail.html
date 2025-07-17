@@ -13,7 +13,7 @@
     <!-- Details -->
     <div class="col-md-6">
       <h2 class="fw-bold">{{ plant.name }}</h2>
-      <p class="text-muted mb-1"><strong>Category:</strong> {{ plant.category }}</p>
+      <p><strong>Category:</strong> {{ plant.category }}</p>
       <p><strong>About:</strong> {{ plant.about }}</p>
       <p><strong>Used For:</strong> {{ plant.used_for }}</p>
       <p><strong>Edible:</strong> {{ plant.is_edible|yesno:"Yes,No" }}</p>
@@ -27,22 +27,53 @@
 
   <!-- Related Plants -->
   <div class="related-plants mt-5">
-    <h4 class="mb-4">Related Plants</h4>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      {% for related in related_plants %}
-        <div class="col">
-          <a href="{% url 'plants:plant_detail' related.id %}" class="text-decoration-none text-dark">
-            <div class="card h-100 shadow-sm">
-              <img src="{{ related.image.url }}" class="card-img-top" alt="{{ related.name }}">
-              <div class="card-body">
-                <h5 class="card-title">{{ related.name }}</h5>
-                <p class="card-text text-muted">{{ related.category }}</p>
-              </div>
-            </div>
-          </a>
+    <h4 class="mt-5 mb-3">Related Plants</h4>
+<div class="row">
+  {% for plant in related_plants %}
+    <div class="col-6 col-md-3 mb-3"> 
+      <a href="{% url 'plants:plant_detail' plant.id %}" class="text-decoration-none">
+        <div class="card shadow-sm border-0">
+          <img src="{{ plant.image.url }}" class="card-img-top" style="height: 120px; object-fit: contain;" alt="{{ plant.name }}">
+          <div class="card-body p-2">
+            <h6 class="card-title text-dark mb-1">{{ plant.name }}</h6>
+            <small class="text-muted">{{ plant.category }}</small>
+          </div>
         </div>
-      {% endfor %}
+      </a>
     </div>
+  {% endfor %}
   </div>
+  <!-- Comment section -->
+  <hr />
+<section class="comment-section mt-3">
+  <h5 class="mb-3">Comments</h5>
+
+  {% for comment in plant.comments.all %}
+    <div class="comment mb-4 p-3 shadow-sm border rounded">
+      <strong>{{ comment.full_name }}</strong>
+      <small class="text-muted d-block">{{ comment.created_at|date:"M d, Y - H:i" }}</small>
+      <p class="mt-2 mb-0">{{ comment.content }}</p>
+    </div>
+  {% empty %}
+    <p class="text-muted">No comments yet. Be the first!</p>
+  {% endfor %}
+  <br>
+  <hr>
+  <h4 class="mb-4">Leave a Comment</h4>
+  <form method="post" class="comment-form">
+    {% csrf_token %}
+    <div class="mb-2">
+      {{ form.full_name.label_tag }}
+      {{ form.full_name }}
+    </div>
+    <div class="mb-2">
+      {{ form.content.label_tag }}
+      {{ form.content }}
+    </div>
+    <button type="submit" class="btn btn-dark btn-sm">Post</button>
+  </form>
+  
+</section>
+
 </div>
 {% endblock %}

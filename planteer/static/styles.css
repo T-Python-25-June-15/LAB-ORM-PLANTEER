@@ -68,17 +68,20 @@ footer ul li {
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.203); 
+  background-color: rgba(0, 0, 0, 0.111); 
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
   z-index: 1;
+  border-radius: 1rem;
 }
 
 .hero-content {
@@ -126,6 +129,27 @@ footer ul li {
 .hero-section input::placeholder {
   color: #777;
 }
+
+@media (max-width: 576px) {
+  .hero-search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-search-input,
+  .hero-search-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-search-btn {
+    height: 50px;
+  }
+}
+
+
 
 /* more buttton */
 .more-btn {
@@ -234,6 +258,99 @@ form textarea {
   color: white;
 }
 
+.card-body h6 {
+  font-size: 0.95rem;
+}
+.card-body small {
+  font-size: 0.75rem;
+}
+
+.comment-section {
+  background-color: #fff;
+  padding: 2rem 1rem;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.comment-form input,
+.comment-form textarea {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc; 
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+  border-color: #999; 
+  outline: none;
+}
+
+.comment-form .btn {
+  font-size: 0.875rem;
+  padding: 0.4rem 1rem;
+}
+
+.comment-form label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.comment {
+  background-color: #f9f9f95e;
+  border-left: 4px solid #000;
+}
+
+@media (max-width: 576px) {
+  .comment-section {
+    padding: 1rem;
+  }
+}
+
+/* ==== Contact us page ==== */
+.contact-container {
+  background-color: #fff;
+}
+
+.contact-title {
+  font-weight: 800;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.contact-subtitle {
+  color: #777;
+  margin-bottom: 2rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #888;
+  outline: none;
+}
+
+.contact-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+
 
 /* ==== Delet page ==== */
 .card h3.text-danger {
@@ -249,6 +366,7 @@ form textarea {
 .pagination {
   gap: 0.4rem;
   flex-wrap: wrap;
+
 }
 
 .pagination .page-item .page-link {

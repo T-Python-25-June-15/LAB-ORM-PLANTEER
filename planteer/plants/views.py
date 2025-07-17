@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Plant
-from .forms import PlantForm 
+from .forms import PlantForm , CommentForm
 from django.db.models import Q
 from django.core.paginator import Paginator
 
@@ -23,6 +23,7 @@ def plant_list_view(request):
         plants = plants.filter(is_edible=False)
 
     # Paginate
+    # here to to confirm howmany plant per page (6)
     paginator = Paginator(plants, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -54,7 +55,7 @@ def plant_search_view(request):
     plants = Plant.objects.all()
 
     if query:
-        plants = plants.filter(Q(name__icontains=query) | Q(about__icontains=query))
+        plants = plants.filter(Q(name__icontains=query))
 
     if category and category != 'all':
         plants = plants.filter(category=category)
@@ -63,7 +64,8 @@ def plant_search_view(request):
         plants = plants.filter(is_edible=True)
     elif is_edible == 'false':
         plants = plants.filter(is_edible=False)
-
+    
+    #._meta.get_field used to access model info
     categories = Plant._meta.get_field('category').choices
 
     context = {
@@ -77,14 +79,19 @@ def plant_search_view(request):
 
 def plant_detail_view(request, plant_id):
     plant = get_object_or_404(Plant, id=plant_id)
+    related_plants = Plant.objects.filter(category=plant.category).exclude(id=plant.id)[:4]
 
-    related_plants = Plant.objects.filter(
-        category=plant.category
-    ).exclude(id=plant.id)[:3] 
+    form = CommentForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        comment = form.save(commit=False)
+        comment.plant = plant
+        comment.save()
+        return redirect('plants:plant_detail', plant_id=plant.id)
 
     context = {
         'plant': plant,
         'related_plants': related_plants,
+        'form': form,
     }
     return render(request, 'plants/plant_detail.html', context)
 
