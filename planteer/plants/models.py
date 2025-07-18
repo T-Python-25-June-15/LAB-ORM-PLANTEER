@@ -20,11 +20,9 @@ class Plant(models.Model):
     usage = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-class Comment(models.Model):
-       plant = models.ForeignKey(Plant, on_delete=models.CASCADE, related_name='comments')
-       user = models.CharField(max_length=255)
-       text = models.TextField()
+class Review(models.Model):
+       plant = models.ForeignKey(Plant, on_delete=models.CASCADE, related_name='reviews')
+       name = models.CharField(max_length=255)
+       comment = models.TextField()
        created_at = models.DateTimeField(auto_now_add=True)
-
-       def __str__(self):
-           return f"Comment by {self.user} on {self.plant.name}"
+    

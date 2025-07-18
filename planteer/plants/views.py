@@ -1,6 +1,6 @@
 from django.http import HttpRequest, HttpResponse, Http404
 from django.shortcuts import render, redirect
-from .models import Plant
+from .models import Plant, Review
 from .forms import PlantForm
 
 # ---------- Home ----------
@@ -106,3 +106,11 @@ def search_plant(request):
         'results': results
     })
 
+
+def add_review(request: HttpRequest, plant_id):
+
+ if request.method == 'POST':
+      plant = Plant.objects.get(pk=plant_id)
+      review_text = Review(plant=plant, name=request.POST.get('name'), comment=request.POST.get('comment'))
+      review_text.save()
+      return redirect('plant_detail', plant_id=plant.id)
