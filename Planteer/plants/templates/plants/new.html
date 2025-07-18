@@ -1,11 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>New Page</h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}New Plant{% endblock %}
+
+{% block fileStyle %}
+
+<link rel="stylesheet" href="{% static 'css/new.css' %}">
+
+
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="new-content">
+
+    <h2>Add a New Plant</h2>
+
+    <form action="{% url 'plants:new_view' %}" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ plant_form.as_p }}
+
+        
+    </form>
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}
