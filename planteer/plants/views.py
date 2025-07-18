@@ -9,19 +9,26 @@ def home(request):
     return render(request, 'main/home.html', {'plants': plants})
 
 # ---------- All Plants ----------
+
 def all_plants(request):
-    category_filter = request.GET.get('category')
-    is_edible_filter = request.GET.get('is_edible')
+    try:
+        category_filter = request.GET.get('category')
+        is_edible_filter = request.GET.get('is_edible')
 
-    plants = Plant.objects.all()
+        plants = Plant.objects.all()
 
-    if category_filter:
-        plants = plants.filter(category=category_filter)
-    
-    if is_edible_filter in ['True', 'False']:
-        plants = plants.filter(is_edible=(is_edible_filter == 'True'))
+        if category_filter:
+            plants = plants.filter(category=category_filter)
 
-    return render(request, 'plants/all_plants.html', {'plants': plants})
+        if is_edible_filter in ['True', 'False']:
+            plants = plants.filter(is_edible=(is_edible_filter == 'True'))
+        return render(request, 'plants/all_plants.html', {'plants': plants})
+
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        raise Http404(f"An error occurred while fetching the plants: {e}")
+
+
 
 # ---------- Plant Detail ----------
 def plant_detail(request, plant_id):
