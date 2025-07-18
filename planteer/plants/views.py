@@ -84,10 +84,15 @@ def delete_plant(request, plant_id):
 
 
 # ---------- Search ----------
+
 def search_plant(request):
     query = request.GET.get('q', '')
-    plants = Plant.objects.filter(name__icontains=query)
+    if query:
+        results = Plant.objects.filter(name__icontains=query) 
+    else:
+        results = Plant.objects.all()  
+
     return render(request, 'plants/search.html', {
-        'plants': plants,
-        'query': query
+        'results': results
     })
+
