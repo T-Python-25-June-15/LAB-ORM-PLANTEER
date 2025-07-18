@@ -3,10 +3,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+app_name = 'main'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls')),  
+    path('main/', include('main.urls')),  
     path('plants/', include('plants.urls')),
     path('contact/', include('contact.urls')),
 ]

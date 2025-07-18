@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "LAB-ORM-PLANTEER",
+			"path": "../.."
+		},
+		{
+			"name": "planteer",
+			"path": "../../../Desktop/planteer/LAB-ORM-PLANTEER/planteer"
+		},
+		{
+			"path": "../../../Desktop/planteer/venv"
+		}
+	],
+	"settings": {}
+}
