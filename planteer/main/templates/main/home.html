@@ -8,9 +8,9 @@ Planteer{%endblock %} {% block content %}
   <div class="hero-overlay">
     <div class="hero-content text-center text-white">
       <h1 class="display-3 fw-bold mb-3">Planteer</h1>
-      <h2 class="lead mb-4">Plant Database For Plant Lovers</h2>
+      <h2>For Plant Lovers</h2>
       <form
-        action="{% url 'plants:search' %}"
+        action="{% url 'plants:plant_search' %}"
         method="get"
         class="hero-search-form d-flex flex-wrap justify-content-center gap-2 mt-3"
       >

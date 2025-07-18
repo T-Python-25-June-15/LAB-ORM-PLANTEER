@@ -72,6 +72,7 @@ footer ul li {
   margin-bottom: 1rem;
 }
 
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -85,19 +86,34 @@ footer ul li {
 }
 
 .hero-content {
+  font-family: "Changa", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
   position: relative;
   z-index: 2;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.421);
+  color: #ff0000;
 }
-
 
 .hero-section h1 {
   color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.421);
+  font-size: 5rem;
 }
 .hero-section h2{
   color: rgb(255, 255, 255);
   font-weight: bold;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.421);
+  font-size: 1.6rem;
+}
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section h2 {
+    font-size: 1.25rem;
+  }
 }
 
 .hero-search-input {
@@ -349,6 +365,8 @@ form textarea {
   min-height: 150px;
   resize: vertical;
 }
+
+.img-fluid
 
 
 
