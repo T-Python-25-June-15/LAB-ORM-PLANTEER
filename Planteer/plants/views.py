@@ -29,7 +29,8 @@ def all_views(request:HttpRequest):
 def details_views(request:HttpRequest, plant_id:int):
     plant = Plants.objects.get(pk=plant_id)
     comments = Comment.objects.filter(plant_relation=plant)
-    return render(request, "plants/details.html", {"plants":plant, "comments":comments})
+    related_plants = Plants.objects.filter(category = plant.category)[0:3]
+    return render(request, "plants/details.html", {"plants":plant, "comments":comments, "related_plants":related_plants})
 
 
 def update_views(request:HttpRequest, plant_id:int):

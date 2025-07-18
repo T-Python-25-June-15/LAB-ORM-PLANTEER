@@ -5,64 +5,49 @@
 {% block content %}
 <h1>Contact Us</h1>
 
-<div class="row">
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <div class="left_text">
-                <div class="right_image">
-                    <img src="{% static 'images\flower.jpg' %}" alt="flower">
-                </div>
-                <form class="form" action="{% url 'plants:add_views' %}" method="post" enctype="multipart/form-data">
+<div class="row ">
+    <div class="row align-items-center ">
+        <div class="col-8">
+                <form class="form" action="{% url 'main:contact_us_views' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label for="name">Name: </label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name of the plant">
+                    <div class="row">
+                        <div class="col">
+                            <label for="first_name">First Name: </label>
+                            <input type="text" class="form-control" placeholder="First name" id="first_name" name="first_name">
+                        </div>
+                        <div class="col">
+                            <label for="last_name">Last Name: </label>
+                            <input type="text" class="form-control" placeholder="Last name" id="last_name" name="last_name">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="about">About the plant:</label>
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your message</label>
                         <br>
-                        <textarea placeholder="Description about the plant" name="about" class="form-control" id="about" rows="3" required></textarea>
+                        <textarea placeholder="Description about the plant" name="message" class="form-control" id="message" rows="3" required></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="user_for">The plant used for:</label>
-                        <textarea placeholder="what the plant used for" name="user_for" class="form-control" id="user_for" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="image">Upload Image:</label>
-                        <input type="file" name="image" class="form-control" id="image" required accept="image/*"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Category: </label>
-                        <div class="form-control">
-                            {% for val, label in CategoryChoices %}
-                                <input type="radio" id="{{val}}" name="category" value="{{val}}" class="form-check-input" required/>
-                                <label class="form-check-label" for="{{val}}">{{label}}</label>
-                            {% endfor %}
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit</button>
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'main:messages_views' %}"><span>Show all messages &rarr;</span></a>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Is edible:</label><br>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" name="is_edible" value="True" class="form-check-input" required>
-                            <label class="form-check-label">Yes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" name="is_edible" value="False" class="form-check-input" required>
-                            <label class="form-check-label">No</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="date">Created at:</label>
-                        <input type="date" name="created_at" class="form-control" id="date" required/>
-                    </div>
-
-
-                    <button type="submit" class="btn btn-primary">Add plant</button>
-
+                        
                 </form>
+                
 
-            </div>
+        </div>
+        <div class="col-4">
+            <img src="{% static 'images\flower.jpg' %}" class="image">
         </div>
     </div>
 </div>
+
+
+
 {% endblock %}

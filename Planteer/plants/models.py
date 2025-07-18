@@ -16,6 +16,8 @@ class Plants(models.Model):
     category = models.CharField(choices=CategoryChoices.choices, default=CategoryChoices.category1)
     is_edible = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self) -> str:
+        return self.name
 
 
 class Comment(models.Model):
@@ -23,3 +25,5 @@ class Comment(models.Model):
     full_name = models.CharField(max_length=1024)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self) -> str:
+        return f"{self.full_name} comment about {self.plant_relation.name}"
