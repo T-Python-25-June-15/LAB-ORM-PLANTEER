@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Home -
+Planteer{%endblock %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'styles.css' %}" />
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-overlay">
+    <div class="hero-content text-center text-white">
+      <h1 class="display-3 fw-bold mb-3">Planteer</h1>
+      <h2>For Plant Lovers</h2>
+      <form
+        action="{% url 'plants:plant_search' %}"
+        method="get"
+        class="hero-search-form d-flex flex-wrap justify-content-center gap-2 mt-3"
+      >
+        <input
+          type="text"
+          name="q"
+          class="form-control form-control-lg hero-search-input"
+          placeholder="Search For Plant..."
+        />
+        <button class="btn hero-search-btn px-4">Search</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Plants Section -->
+<section>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h2 class="fw-bold">Plants</h2>
+      <p class="text-muted">Learn more about plants</p>
+    </div>
+    <a href="{% url 'plants:plant_list' %}" class="more-btn">More →</a>
+  </div>
+  <!--Home cards-->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for plant in featured_plants %}
+    <div class="col">
+      <a href="{% url 'plants:plant_detail' plant.id %}" class="text-decoration-none text-dark">
+        <div class="card h-100">
+          <img
+            src="{{ plant.image.url }}"
+            class="card-img-top"
+            alt="{{ plant.name }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ plant.name }}</h5>
+            <p class="card-text text-muted small">
+              {{ plant.description|truncatechars:40 }}
+            </p>
+            <span class="badge bg-light text-dark">{{ plant.category }}</span>
+          </div>
+        </div>
+      </a>
+      
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

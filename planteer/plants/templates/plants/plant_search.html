@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Search - Planteer{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Search Plants</h2>
+
+  <!-- Filter Form -->
+  <form method="get" class="row g-3 mb-5">
+    <div class="col-md-4">
+      <input type="text" name="q" class="form-control" placeholder="Search plants..." value="{{ query }}">
+    </div>
+
+    <div class="col-md-3">
+      <select name="category" class="form-select">
+        <option value="all">All Categories</option>
+        <!-- uses the passed categories context -->
+        {% for value, label in categories %}
+          <option value="{{ value }}" {% if category == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <select name="is_edible" class="form-select">
+        <option value="">Edibility</option>
+        <option value="true" {% if is_edible == "true" %}selected{% endif %}>Edible</option>
+        <option value="false" {% if is_edible == "false" %}selected{% endif %}>Not Edible</option>
+      </select>
+    </div>
+
+    <div class="col-md-2 d-grid">
+      <button type="submit" class="btn btn-dark">Filter</button>
+    </div>
+  </form>
+
+  <!-- Search Results -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- uses the passed plants context -->
+     <!-- each a linked with plant.id -->
+    {% for plant in plants %}
+      <div class="col">
+        <a href="{% url 'plants:plant_detail' plant.id %}" class="text-decoration-none text-dark">
+          <div class="card h-100" >
+            <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}" style="height: 220px; object-fit: contain;">
+            <div class="card-body">
+              <h5 class="card-title">{{ plant.name }}</h5>
+              <p class="card-text text-muted">{{ plant.category }}</p>
+              {% if plant.is_edible %}
+                <span class="badge bg-success">Edible</span>
+              {% else %}
+                <span class="badge bg-secondary">Not Edible</span>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      </div>
+    {% empty %}
+      <p class="text-center text-muted">No plants found matching your criteria.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
