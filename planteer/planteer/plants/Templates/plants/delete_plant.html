@@ -1,0 +1,19 @@
+
+{% extends 'main/base.html' %}
+
+{% block title %}Delete Plant{% endblock %}
+
+{% block content %}
+<form method="POST" action="{% url 'delete_plant' plant.id %}" class="w-65 mx-auto">
+  {% csrf_token %}
+  <div class="text-center">
+    <p class="fw-bold">Are you sure you want to delete <strong>{{ plant.name }}</strong>?</p>
+    {% if plant.image %}
+      <img src="{{ plant.image.url }}" alt="{{ plant.name }}" style="max-width: 300px;" class="mb-3">
+    {% endif %}
+    <button type="submit" class="btn btn-danger fw-bold" onclick="return confirm('Are you sure you want to delete this plant?')">
+      Delete Plant</button>
+    </button>
+    <a href="{% url 'all_plant' %}" class="btn btn-secondary ms-3">Cancel</a>
+  </div>
+</form>

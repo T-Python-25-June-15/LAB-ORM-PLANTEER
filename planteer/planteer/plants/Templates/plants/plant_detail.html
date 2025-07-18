@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% block title %}{{ plant.name }} - Detail{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <img src="{{ plant.image.url }}" class="img-fluid rounded" alt="{{ plant.name }}">
+  </div>
+  <div class="col-md-6">
+    <h2>{{ plant.name }}</h2>
+    <p><strong>Category:</strong> {{ plant.category }}</p>
+    <!-- <p>{{ plant.about }}</p> -->
+    <p><strong>Native to:</strong> {{ plant.about }}</p>
+    <p><strong>Is Edible:</strong> {{ plant.is_edible|yesno:"Yes,No" }}</p>
+    <p><strong>Used for:</strong> {{ plant.used_for }}</p>
+  </div>
+</div>
+
+<h4 class="mt-5">Related Plants</h4>
+<div class="row">
+  {% for item in related_plants %}
+  <div class="col-md-3 mb-3">
+    <div class="card">
+      <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+      <div class="card-body">
+        <h6>{{ item.name }}</h6>
+        <small>{{ item.category }}</small>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
