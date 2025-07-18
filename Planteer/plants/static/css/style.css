@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
 }
 
 header {
@@ -8,10 +10,83 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 2rem 3rem;
-  background-color: aqua;
+  font-size: medium;
 }
 
 .links {
   display: flex;
   gap: 1rem;
+  align-items: center;
+}
+
+.links a {
+  text-decoration: none;
+}
+
+.btn {
+  padding: 0.6rem 1.6rem;
+  background-color: black;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 1px 1px black;
+  color: white;
+}
+
+.black {
+  color: black;
+}
+
+.white {
+  color: white;
+}
+
+.base-container {
+  margin: 2rem 3rem;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  border-top: solid 1px black;
+}
+
+.table-container  {
+  width: 50%;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+}
+
+
+.fot-site-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.gray, td {
+  color: rgb(19, 19, 19);
+  font-weight: 600;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+.social-container {
+  display: flex;
+  gap: 1rem;
+  margin-left: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 2px solid orangered;
+  color: orangered;
 }
