@@ -86,11 +86,14 @@ def delete_plant(request, plant_id):
 # ---------- Search ----------
 
 def search_plant(request):
-    query = request.GET.get('q', '')
-    if query:
-        results = Plant.objects.filter(name__icontains=query) 
-    else:
-        results = Plant.objects.all()  
+    try:
+        query = request.GET.get('q', '')
+        if query:
+            results = Plant.objects.filter(name__icontains=query) 
+        else:
+            results = Plant.objects.all()  
+    except Exception as e:
+        print(f"Error occurred while searching for plants: {e}")
 
     return render(request, 'plants/search.html', {
         'results': results

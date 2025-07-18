@@ -1,12 +1,14 @@
 from django.db import models
 
 class Plant(models.Model):
-
-    category = (
-        ('Flower', 'Flower'),
-        ('Fruit', 'Fruit'),
-        ('Tree', 'Tree')
-    )
+    try:
+        category = (
+            ('Flower', 'Flower'),
+            ('Fruit', 'Fruit'),
+            ('Tree', 'Tree')
+        )
+    except Exception as e:
+        print(f"Error occurred while defining categories: {e}")
 
     name = models.CharField(max_length=255)
     about = models.TextField()

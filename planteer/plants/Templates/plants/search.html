@@ -13,9 +13,9 @@
   {% for plant in results %}
   <div class="col-md-4 mb-4">
     <div class="card">
-      
-      <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}" style="height: 150px; object-fit: cover;">
-      
+
+      <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}" style="height: 180px; position: relative; object-fit: cover;">
+
       <div class="card-body">
         <a href="{% url 'plant_detail' plant.id %}" class="card-title h5 d-block">{{ plant.name }}</a>
         <p>{{ plant.description|truncatechars:50 }}</p>
