@@ -1,11 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Index Page</h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block fileStyle %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- <meta http-equiv="refresh" content="20"> -->
+
+
+{% endblock %}
+
+{% block content %}
+
+<div class="main-header">
+    <div class="header-background">
+
+    </div>
+
+    <div class="header-content">
+        <h1>Planteer</h1>
+        <h3>Plant Databsae for Plants Lovers</h3>
+        <div class="search">
+            <input type="search" placeholder="Search For Plant...">
+            <input type="submit" value="Search">
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="up-bar">
+        <div class="left-up-bar">
+            <h2>Plants</h2>
+            <p>Learn more about plants</p>
+        </div>
+        <div class="right-up-bar">
+            <a href="">More<i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="cards">
+        <div class="card">
+            <img src="{% static 'images/plant.jpg'%}" alt="Image 1">
+            <div class="texts">
+                <h5>Plant 1</h5>
+                <p>Brief about plant</p>
+                <strong>Tree</strong>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'images/banana.jpg'%}" alt="Image 2">
+            <div class="texts">
+                <h5>Banana</h5>
+                <p>Brief about plant</p>
+                <strong>Fruit</strong>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'images/banana.jpg'%}" alt="Image 3">
+            <div class="texts">
+                <h5>Plant 3</h5>
+                <p>Brief about plant</p>
+                <strong>Vegetables</strong>
+            </div>
+        </div>
+        
+
+    </div>
+</div>
+
+
+
+{% endblock %}

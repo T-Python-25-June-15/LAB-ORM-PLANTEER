@@ -30,6 +30,7 @@ header nav {
     justify-content: space-between;
     height: 70px;
     position: relative;
+    margin-bottom: 30px;
 }
 
 header nav a {
@@ -171,7 +172,7 @@ footer a {
     font-weight: 550;
 }
 
-@media (max-width: 1200px){
+@media (max-width: 1300px){
     .container {
         width: 85%;
     }
