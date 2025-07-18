@@ -4,7 +4,7 @@ class Plant(models.Model):
 
     category = (
         ('Flower', 'Flower'),
-        ('Vegetable', 'Vegetable'),
+        ('Fruit', 'Fruit'),
         ('Tree', 'Tree')
     )
 
