@@ -1,33 +1,56 @@
-# LAB-ORM-PLANTEER
+# 🌿 Planteer
 
+**Planteer** is a responsive Django web app for plant lovers to explore, manage, and learn about various plants. Users can browse plant collections, search and filter them, view plant details, and leave comments. There’s also a contact page where users can send messages.
 
-## Using what you learned, Create a new website called "Planteer" , this website has the following pages/paths:
-- Home page `/`
-- All Plants page : `plants/all/`
-- Plant Detail Page : `plants/<plant_id>/detail/`
-- Add new plant page : `plants/new/`
-- Update plant page : `plants/<plant_id>/update/`,
-- Delete Plant : `plants/<plant_id>/delete/`
-- Search Page : `plants/search/`
-- (Bonus) Contact Us page : `contact/`
-- (Bonus) Contact Us Messages page : `contact/messages/`
+---
 
+## 📸 Screenshots
 
-### Notes:
-- Use templates & template inheritance.
-- The website must be responsive (looks good on big and small screens)
-- In all plants page, user can filter by `category` and `is_edible`.
-- For the images, backgrounds, fonts you can use whatever you like. As for the content like categories,  make sure you add real plants with real plants images.
-- Use at least 2 apps, one main and one for the plants.
-- Add a related `Comment` model on the plants (fields: plant relation, full_name, content, created_at).  So, visitors can add comments on the plants.
-- In Plant detail page , Add related plants (based on the same category, use filter !)
-  
-## wireframe for the main pages
-<img width="1771" style="width:100%" alt="Screenshot 2024-03-19 at 2 27 18 PM" src="assets/main-wireframe.png">
+![Home Page](screenshots/home.png)  
+![Plant Detail](screenshots/detail.png)  
+![Contact](screenshots/contact.png)
 
-## Contact pages wireframe:
-<img width="1015" style="width:100%" alt="Screenshot 2024-03-19 at 3 22 17 PM" src="assets/contact-wireframe.png">
+---
 
+## 🚀 Features
 
-## UML for the model `Plant` &  `Contact` Model 
-<img width="618" style="width:100%; height:auto;" alt="Screenshot 2024-03-19 at 3 16 01 PM" src="assets/uml.png">
+- 🏡 Home page with hero section and search
+- 🌱 All plants page with filter (by category & edibility)
+- 🔍 Search functionality
+- 📄 Plant detail page with related plants and comments
+- ➕ Add new plant
+- ✏️ Update and delete plants with confirmation
+- 💬 Add comments to plants
+- 📬 Contact Us form
+- 📥 Contact message inbox with delete option
+- 📱 Fully responsive layout (Bootstrap + custom CSS)
+
+---
+
+## 🧩 Tech Stack
+
+- Python 3.13
+- Django 5.x
+- SQLite (default)
+- HTML5 + CSS3 + Bootstrap
+- Pillow (for image uploads)
+
+---
+
+## 📁 Project Structure
+
+planteer/
+│
+├── main/ # Contact & homepage
+│ ├── templates/
+│ ├── static/
+│
+├── plants/ # Plant views & models
+│ ├── templates/
+│ ├── static/
+│
+├── static/ # Global static files
+├── media/ # Uploaded plant images
+├── planteer/ # Project settings
+├── db.sqlite3
+└── manage.py
