@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row g-4">
+  <div class="col-md-5">
+    <img src="{{ plant.image.url }}" class="img-fluid rounded" alt="{{ plant.name }}">
+  </div>
+  <div class="col-md-7">
+    <h2>{{ plant.name }}</h2>
+    <p>{{ plant.description }}</p>
+    <p><strong>Category:</strong> {{ plant.get_category_display }}</p>
+    <p><strong>Native to:</strong><br> {{ plant.native_to }}</p>
+<p><strong>Used For:</strong><br> {{ plant.used_for }}</p>
+    <p><strong>Edible:</strong> {{ plant.is_edible|yesno:"Yes,No" }}</p>
+
+<a href="{% url 'plants:plant_update' plant.id %}" class="btn btn-dark-custom">Edit</a>
+<a href="{% url 'plants:plant_delete' plant.id %}" class="btn btn-dark-custom">Delete</a>
+
+
+    <hr>
+
+    <h4>Related Plants</h4>
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+      {% for related in related_plants %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="{{ related.image.url }}" class="card-img-top" alt="{{ related.name }}" style="height: 150px; object-fit: cover;">
+            <div class="card-body">
+              <h6 class="card-title">{{ related.name }}</h6>
+              <a href="{% url 'plants:plant_detail' related.id %}" class="btn btn-sm btn-outline-primary">View</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>No related plants found.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Contact Us</h2>
+<a href="{% url 'main:contact_messages' %}" class="btn btn-dark-custom">Contact Messages</a>
+
+<form method="post" class="plant-form">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <div class="mb-3">
+    <label for="{{ form.name.id_for_label }}">Name</label>
+    {{ form.name }}
+  </div>
+  <div class="mb-3">
+    <label for="{{ form.email.id_for_label }}">Email</label>
+    {{ form.email }}
+  </div>
+  <div class="mb-3">
+    <label for="{{ form.message.id_for_label }}">Message</label>
+    {{ form.message }}
+  </div>
+  <button type="submit" class="btn-dark-custom no-form-style">Send Message</button>
+
+
+
+</form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container my-4">
+<h2 class="mb-4">Contact Messages</h2>
+
+    {% if messages %}
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for msg in messages %}
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">{{ msg.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ msg.email }}</h6>
+                <p class="card-text">{{ msg.message|linebreaksbr }}</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Sent: {{ msg.created_at|date:"Y-m-d H:i" }}</small>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center">No messages found.</p>
+    {% endif %}
+  </div>
+{% endblock %}

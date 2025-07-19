@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">
+  {% if update %}Update Plant{% else %}Add New Plant{% endif %}
+</h2>
+
+<form method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-light">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <div class="mb-3">
+    <label for="id_name" class="form-label">Name</label>
+    {{ form.name }}
+  </div>
+
+  <div class="mb-3">
+    <label for="id_description" class="form-label">Description</label>
+    {{ form.description }}
+  </div>
+
+  <div class="mb-3">
+    <label for="id_image" class="form-label">Image</label>
+    {{ form.image }}
+  </div>
+
+  <div class="mb-3">
+    <label for="id_category" class="form-label">Category</label>
+    {{ form.category }}
+  </div>
+
+  <div class="form-check mb-3">
+    {{ form.is_edible }} <label for="id_is_edible" class="form-check-label">Is Edible</label>
+  </div>
+
+  <div class="mb-3">
+    <label for="id_native_to" class="form-label">Native To</label>
+    {{ form.native_to }}
+  </div>
+
+  <div class="mb-3">
+    <label for="id_used_for" class="form-label">Used For</label>
+    {{ form.used_for }}
+  </div>
+
+  <button type="submit" class="btn btn-dark-custom">
+    {% if update %}Update{% else %}Add Plant{% endif %}
+  </button>
+</form>
+{% endblock %}

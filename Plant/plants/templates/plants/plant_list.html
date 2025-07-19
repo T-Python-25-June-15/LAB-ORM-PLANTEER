@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">All Plants</h2>
+
+<form method="get" class="d-flex gap-3 mb-4 align-items-center flex-wrap">
+  <label for="category" class="form-label mb-0 me-2">Category:</label>
+  <select name="category" id="category" class="form-select w-auto" onchange="this.form.submit()">
+    <option value="all" {% if selected_category == 'all' %}selected{% endif %}>All</option>
+    {% for key, value in categories %}
+      <option value="{{ key }}" {% if selected_category == key %}selected{% endif %}>{{ value }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="is_edible" class="form-label mb-0 me-2">Edible:</label>
+  <select name="is_edible" id="is_edible" class="form-select w-auto" onchange="this.form.submit()">
+    <option value="all" {% if selected_is_edible == 'all' %}selected{% endif %}>All</option>
+    <option value="true" {% if selected_is_edible == 'true' %}selected{% endif %}>Yes</option>
+    <option value="false" {% if selected_is_edible == 'false' %}selected{% endif %}>No</option>
+  </select>
+</form>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for plant in plants %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}" style="height: 200px; object-fit: cover;" />
+       <div class="card-body d-flex flex-column">
+  <h5 class="card-title">{{ plant.name }}</h5>
+  <p class="card-text">{{ plant.description|truncatewords:20 }}</p>
+  <p class="mb-1"><strong>Category:</strong> {{ plant.get_category_display }}</p>
+  <p class="mb-1"><strong>Edible:</strong> {{ plant.is_edible|yesno:"Yes,No" }}</p>
+  <a href="{% url 'plants:plant_detail' plant.id %}" class="btn btn-dark-custom mt-auto">More Details</a>
+</div>
+
+      </div>
+    </div>
+  {% empty %}
+    <p>No plants found.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}
