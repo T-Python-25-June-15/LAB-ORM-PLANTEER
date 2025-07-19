@@ -73,7 +73,7 @@
             <div class="card">
                 <img src="{{ related.poster.url }}" alt="{{ related.title }}">
                 <div class="texts">
-                     <h5>{{ related.title }}</h5>
+                    <a href="{% url 'plants:detail_view' related.id %}"><h5>{{ related.title }}</h5></a>
                     <p>{{ related.description|truncatewords:10 }}</p>
                     <strong>{{ related.category }}</strong>
                 </div>

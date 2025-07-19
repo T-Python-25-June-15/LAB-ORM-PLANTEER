@@ -207,6 +207,12 @@
 
 .related-plants .card .texts {
     padding: 10px;
+    text-align: left;
+}
+
+.related-plants .card .texts a {
+    text-decoration: none;
+    color: black;
 }
 
 .related-plants .card .texts h5 {
