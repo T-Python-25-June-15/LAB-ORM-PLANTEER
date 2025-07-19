@@ -1,0 +1,36 @@
+{% extends 'plants/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="position-relative mb-5">
+    <img src="{% static 'images/header.jpg' %}" alt="Plants" class="w-100" style="height: 400px; object-fit: cover; filter: blur(1px);">
+    
+    <div class="position-absolute top-50 start-50 translate-middle text-center w-100 px-3">
+        <h2 class="display-5 fw-bold">Planteer</h2>
+        <p class="display-6 fw-bold">Plant Database For Plant Lovers</p>
+        <form method="get" action="/plants/search/" class="d-flex justify-content-center mt-3">
+            <input class="form-control w-50 me-2" type="text" name="q" placeholder="Search for Plant...">
+            <button class="btn btn-dark" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+<h3>Latest Plants</h3>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for plant in latest_plants %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ plant.image.url }}" class="card-img-top img-fluid" style="object-fit: cover; height: 200px;" alt="{{ plant.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ plant.name }}</h5>
+                    <p class="card-text">{{ plant.category }}</p>
+                    <a href="{% url 'plant_detail' plant.id %}" class="btn btn-outline-primary">View</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No plants available.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
