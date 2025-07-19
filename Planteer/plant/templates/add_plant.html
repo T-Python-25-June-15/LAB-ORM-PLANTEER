@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Add Plant {% endblock %}
+
+{% block main %}
+<div class="container-fluid px-3 px-md-5">
+  <h1 class="text-center mb-4">Add New Plant</h1>
+
+  <div class="col-12 col-md-8 col-lg-6 mx-auto mb-5">
+    <form method="post" enctype="multipart/form-data" class="d-flex flex-column gap-3 shadow p-4 rounded bg-light">
+      {% csrf_token %}
+
+      <div>
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        {{ form.name.errors }}
+      </div>
+
+      <div>
+        {{ form.about.label_tag }}
+        {{ form.about }}
+        {{ form.about.errors }}
+      </div>
+
+      <div>
+        {{ form.used_for.label_tag }}
+        {{ form.used_for }}
+        {{ form.used_for.errors }}
+      </div>
+
+      <div>
+        {{ form.category.label_tag }}
+        {{ form.category }}
+        {{ form.category.errors }}
+      </div>
+
+      <div class="form-check">
+        {{ form.is_edible.label_tag }}
+        {{ form.is_edible }}
+        {{ form.is_edible.errors }}
+      </div>
+
+      <div>
+        {{ form.image.label_tag }}
+        {{ form.image }}
+        {{ form.image.errors }}
+      </div>
+
+      <button type="submit" class="btn btn-success">Create Plant</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

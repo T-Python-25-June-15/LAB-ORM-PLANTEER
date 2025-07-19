@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} All Plant {% endblock %}
+
+{% block main %}
+
+<div class="container my-5">
+  <h2 class="fw-bold mb-5">All Plants</h2>
+
+    <form method="get" class="mb-4 d-flex justify-content-end">
+        <div class="w-auto" style="display: flex; flex-direction: row; align-items: center; gap: 1rem;">
+            <select name="category" class="form-select form-select-sm" onchange="this.form.submit()">
+                <option value="">All</option>
+                {% for value, label in categories %}
+                    <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <div class="edible" style="display: flex; flex-direction: row; gap: 0.5rem;">
+                <label for="is_edible">Edible</label>
+                <input type="checkbox" name="is_edible" id="is_edible" onchange="this.form.submit()" {% if request.GET.is_edible %}checked{% endif %}   >
+            </div>
+        </div>
+    </form>
+
+
+
+  <!-- Responsive grid layout -->
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        {% for plant in plants %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+
+                    <a href="{% url 'plant:details_view' plant.id %}" class="text-decoration-none text-dark">
+                    <div style="height: 200px; background-color: #f8f9fa; display: flex; justify-content: center; align-items: center;">
+                        <img src="{{ plant.image.url }}" style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="{{ plant.name }}">
+                    </div>
+                    </a>
+
+                    <div class="card-body d-flex flex-column">
+                        <a href="{% url 'plant:details_view' plant.id %}" class="text-decoration-none text-dark">
+                            <h5 class="card-title">{{ plant.name }}</h5>
+                        </a>
+                        <p class="card-text text-muted">{{ plant.about|truncatewords:15 }}</p>
+
+                        <div class="mt-auto">
+                            <span class="badge bg-success">{{ plant.category }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+  </div>
+
+  <nav class="mt-4 d-flex justify-content-center">
+  <ul class="pagination">
+
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}{% if request.GET.is_edible %}is_edible=on&{% endif %}page={{ page_obj.previous_page_number }}">Previous</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">Previous</span></li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}  
+      {% if page_obj.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}{% if request.GET.is_edible %}is_edible=on&{% endif %}page={{ num }}">{{ num }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}{% if request.GET.is_edible %}is_edible=on&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">Next</span></li>
+    {% endif %}
+
+  </ul>
+</nav>
+</div>
+
+{% endblock %}
