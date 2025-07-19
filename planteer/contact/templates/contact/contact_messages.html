@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Messages from Users{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <h2 class="mb-4 fw-bold">Messages from Users</h2>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for msg in messages %}
+      <div class="col">
+        <div class="border p-3 rounded shadow-sm h-100">
+          <p class="fw-bold mb-1">{{ msg.first_name }} {{ msg.last_name }}</p>
+          <p class="mb-1"><a href="mailto:{{ msg.email }}">{{ msg.email }}</a></p>
+          <p class="text-muted mb-2">{{ msg.message }}</p>
+          <small class="text-secondary">Sent on: {{ msg.created_at|date:"F d, Y H:i" }}</small>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

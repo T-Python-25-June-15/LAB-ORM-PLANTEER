@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Update Plant{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-center">Edit Plant: {{ plant.name }}</h2>
+
+<div class="d-flex justify-content-center align-items-start">
+  <div class="w-50">
+    <form method="POST" action="{% url 'update_plant' plant.id %}" enctype="multipart/form-data" class="w-100">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <a href="{% url 'plant_detail' plant.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+  
+  {% if plant.image %}
+    <div class="text-center mb-3 ml-4">
+      <img src="{{ plant.image.url }}" alt="{{ plant.name }}" style="max-width: 300px;">
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}
