@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="row align-items-center justify-content-center" style="min-height: 70vh;">
+    <div class="col-md-6">
+        <div class="card p-5" style="background: #fafafa;">
+            <h2 class="mb-2 text-start">Contact us</h2>
+            <div class="mb-3 text-muted">Subheading for description or instructions</div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="id_first_name" class="form-label">First Name</label>
+                        <input type="text" name="first_name" class="form-control" id="id_first_name" placeholder="Jane" value="{{contact_form.first_name.value|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="id_last_name" class="form-label">Last Name</label>
+                        <input type="text" name="last_name" class="form-control" id="id_last_name" placeholder="Smitherton" value="{{contact_form.last_name.value|default:''}}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">Email address</label>
+                    <input type="email" name="email" class="form-control" id="id_email" placeholder="email@plantstakedomain.net" value="{{contact_form.email.value|default:''}}">
+                </div>
+                <div class="mb-4">
+                    <label for="id_message" class="form-label">Your message</label>
+                    <textarea name="message" class="form-control" id="id_message" rows="4" placeholder="Enter your message">{{contact_form.message.value|default:''}}</textarea>
+                </div>
+                <button type="submit" class="btn w-100" style="background:#111; color:#fff; font-weight:600; font-size:1.1rem;">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-5 d-none d-md-block text-center">
+        <img src="/static/main/images/plant-contact.jpg" alt="Contact Plant"  style="max-height: 540px; border-radius: 15px;">
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Search Results</h2>
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-6">
+        <input type="text" name="search" class="form-control" placeholder="Search for plant..." value="{{query}}" required minlength="3">
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Search</button>
+    </div>
+</form>
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+    {% for plant in plants %}
+    <div class="col">
+        <div class="card h-100 p-2 d-flex flex-column align-items-center text-center">
+            <img src="{{plant.image.url}}" class="card-img-top mb-2" alt="{{plant.name}}" style="max-width: 220px; max-height: 180px; object-fit:cover; margin:auto;">
+            <div class="card-body p-2">
+                <div class="fw-bold">{{ plant.name }}</div>
+                <div class="text-muted small mb-1">{{plant.about}}</div>
+                <div class="text-secondary small mb-1">{{plant.category}}</div>
+                {% if plant.is_edible %}
+                    <span class="badge bg-info text-dark">Edible</span>
+                {% endif %}
+            </div>
+            <div class="card-footer text-center bg-transparent border-0">
+                <a href="{% url 'plants:plant_detail_view' plant.id %}" class="btn btn-outline-primary btn-sm">View</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col">
+        <div class="alert alert-warning w-100">No plants found. Try a different search.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 
