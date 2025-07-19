@@ -29,7 +29,13 @@ def detail_view (request:HttpRequest, plant_id: int):
 
 # Search Page
 def search_view (request:HttpRequest):
-    return render(request, "plants/search.html")
+
+    query = request.GET.get("search", "")
+    order_by = request.GET.get("order_by", "title")
+
+    plants = Plant.objects.filter(title__icontains=query).order_by(order_by)
+
+    return render(request, "plants/search.html", context={"plants" : plants, "query" : query})
 
 # New Page
 def new_view (request:HttpRequest):

@@ -21,9 +21,11 @@
     <div class="header-content">
         <h1>Planteer</h1>
         <h3>Plant Databsae for Plants Lovers</h3>
-        <div class="search">
-            <input type="search" placeholder="Search For Plant...">
-            <input type="submit" value="Search">
+        <div class="search-div">
+            <form action="{% url 'plants:search_view' %}" method="get" >
+                <input type="search" name="search" value="{{ request.GET.search }}" placeholder="Search For Plant...">
+                <input type="submit" value="Search">
+            </form>
         </div>
     </div>
 </div>
@@ -44,7 +46,7 @@
         <div class="card">
             <img src="{{plant.poster.url}}" alt="Image 1">
             <div class="texts">
-                <h5>{{plant.title}}</h5>
+                <a href="{% url 'plants:detail_view' plant.id %}"><h5>{{plant.title}}</h5></a>
                 <p>{{plant.description}}</p>
                 <strong>{{plant.category}}</strong>
             </div>
