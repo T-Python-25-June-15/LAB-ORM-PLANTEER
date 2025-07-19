@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpRequest, HttpResponse
 from .models import Plant
 from .forms import PlantForm
+from django.shortcuts import get_object_or_404
 
 # All Page 
 def all_view (request:HttpRequest):
@@ -31,7 +32,19 @@ def new_view (request:HttpRequest):
 
 # Update Page
 def update_view (request:HttpRequest, plant_id: int):
-    return render(request, "plants/update.html")
+    plant = Plant.objects.get(pk=plant_id)
+
+    if request.method == "POST":
+        plant_form = PlantForm(request.POST, request.FILES, instance=plant)
+        if plant_form.is_valid():
+            plant_form.save()
+            return redirect("plants:detail_view", plant_id=plant.id)
+        else:
+            print("Not valid form")
+    else:
+        plant_form = PlantForm(instance=plant)
+    return render(request, "plants/update.html", context={"plant_form": plant_form, "plant" : plant})
+    
 
 # Delete Page
 def delete_view (request:HttpRequest, plant_id: int):

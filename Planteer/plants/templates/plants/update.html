@@ -1,11 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Update Page</h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Update Plant{% endblock %}
+
+{% block fileStyle %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Update Plant</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value="{{ plant_form.title.value }}" required>
+
+        <label for="category">Category</label>
+        <input type="text" name="category" id="category" value="{{ plant_form.category.value }}" required>
+
+        <label for="description">Description</label>
+        <textarea name="description" id="description" rows="3" required>{{ plant_form.description.value }}</textarea>
+
+        <label for="native_to">Native To</label>
+        <input type="text" name="native_to" id="native_to" value="{{ plant_form.native_to.value }}" required>
+
+        <label for="is_edible">
+            <input type="checkbox" name="is_edible" id="is_edible" {% if plant_form.is_edible.value %}checked{% endif %}> Is Edible?
+        </label>
+
+        <label for="usage">Usage</label>
+        <textarea name="usage" id="usage" rows="3" required>{{ plant_form.usage.value }}</textarea>
+
+        <label for="poster">Poster</label>
+        <input type="file" name="poster" id="poster">
+
+        <input type="submit" value="Update Plant">
+    </form>
+</div>
+{% endblock %}

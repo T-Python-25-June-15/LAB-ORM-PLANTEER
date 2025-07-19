@@ -60,6 +60,11 @@
     border-radius: 0 0 7px 7px;
 }
 
+.content .cards .card .texts a {
+    text-decoration: none;
+    color: black;
+}
+
 .content .cards .card .texts h5 {
     font-size: 18px;
     margin: 0;
