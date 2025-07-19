@@ -34,36 +34,22 @@
             <p>Learn more about plants</p>
         </div>
         <div class="right-up-bar">
-            <a href="">More<i class="fa-solid fa-arrow-right"></i></a>
+            <a href="{% url 'plants:all_view' %}">More<i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </div>
     <div class="cards">
-        <div class="card">
-            <img src="{% static 'images/plant.jpg'%}" alt="Image 1">
-            <div class="texts">
-                <h5>Plant 1</h5>
-                <p>Brief about plant</p>
-                <strong>Tree</strong>
-            </div>
-        </div>
-        <div class="card">
-            <img src="{% static 'images/banana.jpg'%}" alt="Image 2">
-            <div class="texts">
-                <h5>Banana</h5>
-                <p>Brief about plant</p>
-                <strong>Fruit</strong>
-            </div>
-        </div>
-        <div class="card">
-            <img src="{% static 'images/banana.jpg'%}" alt="Image 3">
-            <div class="texts">
-                <h5>Plant 3</h5>
-                <p>Brief about plant</p>
-                <strong>Vegetables</strong>
-            </div>
-        </div>
-        
 
+        {% for plant in plants %}
+
+        <div class="card">
+            <img src="{{plant.poster.url}}" alt="Image 1">
+            <div class="texts">
+                <h5>{{plant.title}}</h5>
+                <p>{{plant.description}}</p>
+                <strong>{{plant.category}}</strong>
+            </div>
+
+        {% endfor %}
     </div>
 </div>
 

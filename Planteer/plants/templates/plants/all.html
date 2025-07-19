@@ -4,32 +4,25 @@
 {% block title %}All Plants{% endblock %}
 
 {% block fileStyle %}
-
 <link rel="stylesheet" href="{% static 'css/all.css' %}">
-
-
-
 {% endblock %}
 
 {% block content %}
+<div class="content">
 
-<div class="cards">
+    <div class="cards">
 
-    {% for plant in plants %}
-    <div class="card">
-        <img src="{{ plant.poster.url }}" alt="{{ plant.title }}">
-        <h4>{{ plant.title }}</h4>
-        <p>{{ plant.category }}</p>
-        <a href="{% url 'plants:detail_view' plant.id %}">View Details</a>
+        {% for plant in plants %}
+        <div class="card">
+            <img src="{{plant.poster.url}}" alt="Image 1">
+            <div class="texts">
+                <h5>{{plant.title}}</h5>
+                <p>{{plant.description}}</p>
+                <strong>{{plant.category}}</strong>
+            </div>
+        </div>
+        {% endfor %}
+
     </div>
-    {% endfor %}
-
 </div>
-
-
-
-
-
-
-
 {% endblock %}

@@ -1,0 +1,58 @@
+
+
+.form-container {
+    width: 95%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 100px;
+    margin-top: 40px;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.form-container label {
+    display: block;
+    text-align: left;
+    margin-top: 18px;
+    font-weight: bold;
+    color: rgb(101, 101, 101);
+}
+
+.form-container input[type="text"],
+.form-container textarea,
+.form-container input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid rgb(180, 178, 178);
+    border-radius: 6px;
+}
+
+.form-container input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+.form-container input[type="submit"] {
+    background-color: black;
+    color: white;
+    border: none;
+    margin-top: 40px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 17px;
+    transition: 0.3s;
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #4CAF50;
+}

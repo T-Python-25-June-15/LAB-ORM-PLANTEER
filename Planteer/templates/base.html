@@ -19,12 +19,12 @@
         <header>
             <nav>
                 <div class="logo-div">
-                    <a href="#">Planteer</a>
+                    <a href="{% url 'main:home_view' %}">Planteer</a>
                 </div>
                 <div class="top-right-nav">
                     <a href="">All Plants</a>
                     <a href="">Contact Us</a>
-                    <a href="" class="btn">Add Plant</a>
+                    <a href="{% url 'plants:new_view'%}" class="btn">Add Plant</a>
                 </div>
             </nav>
 
