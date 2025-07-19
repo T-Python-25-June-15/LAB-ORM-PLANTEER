@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Search Results for "{{ query }}"</h2>
+<form method="get" action="{% url 'plants:plant_search' %}" class="d-flex mb-4" role="search">
+  <input class="form-control me-2" type="search" name="query" placeholder="Search plants..." value="{{ query }}">
+  <button class="btn btn-dark-custom" type="submit">Search</button>
+</form>
+
+  {% if results %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for plant in results %}
+    <div class="col">
+      <div class="card h-100">
+        <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ plant.name }}</h5>
+          <p class="card-text">{{ plant.description|truncatewords:20 }}</p>
+          <p><strong>Category:</strong> {{ plant.get_category_display }}</p>
+          <p><strong>Edible:</strong> {{ plant.is_edible|yesno:"Yes,No" }}</p>
+          <a href="{% url 'plants:plant_detail' plant.id %}" class="btn btn-dark-custom">More Details</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+  {% else %}
+    <p>No plants found matching your search.</p>
+  {% endif %}
+{% endblock %}

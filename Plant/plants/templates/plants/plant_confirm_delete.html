@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-warning mt-4">
+  <h4>Are you sure you want to delete <strong>{{ plant.name }}</strong>?</h4>
+  <form method="POST" class="mt-3">
+    {% csrf_token %}
+    <button type="submit"class="btn btn-dark-custom">Yes, Delete</button>
+    <a href="{% url 'plants:plant_detail' plant.id %}"class="btn btn-dark-custom">Cancel</a>
+  </form>
+</div>
+{% endblock %}
