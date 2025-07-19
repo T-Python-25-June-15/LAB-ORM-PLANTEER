@@ -1,0 +1,73 @@
+.navbar-brand {
+  padding-left: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
+  transition: color 0.3s ease; 
+}
+
+.navbar-brand:hover {
+  color: red; 
+  text-decoration: none; 
+  cursor: pointer;
+}
+
+.navbar-nav {
+  margin-left: auto;
+  padding-right: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.nav-link.active:hover {
+  color: red;
+}
+
+
+
+
+.add-plant-link {
+  border: 2px solid black;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+
+.More{
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    color: black;
+    text-decoration: none;
+}
+
+.More:hover{
+  color: red;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-section {
+  max-width: 1000px;
+  position: relative;
+}
+
+.hero-image {
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-overlay {
+  width: 100%;
+  max-width: 700px;
+}
+
+.search-form-box {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
