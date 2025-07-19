@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/d430c26570.js" crossorigin="anonymous"></script>
+
+
+</head>
+<body class="flex flex-col min-h-screen p-12">
+    <nav class="sticky top-2 flex justify-between text-lg flex-wrap items-center bg-opacity-50 backdrop-blur-md px-4 rounded-xl">
+      <a href="/" class="flex-shrink-0">
+      <h1 class="text-2xl">Planteer</h1>
+      </a>
+
+      <button class="md:hidden text-xl" id="menu-toggle">
+      <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="hidden md:flex md:flex-row gap-10 items-center w-full md:w-auto" id="menu">
+      <a href="{% url 'plants:all_plants_view' %}" class="block md:inline-block my-2"> All Plants </a>
+      <a href="{% url 'main:contact_us_view' %}" class="block md:inline-block my-2"> Contact Us </a>
+      <a href="{% url 'plants:add_plant_view' %}" class="block md:inline-block bg-black px-6 py-4 text-xs text-white rounded-xl font-mono my-2"> Add Plant </a>
+      </div>
+    </nav>
+
+    <script>
+      const menuToggle = document.getElementById('menu-toggle');
+      const menu = document.getElementById('menu');
+
+      menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      });
+    </script>
+    <main class="flex-grow">
+
+   
+    {% block content %}
+
+
+    {% endblock %}
+
+    </main> 
+    <footer class="w-full border-t pt-12">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between flex-wrap">
+        <div class="mb-8 md:mb-0">
+        <h1 class="text-3xl font-bold">Planteer</h1>
+        <div class="flex gap-4 mt-6">
+          <a href="#" class="text-sm hover:underline text-gray-500 fa-xl"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="text-sm hover:underline text-gray-500 fa-xl"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#" class="text-sm hover:underline text-gray-500 fa-xl"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="text-sm hover:underline text-gray-500 fa-xl"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        </div>
+        <div class="flex flex-wrap gap-12">
+        <div class="flex flex-col items-start md:items-center mb-8 md:mb-0">
+          <h3 class="text-xl font-semibold">Topic</h3>
+          <div class="mt-4 flex flex-col">
+          <a href="#" class="text-sm hover:underline flex pt-2">Page</a>
+          <a href="#" class="text-sm hover:underline flex pt-2">Page</a>
+          <a href="#" class="text-sm hover:underline flex pt-2">Page</a>
+          </div>
+        </div>
+        <div class="flex flex-col items-start md:items-center mb-8 md:mb-0">
+          <h3 class="text-xl font-semibold">Topic</h3>
+          <div class="mt-4 flex flex-col">
+            <a href="#" class="text-sm hover:underline flex pt-2">Page</a>
+            <a href="#" class="text-sm hover:underline flex pt-2">Page</a>
+            <a href="#" class="text-sm hover:underline flex pt-2">Page</a>
+          </div>
+          </div>
+          <div class="flex flex-col items-start md:items-center">
+          <h3 class="text-xl font-semibold">Topic</h3>
+          <div class="mt-4 flex flex-col">
+            <a href="#" class="text-sm hover:underline flex pt-2">Page</a>
+            <a href="#" class="text-sm hover:underline flex pt-2">Page</a>
+            <a href="#" class="text-sm hover:underline flex pt-2">Page</a>
+          </div>
+          </div>
+        </div>
+      </div>
+      </footer>
+</body>
+</html>

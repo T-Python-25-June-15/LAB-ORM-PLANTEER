@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Contactus - messages {% endblock %}
+
+{% block content %} 
+<div class="p-4 md:p-10">
+
+    <h1 class="text-4xl md:text-6xl font-bold text-center">Messages from Users</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-10 my-10">
+        {% for m in messages %}
+        
+        <div class="flex flex-col">
+            <i class="far fa-user-circle fa-xl mb-5"></i>
+                <h3 class="font-semibold text-xl">{{m.first_name}} {{m.last_name}}</h3>
+                <h3 class="font-semibold text-blue-500">{{m.email}}</h3>
+
+                <p class="text-gray-500  w-lg ">{{m.message}}</p>
+        </div>
+        
+   
+        {% endfor %}
+    </div>     
+</div>
+
+{% endblock %}

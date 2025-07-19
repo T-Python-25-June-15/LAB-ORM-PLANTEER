@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Contactus - messages {% endblock %}
+
+{% block content %} 
+
+<div class=" p-1 md:p-10">
+
+        <h1 class="text-6xl font-bold">All plants</h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-10">
+   
+            {% for p in plants %}
+            <a href="{% url 'plants:plant_details_view' p.id %}">
+            <div class="flex flex-col mx-2">
+                <img src="{{p.image.url}}" class="rounded-xl h-70">
+                <div class="mt-2 mx-2">
+                    <h3 class="font-semibold text-xl">{{p.name}}</h3>
+                    <p class="text-gray-500">{{p.about}}</p>
+                    <h3 class="font-semibold">{{p.category}}</h3>
+                </div>
+            </div>
+            </a>
+        
+        
+            {% endfor %}
+        
+        </div>     
+</div>
+
+{% endblock %}

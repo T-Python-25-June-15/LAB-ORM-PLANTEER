@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %} 
+
+<style>
+    ul.errorlist {
+        color: #ef4444;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        list-style: none;
+    }
+</style>
+<div class=" p-1 md:p-10">
+
+        <h1 class="text-6xl font-bold">update plant</h1>
+        <h2 class="text-gray-500 text-xl mt-5">Subheading for description or instructions</h2>
+      
+        <br>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-6">
+                <label class="block font-semibold mb-2">Current Image</label>
+                {% if plant.image %}
+                    <img src="{{ plant.image.url }}" alt="Current Image" class="h-40 rounded shadow-md">
+                {% else %}
+                    <p class="text-gray-400">No image uploaded</p>
+                {% endif %}
+            </div>
+        {{ plant_form.as_p }}
+
+     
+        <button class="bg-black p-2 text-white rounded-lg w-full" type="submit">Update</button>
+
+        </form>
+    </div>
+
+{% endblock %}
