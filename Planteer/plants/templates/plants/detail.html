@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ plant.title }}{% endblock %}
+
+{% block fileStyle %}
+
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+<!-- <meta http-equiv="refresh" content="5"> -->
+
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+    <div class="plant-detail">
+        <img src="{{ plant.poster.url }}" alt="{{ plant.title }}" width="400">
+        <div class="info">
+            <h2>{{ plant.title }}</h2>
+            <h4>{{ plant.category }}</h4>
+            <p>{{ plant.description }}</p>
+            <p>Native to: <br>{{ plant.native_to }}</p>
+            <p>Is Edible: {{ plant.is_edible|yesno:"Yes,No" }}</p>
+            <p>Used For: {{ plant.usage }}</p>
+            <div class="update-delete">
+                <a href="{% url 'plants:update_view' plant.id %}" class="update">UPDATE</a>
+                <form action="{% url 'plants:delete_view' plant.id %}" method="post" style="display:inline;"
+                onsubmit="return confirm('Are you sure you want to delete this plant?');">
+                    {% csrf_token %}
+                    <button type="submit" class="delete">DELETE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="comment">
+        <h3>Leave a Comment</h3>
+        <form action="{% url 'plants:detail_view' plant.id %}" method="post">
+            {% csrf_token %}
+
+            <label for="full_name">Full Name</label>
+            <input type="text" name="full_name" id="full_name" placeholder="Your name" required>
+
+            <label for="content">Comment</label>
+            <textarea name="content" id="content" rows="4" placeholder="Write your comment here..." required></textarea>
+
+            <input type="submit" id="submit-btn" value="Add Comment">
+        </form>
+    </div>
+
+    {% if plant.comments.exists %}
+    <div class="comments-list">
+        <h3>Comments</h3>
+
+        {% for comment in plant.comments.all %}
+            <div class="comment-detail">
+                <p><strong>{{ comment.full_name }}</strong></p>
+                <p>{{ comment.content }}</p>
+                <p class="date">{{ comment.created_at|date:"F d, Y H:i" }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p class="no-comments">No comments yet.</p>
+    {% endif %}
+
+
+
+    <div class="related-plants">
+        <h3>Related Plants</h3>
+        <div class="cards">
+            {% for related in related_plants %}
+            <div class="card">
+                <img src="{{ related.poster.url }}" alt="{{ related.title }}">
+                <div class="texts">
+                    <a href="{% url 'plants:detail_view' related.id %}"><h5>{{ related.title }}</h5></a>
+                    <p>{{ related.description|truncatewords:10 }}</p>
+                    <strong>{{ related.category }}</strong>
+                </div>
+            </div>
+            {% empty %}
+                <p>No related plants available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

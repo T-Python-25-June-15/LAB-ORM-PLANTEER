@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}All Plants{% endblock %}
+
+{% block fileStyle %}
+<link rel="stylesheet" href="{% static 'css/all.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+
+    <div class="cards">
+
+        {% for plant in plants %}
+        <div class="card">
+            <img src="{{plant.poster.url}}" alt="Image 1">
+            <div class="texts">
+                <a href="{% url 'plants:detail_view' plant.id %}"><h5>{{plant.title}}</h5></a>
+                <p>{{plant.description}}</p>
+                <strong>{{plant.category}}</strong>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

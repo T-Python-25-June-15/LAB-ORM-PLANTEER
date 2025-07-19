@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}New Plant{% endblock %}
+
+{% block fileStyle %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Add a New Plant</h2>
+    <form action="{% url 'plants:new_view' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" placeholder="e.g. Aloe Vera" required>
+
+        <label for="category">Category</label>
+        <input type="text" name="category" id="category" placeholder="e.g. Fruit, Tree, Flower" required>
+
+        <label for="description">Description</label>
+        <textarea name="description" id="description" rows="3" placeholder="Write a short description..." required></textarea>
+
+        <label for="native_to">Native To</label>
+        <input type="text" name="native_to" id="native_to" placeholder="e.g. Arabian Peninsula" required>
+
+        <label for="is_edible">
+            <input type="checkbox" name="is_edible" id="is_edible"> Is Edible?
+        </label>
+
+        <label for="usage">Usage</label>
+        <textarea name="usage" id="usage" rows="3" placeholder="e.g. Used in skincare, herbal medicine..." required></textarea>
+
+        <label for="poster">Poster</label>
+        <input type="file" name="poster" id="poster">
+
+        <input type="submit" value="Add Plant">
+    </form>
+</div>
+{% endblock %}
