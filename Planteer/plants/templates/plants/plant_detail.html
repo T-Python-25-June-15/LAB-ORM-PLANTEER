@@ -1,0 +1,49 @@
+{% extends 'main/base.html'%}
+{%load static%}
+
+{% block title%}
+All Plants
+{% endblock %}
+
+
+{% block content %}
+<div class=" flex flex-col md:flex-row gap-16 my-12">
+    <div class="bg-[url({{plant.image.url}})] md:w-[32rem] h-[32rem] bg-cover bg-center rounded-md border border-gray-200"></div>
+    <div class="md:w-[50%] flex flex-col gap-y-6">
+        <p class="text-4xl font-semibold ">{{plant.name}}</p>
+        <p class="text-lg text-gray-500">{{plant.get_category_display}}</p>
+        <p class="text-base text-gray-500">{{plant.about}}</p>
+
+        {% if plant.is_edible == 1%}Edible{% endif %}
+        {% if plant.is_edible == 0%}Inedible{% endif %}
+
+        <div>
+            <p>Used for:</p>
+            <p>{{plant.used_for}}</p>
+        </div>
+
+        <div class="flex md:flex-row flex-col gap-3">
+            <a href="{% url 'plants:update_plant_view' plant.pk%}" class="bg-black text-white w-20 px-5 py-2 rounded-sm text-center md:w-32 w-full">Edit</a>
+            <a href="{% url 'plants:delete_plant_view' plant.pk%}" class="bg-black text-white w-20 px-5 py-2 rounded-sm text-center md:w-32 w-full">Delete</a>
+        </div>
+    </div>
+</div>
+
+<div class="my-6">
+    <h2 class="text-xl">Related Plants</h2>
+</div>
+
+<div class="grid grid-cols-2 sm:grid-cols-3  gap-4">
+    {% for plant in plants %}
+    <div>
+        <div class="bg-[url({{plant.image.url}})] h-48 bg-cover bg-center rounded-md border border-gray-200"></div>
+        <a class="text-base"  href="{% url 'plants:plant_detail_view' plant.id%}">{{plant.name}}</a>
+        <p class="text-sm text-gray-500">{{plant.about}}</p>
+        <p class="text-sm font-base">{{plant.get_category_display}}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+
