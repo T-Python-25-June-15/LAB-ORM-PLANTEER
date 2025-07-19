@@ -1,0 +1,8 @@
+*{
+    box-sizing: border-box;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.page{
+    padding: 3rem;
+}

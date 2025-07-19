@@ -1,0 +1,100 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Detail Page
+{% endblock %}
+
+{% block content %}
+<!--Detail Page -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-6">
+      <img src="{{ plant.image.url }}" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;" alt="{{ plant.name }}">
+    </div>
+    <div class="col-6">
+      <h2 class="fw-bold">{{ plant.name }}</h2>
+      <p class="text-muted">{{ plant.category }}</p>
+      <p>{{ plant.about }}</p>
+      <p class="fw-bold mb-0">Is Edible:</p>
+      <p>{{ plant.is_edible|yesno:"Yes,No" }}</p>
+      <p class="fw-bold mb-0">Used For:</p>
+      <p>{{ plant.used_for }}</p>
+    </div>
+  </div>
+   <div class="d-flex justify-content-end gap-2">
+               <a href="{% url 'plant:update_view' plant.id %}" class="btn btn-primary btn-dark" >Update</a>
+               <button type="button" class="btn btn-danger btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Delete
+               </button>
+            </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Post</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete {{plant.title}} ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="{% url 'plant:delete_view' plant.id %}" class="btn btn-danger" >Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+  <br> 
+  <br> 
+  
+<h2>Comments [{{ comment.count }}]</h2>
+
+<div class="row g-4">
+  {% for comments in comment %}
+    <div class="col d-flex">
+      <div class="card border-0 h-100">
+        <div class="card-body d-flex flex-column">
+          <h5><strong>{{ comments.full_name }}</strong></h5>
+          <p class="mb-1">{{ comments.plant_relation }}</p>
+          <p class="flex-grow-1">{{ comments.content }}</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<br> 
+<br>
+<h2>Add Comment</h2>
+<div class="container">
+<form class="d-flex flex-column gap-2  w-100" action="{% url 'plant:add_comment_view' plant.id %}" method="post">
+    {% csrf_token %}
+    <input class="form-control" name="full_name" required minlength="3" placeholder="full name"/>
+    <textarea class="form-control" name="plant_relation" required minlength="3" placeholder="plant relation"></textarea>
+    <textarea class="form-control" name="content" required minlength="3" placeholder="content"></textarea>
+    <input type="submit" class="btn btn-primary btn-dark" value="Add Comment" />
+</form>
+</div>
+
+  <br> 
+  <br>
+  <h3> Related Plants</h3>
+  <div class="row">
+   {% for related in same_category %}
+    <div class="col-md-4 col-lg-3 mb-4 d-flex align-items-stretch">
+      <div class="card border-0 shadow-sm">
+        <img src="{{ related.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+        <div class="card-body">
+          <a href="{%url 'plant:detail_view' related.id %}"class="text-decoration-none"><h6 class="fw-bold mb-1 text-decoration-none fw-semibold text-dark">{{ related.name }}</h6></a>
+          <p class="text-muted mb-1">{{ related.about }}</p>
+          <p class="fw-semibold">{{ related.category }}</p>
+        </div>
+      </div>
+    </div>
+    
+    {% endfor %}
+  </div>
+
+
+{% endblock %}
