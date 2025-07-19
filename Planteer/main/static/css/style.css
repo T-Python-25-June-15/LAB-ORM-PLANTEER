@@ -23,19 +23,19 @@ main {
 }
 
 .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.nav-link {
-    color: black;
-    text-decoration: none;
-    font-weight: 500;
-}
+
 
 .nav-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+
 }
 
 .btn-add {
@@ -171,14 +171,71 @@ footer {
 
 
 .section-below p {
-    color: gray;
+  color: gray;
 }
 
 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+.delete-icon {
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.delete-icon:hover {
+  transform: scale(1.2);
+}
+
+
+/* Animate logo text */
+.navbar-custom .fw-bold {
+  transition: transform 0.3s ease;
+}
+
+.navbar-custom .fw-bold:hover {
+  transform: scale(1.1);
+}
+
+
+.navbar-custom .nav-link {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+  transform: scale(1.05);
+  color: #198754;
+}
+
+/* Animate "Add Plant" button */
+.navbar-custom .btn-add {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar-custom .btn-add:hover {
+  transform: scale(1.05);
+  background-color: #198754;
+  color: white;
+}
+
+.more a .material-symbols-outlined {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.more a:hover .material-symbols-outlined {
+  transform: translateX(4px) scale(1.2); /* moves right and grows */
+}
 
 
 
