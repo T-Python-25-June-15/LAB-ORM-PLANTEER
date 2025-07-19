@@ -13,11 +13,16 @@
     <h2>Search Results</h2>
 
     <form action="{% url 'plants:search_view' %}" method="get">
-        <input type="search" name="search" value="{{request.GET.search}}" placeholder="Search for Plants..." minlength="3" required>
+        <input type="search" name="search" value="{{request.GET.search}}" placeholder="Search for Plants..." required>
         <select name="order_by">
             <option value="title" {% if request.GET.order_by == "title" %}selected{% endif %}>Title</option>
             <option value="category" {% if request.GET.order_by == "category" %}selected{% endif %}>Category</option>
             <option value="native_to" {% if request.GET.order_by == "native_to" %}selected{% endif %}>Native to</option>
+        </select>
+        <select name="is_edible">
+            <option value="">Edible</option>
+            <option value="true" {% if request.GET.is_edible == "true" %}selected{% endif %}>Yes</option>
+            <option value="false" {% if request.GET.is_edible == "false" %}selected{% endif %}>No</option>
         </select>
         <input type="submit" value="apply">
     </form>

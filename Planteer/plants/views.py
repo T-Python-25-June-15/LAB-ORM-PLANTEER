@@ -32,8 +32,16 @@ def search_view (request:HttpRequest):
 
     query = request.GET.get("search", "")
     order_by = request.GET.get("order_by", "title")
+    is_edible = request.GET.get("is_edible")
 
-    plants = Plant.objects.filter(title__icontains=query).order_by(order_by)
+    plants = Plant.objects.filter(title__icontains=query)
+
+    if is_edible == "true":
+        plants = plants.filter(is_edible=True)
+    elif is_edible == "false":
+        plants = plants.filter(is_edible=False)
+
+    plants = plants.order_by(order_by)
 
     return render(request, "plants/search.html", context={"plants" : plants, "query" : query})
 
