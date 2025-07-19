@@ -1,0 +1,42 @@
+{% extends 'plants/base.html' %}
+{%load static%}
+
+{% block content %}
+
+{% block linkcss %}
+<link rel="stylesheet" href="{% static 'css/home_style.css'%}">
+{% endblock %}
+<div class="head-input home-image" style="background-image: url({% static 'images/wallpaper.jpg' %});">
+    <h1>Planteer</h1>
+    <h2>Plant Database For Plants Lovers</h2>
+
+    <form method="get" action="{% url 'plants:plants_search' %}">
+        <div class="search-box">
+            <input type="search" name="search" id="" placeholder="Search For Plant..." value="{{query|default:''}}">
+            <button type="submit" class="btn">Search</button>
+            
+        </div>
+    </form>
+
+</div>
+
+<div class="cards-container">
+    <h1>Plants</h1>
+    <p>learn more about plants.</p>
+
+    <div class="cards">
+        {%for plant in plant%}
+        <div class="card">
+            <a href="/plants/{{plant.id}}/detail">
+                <img src="{{plant.image.url}}" alt="">
+                <h3>{{plant.name}}</h3>
+                <p>{{plant.about}}</p>
+                <h3>{{plant.category}}</h3>
+            </a>
+        </div>
+        {%endfor%}
+    </div>
+
+</div>
+
+{% endblock %}

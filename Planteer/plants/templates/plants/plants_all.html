@@ -1,0 +1,29 @@
+{% extends 'plants/base.html' %}
+{%load static%}
+
+{% block content %}
+
+{% block linkcss %}
+<link rel="stylesheet" href="{% static 'css/home_style.css'%}">
+{% endblock %}
+
+<div class="cards-container">
+    <h1>Plants</h1>
+    <p>learn more about plants.</p>
+
+    <div class="cards">
+        {%for plant in plant%}
+        <div class="card">
+            <a href="/plants/{{plant.id}}/detail">
+                <img src="{{plant.image.url}}" alt="">
+                <h3>{{plant.name}}</h3>
+                <p>{{plant.about}}</p>
+                <h3>{{plant.category}}</h3>
+            </a>
+        </div>
+        {%endfor%}
+    </div>
+
+</div>
+
+{% endblock %}

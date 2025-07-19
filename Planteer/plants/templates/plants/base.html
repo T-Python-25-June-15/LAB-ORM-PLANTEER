@@ -1,0 +1,74 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{%block title%}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  {%block linkcss%}
+  {%endblock%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+</head>
+<body>
+  <header>
+    <div class="links">
+      <a href="/" class="black">Planter</a>
+    </div>
+    
+    <div class="links">
+      <a href="/plants/all" class="black">All Plants</a>
+      <a href="#" class="black">Contact US</a>
+      <a href="/plants/new" class="btn white">Add Plant</a>
+    </div>
+    
+  </header>
+  <div class="base-container">
+    {% block content %}
+    
+    {% endblock %}
+  </div>
+  
+  <footer>
+    <div class="fot-site-container">
+      <a href="/" class="black">Planter</a>
+      <div class="social-container">
+          <a href="/" class="gray"><i class="fab fa-facebook"></i> </a>
+          <a href="/" class="gray"><i class="fab fa-linkedin"></i> </a>
+          <a href="/" class="gray"><i class="fab fa-youtube"></i> </a>
+          <a href="/" class="gray"><i class="fab fa-instagram"></i> </a>
+      </div>
+    </div>
+    <div class="table-container">
+
+      <table>
+        <tr>
+          <th>topic</th>
+          <th>topic</th>
+          <th>topic</th>
+        </tr>
+        <tr>
+          <td><a href="">page</a></td>
+          <td><a href="">page</a></td>
+          <td><a href="">page</a></td>
+        </tr>
+        <tr>
+          <td><a href="">page</a></td>
+          <td><a href="">page</a></td>
+          <td><a href="">page</a></td>
+        </tr>
+        <tr>
+          <td><a href="">page</a></td>
+          <td><a href="">page</a></td>
+          <td><a href="">page</a></td>
+        </tr>
+      </table>
+
+    </div>
+  </footer>
+</body>
+</html>

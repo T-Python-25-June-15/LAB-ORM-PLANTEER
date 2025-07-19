@@ -1,0 +1,46 @@
+{% extends 'plants/base.html' %}
+
+{% block title %}
+ddd
+{%endblock%}
+
+{% block content %}
+
+<form class="add-container" method="POST" action="{% url 'plants:plants_new' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <h2>Add New Plant</h2>
+
+  <input class="add-input" type="text" name="name" placeholder="Name" required>
+  <textarea class="add-input about" name="about" placeholder="About" required></textarea>
+  <input class="add-input" type="text" name="used_for" placeholder="Used For" required>
+  <input class="add-input" type="file" name="image" placeholder="Image URL" required>
+
+  <select class="add-input" name="category" required>
+    <option value="" disabled selected>Select Category</option>
+    <option value="flower">Flower</option>
+    <option value="tree">Tree</option>
+    <option value="herb">Herb</option>
+    <option value="succulent">Succulent</option>
+    <option value="fruit">Fruit</option>
+    <option value="vegetable">Vegetable</option>
+    <option value="medicinal">Medicinal</option>
+    <option value="other">Other</option>
+  </select>
+
+  <select class="add-input" name="is_editable" required>
+    <option value="" disabled selected>Select Editability</option>
+    <option value='1'>Editable</option>
+    <option value='0'>Not Editable</option>
+  </select>
+
+  <input class="add-input date-input" type="date" name="created_at" placeholder="Created At">
+  <button class="btn" type="submit">Add Plant</button>
+
+</form>
+
+
+
+
+
+
+{% endblock %}
