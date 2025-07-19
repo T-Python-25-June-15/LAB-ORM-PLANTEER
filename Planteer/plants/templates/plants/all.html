@@ -1,0 +1,41 @@
+{% extends 'plants/base.html' %}
+{% block content %}
+<h2 class="mb-4">All Plants</h2>
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-5">
+        <select name="category" class="form-select">
+            <option value="">All Categories</option>
+            <option value="Tree">Tree</option>
+            <option value="Fruit">Fruit</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Herb">Herb</option>
+        </select>
+    </div>
+    <div class="col-md-5">
+        <select name="is_edible" class="form-select">
+            <option value="">All</option>
+            <option value="true">Edible</option>
+            <option value="false">Not Edible</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Filter</button>
+    </div>
+</form>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for plant in plants %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ plant.image.url }}" class="card-img-top img-fluid" style="object-fit: cover; height: 200px;" alt="{{ plant.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ plant.name }}</h5>
+                    <p class="card-text">{{ plant.category }}</p>
+                    <a href="{% url 'plant_detail' plant.id %}" class="btn btn-outline-primary">Details</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

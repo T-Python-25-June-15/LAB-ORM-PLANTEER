@@ -1,0 +1,35 @@
+{% extends 'plants/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row align-items-center">
+    <div class="col-md-6">
+        <h2 class="fw-bold mb-3">Contact us</h2>
+        <p class="text-muted mb-4">Let us know how we can help</p>
+        <form method="post" class="row g-3">
+            {% csrf_token %}
+            <div class="col-md-6">
+                {{ form.first_name.label_tag }} 
+                {{ form.first_name}}
+            </div>
+            <div class="col-md-6">
+                {{ form.last_name.label_tag }} 
+                {{ form.last_name}}
+            </div>
+            <div class="col-12">
+                {{ form.email.label_tag }} 
+                {{ form.email}}
+            </div>
+            <div class="col-12">
+                {{ form.message.label_tag }} 
+                {{ form.message}}
+            </div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-dark w-100">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 text-center">
+        <img src="{% static 'images/contact.jpg' %}" class="img-fluid rounded" style="height: 600px;" alt="Contact Image">
+    </div>
+</div>
+{% endblock %}
