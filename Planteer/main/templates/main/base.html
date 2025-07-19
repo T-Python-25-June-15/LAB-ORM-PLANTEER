@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planteer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+</head>
+<body class="bg-white text-gray-800">
+    <!-- navbar above -->
+    <nav class="bg-white shadow p-4 flex justify-between items-center sticky top-0 z-50">
+        <a href="/" class="text-2xl font-bold text-green-800">Planteer</a>
+        <div class="space-x-6 flex items-center">
+            <a href="/plants/all/" class="text-gray-700 hover:text-green-700">All Plants</a>
+            <a href="/contact/" class="text-gray-700 hover:text-green-700">Contact Us</a>
+            <a href="{% url 'plants:add_plant' %}" class="bg-black text-white px-3 py-1 rounded">Add Plant</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+
+    {% block hero %}
+    {% endblock %}
+
+    <!--my content -->
+    <main class="p-8 max-w-7xl mx-auto">
+        {% block content %}{% endblock %}
+    </main>
+
+
+    <!--footer-->
+    <footer class="bg-white py-10 mt-16 border-t">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm text-gray-600 px-6">
+            <div>
+                <h4 class="font-semibold mb-2">🌱 Planteer </h4>
+                <div class="mt-4 flex space-x-2">
+                    <a href="#" class="fa fa-facebook text-gray-600 hover:text-gray-900"></a>
+                    <a href="#" class="fa fa-linkedin text-gray-600 hover:text-gray-900"></a>
+                    <a href="#" class="fa fa-youtube-play text-gray-600 hover:text-gray-900"></a>
+                    <a href="#" class="fa fa-instagram text-gray-600 hover:text-gray-900"></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2">Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2">Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2">Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>
+
