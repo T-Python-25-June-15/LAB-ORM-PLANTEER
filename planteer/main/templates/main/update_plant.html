@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Update Plant - Planteer {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Update Plant</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label>Name:</label>
+            <input type="text" name="name" class="form-control" value="{{ plant.name }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label>About:</label>
+            <textarea name="about" class="form-control" required>{{ plant.about }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label>Used For:</label>
+            <textarea name="used_for" class="form-control" required>{{ plant.used_for }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label>Category:</label>
+            <select name="category" class="form-select" required>
+                <option value="tree" {% if plant.category == "tree" %}selected{% endif %}>Tree</option>
+                <option value="fruit" {% if plant.category == "fruit" %}selected{% endif %}>Fruit</option>
+                <option value="vegetable" {% if plant.category == "vegetable" %}selected{% endif %}>Vegetable</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label>Current Image:</label><br>
+            <img src="{{ plant.image.url }}" width="150" class="img-thumbnail mb-2"><br>
+            <input type="file" name="image" class="form-control">
+        </div>
+
+        <div class="form-check mb-3">
+            <input type="checkbox" name="is_edible" class="form-check-input" id="is_edible"
+                   {% if plant.is_edible %}checked{% endif %}>
+            <label class="form-check-label" for="is_edible">Is Edible?</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Plant</button>
+    </form>
+</div>
+{% endblock %}

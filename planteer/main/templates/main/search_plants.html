@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+{% if plants %}
+  <h1>Search Results ({{ plants.count }})</h1>
+  <h5>Results for: "{{ request.GET.search }}"</h5>
+
+  <div class="d-flex justify-content-end my-4">
+    <form class="d-flex w-100" method="get" action="{% url 'main:search_plants_view' %}">
+      <input 
+        type="text" 
+        name="search" 
+        value="{{ request.GET.search }}" 
+        class="form-control me-2 no-border" 
+        placeholder="Search for a plant..." 
+        aria-label="Search"
+        required>
+      <button class="btn btn-dark px-4" type="submit">Search</button>
+    </form>
+  </div>
+
+{% else %}
+  <p class="bg-warning p-3 rounded">No results found for your search "{{ request.GET.search }}"</p>
+{% endif %}
+
+
+
+  <div class="row mt-2 row-cols-1 row-cols-md-3 g-4">
+    {% for plant in plants %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}" style="height: 250px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ plant.name }}</h5>
+            <p class="card-text">{{ plant.about }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <small class="text-muted">Category: {{ plant.category }}</small>
+            <a href="{% url 'main:plant_detail_view' plant.id %}" class="btn btn-dark btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

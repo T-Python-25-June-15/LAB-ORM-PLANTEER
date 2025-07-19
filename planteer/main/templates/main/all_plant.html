@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
+  <h2 class="mb-0">All Plants</h2>
+  <form method="get" class="d-flex gap-3 flex-wrap align-items-end">
+    <div>
+      <label for="category">Category</label>
+      <select name="category" id="category" class="form-select">
+        <option value="">All</option>
+        {% for cat in categories %}
+          <option value="{{ cat }}" {% if request.GET.category == cat %}selected{% endif %}>{{ cat }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label for="is_edible">Is Edible</label>
+      <select name="is_edible" id="is_edible" class="form-select">
+        <option value="">All</option>
+        <option value="true" {% if request.GET.is_edible == "true" %}selected{% endif %}>Yes</option>
+        <option value="false" {% if request.GET.is_edible == "false" %}selected{% endif %}>No</option>
+      </select>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-dark">Apply Filters</button>
+      <a href="{% url 'main:all_plant_view' %}" class="btn btn-outline-secondary">Reset</a>
+    </div>
+  </form>
+</div>
+
+  <div class="row mt-2 row-cols-1 row-cols-md-3 g-4">
+    {% for plant in plants %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}" style="height: 250px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ plant.name }}</h5>
+            <p class="card-text">{{ plant.about }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <small class="text-muted">Category: {{ plant.category }}</small>
+            <a href="{% url 'main:plant_detail_view' plant.id %}" class="btn btn-dark btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
