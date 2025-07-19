@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Messages{% endblock %}
+
+{% block content %}
+
+<h1>Messages from Users</h1>
+
+    <div class="last_three_imgs">
+        {% for message in messages %}
+            <div class="last_three_img">
+                <img src="{% static 'images\user.png' %}" style="width: 10%;">
+                <h3>{{message.first_name}} {{message.last_name}}</h3>
+                <a href="mailto:{{message.email}}"><h4>{{message.email}}</h4></a>
+                <p>{{message.message}}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

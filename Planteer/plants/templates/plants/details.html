@@ -1,0 +1,88 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Details{% endblock %}
+
+{% block content %}
+    <div class="detail">
+        <div class="detail_img">
+            <img src="{{plants.image.url}}">
+        </div>
+        <div class="detail_text">
+            <h2>{{plants.name}}</h2>
+            <h4>Category</h4>
+            <p>{{plants.about}}</p>
+            <h5>Is Edible: {{plants.is_edible}}</h5>
+            <h5>Used for:<br>{{plants.user_for}}</h5>
+            <div class="detail_buttons">
+                <a href="{% url 'plants:update_views' plants.id %}" class="btn btn-primary">update</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">delete</button>
+            </div>
+        </div>
+        
+    </div>
+    <br>
+    <span style="margin: 1rem 5rem; font-weight: bold;">Related Plants</span>
+    <div class="detail">
+      
+      <div class="last_three_imgs">
+                  {% for related_plant in related_plants %}
+                    {% if related_plant.id != plants.id%}
+                        <div class="last_three_img">
+                            <img src="{{related_plant.image.url}}">
+                            <h6>{{related_plant.name}}</h6>
+                            <a href="{% url 'plants:details_views' related_plant.id %}"><p>Brief about plant</p></a>
+                            <h6>{{related_plant.category}}</h6>
+                        </div>
+                    {% endif%}
+                  {% endfor %}
+          </div>
+        </div>
+    <hr>
+    <h2>Comments ({{comments.count}})</h2>
+    <div class="d-flex flex-column gap-3">
+      {% for comment in comments %}
+      <div class="d-flex flex-column p-3 shadow">
+        <h4>{{comment.full_name}}</h4>
+        <p>{{comment.content}}</p>
+        <p class="text-muted">{{comment.created_at}}</p>
+      </div>
+      {% endfor%}
+    </div>
+    <br>
+    <hr style="border: 1px solid black;">
+    <h2>Add Comment</h2>
+    <form class="d-flex flex-column gap-2 mt-4" action="{% url 'plants:comment_views' plants.id %}" method="POST">
+      {% csrf_token %}
+            <div class="form-group">
+                <label for="full_name">Full Name: </label>
+                <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+                <label for="content">Comment:</label>
+                <br>
+                <textarea placeholder="Your comment" name="content" class="form-control" id="content" rows="3" required></textarea>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+              <button type="submit" class="btn btn-primary" style="width: 100px;">Submit</button>
+            </div>
+    </form>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Plant</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are You sure you want to delete {{plants.name}} ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="{% url 'plants:delete_views' plants.id %}" class="btn btn-danger">delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
