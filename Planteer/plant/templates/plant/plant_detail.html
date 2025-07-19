@@ -1,0 +1,91 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container my-4">
+
+  <div class="row plant-detail-container">
+    <div class="col-md-5 plant-image mb-3 mb-md-0">
+      <img src="{{ plant.image.url }}" alt="{{ plant.name }}" class="img-fluid rounded">
+    </div>
+
+    <div class="col-md-7 plant-info">
+      <h2>{{ plant.name }}</h2>
+      <p><strong>Category:</strong> {{ plant.category }}</p>
+      <p>{{ plant.about }}</p>
+      <p><strong>Used For:</strong> {{ plant.used_for }}</p>
+      <p><strong>Is Edible:</strong> {{ plant.is_edible|yesno:"Yes,No" }}</p>
+
+      <div class="d-flex justify-content-end gap-3 mt-4">
+        <a href="{% url 'plant:plant_update_view' plant.id %}" class="btn btn-dark">Update</a>
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+<h2 class="mt-4 mb-4">Comments ({{ comments.count }})</h2>
+
+<div class="d-flex flex-column gap-3 mb-4">
+  {% for comment in comments %}
+    <div class="card p-3">
+      <p style="font-size: 0.9rem; margin-bottom: 0.25rem;">{{ comment.comment }}</p>
+      <p class="text-muted small mb-0" style="font-size: 0.8rem;">
+        By <strong>{{ comment.name }}</strong> on {{ comment.created_at }}
+      </p>
+    </div>
+  {% empty %}
+    <p>No comments yet.</p>
+  {% endfor %}
+</div>
+
+
+<h2 class="mt-4 mb-4">Add Comment</h2>
+<form action="{% url 'plant:add_comment_view' plant.id %}" method="post" class="d-flex flex-column gap-2 mb-5">
+  {% csrf_token %}
+  <input class="form-control" name="name" required minlength="3" placeholder="Name" />
+  <textarea class="form-control" name="comment" required minlength="3" placeholder="Comment..."></textarea>
+  <input type="submit" class="btn btn-dark" value="Add Comment" />
+</form>
+
+
+<h3 class="related-plants-title mt-5 mb-4 text-dark">Related Plants</h3>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 related-plants-grid">
+  {% for related in related_plants %}
+    <div class="col">
+      <div class="card plant-card h-100">
+        <a href="{% url 'plant:plant_detail_view' related.id %}" class="text-decoration-none text-dark">
+          <img src="{{ related.image.url }}" alt="{{ related.name }}" class="card-img-top" style="object-fit: cover; height: 180px; border-radius: 0.75rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ related.name }}</h5>
+            <p class="card-text text-muted">{{ related.category }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  {% empty %}
+    <p>No related plants available.</p>
+  {% endfor %}
+</div>
+
+
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Plant</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete plant <strong>{{ plant.name }}</strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="{% url 'plant:plant_delete_view' plant.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row align-items-center">
+
+    <div class="col-md-6">
+      <h2 class="mb-3 fw-bold">Update {{ plant.name }}</h2>
+      <p class="text-muted mb-4">Edit the plant information </p>
+
+      <form method="POST" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-2">
+          <label for="name" class="form-label small">Name</label>
+          <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{ plant.name }}" required>
+        </div>
+
+        <div class="mb-2">
+          <label for="about" class="form-label small">About</label>
+          <textarea class="form-control form-control-sm" name="about" id="about" rows="2" required>{{ plant.about }}</textarea>
+        </div>
+
+        <div class="mb-2">
+          <label for="used_for" class="form-label small">Used For</label>
+          <textarea class="form-control form-control-sm" name="used_for" id="used_for" rows="2" required>{{ plant.used_for }}</textarea>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label small">Category</label>
+          <div>
+            {% for val, label in CategoryChoices %}
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="category" id="{{ val }}" value="{{ val }}" {% if plant.category == val %}checked{% endif %} required>
+                <label class="form-check-label small" for="{{ val }}">{{ label }}</label>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="mb-2 form-check">
+          <input type="checkbox" class="form-check-input" name="is_edible" id="is_edible" {% if plant.is_edible %}checked{% endif %}>
+          <label class="form-check-label small" for="is_edible">Is Edible</label>
+        </div>
+
+        <div class="mb-2">
+          <label for="image" class="form-label small">Change Image</label>
+          <input type="file" class="form-control form-control-sm" name="image" id="image" accept="image/*">
+        </div>
+
+        <button type="submit" class="btn btn-dark btn-sm w-100">Update Plant</button>
+      </form>
+    </div>
+
+   <div class="col-md-6 mt-4 mt-md-0">
+  {% if plant.image %}
+  <img src="{{ plant.image.url }}" alt="{{ plant.name }}" class="img-fluid rounded" style="max-width: 450px;">
+  {% else %}
+  <p class="text-muted">No image available</p>
+  {% endif %}
+</div>
+
+  </div>
+</div>
+{% endblock %}

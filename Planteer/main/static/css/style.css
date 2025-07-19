@@ -1,0 +1,367 @@
+
+.page-content {
+  padding: 20px 60px;
+  box-sizing: border-box;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: white;
+  margin-bottom: 40px;
+}
+
+.header-nav h1 {
+  margin: 0;
+  font-weight: 900;
+  font-size: 25px;
+}
+
+.header-nav h1 a,
+.nav-link a,
+.plant-card h3 a,
+.plant-card a {
+  color: black;
+  text-decoration: none;
+}
+
+.nav-link {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link a {
+  font-weight: 500;
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.nav-link a:hover,
+.nav-add a:hover {
+  transform: scale(1.1);
+}
+
+.nav-add a {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 200;
+}
+
+.nav-add a:hover {
+  background-color: #333;
+  color: white;
+}
+
+footer {
+  padding: 40px 20px;
+  margin: 40px auto 0;
+  border-top: 1px solid #ccc;
+  width: 90%;
+}
+
+.plant-contant {
+  background: url("../images/background.jpg") no-repeat center center;
+  background-size: cover;
+  padding: 150px 40px;
+  margin: 20px 60px;
+  text-align: center;
+  color: black;
+  background-color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.plant-title h2 {
+  font-size: 42px;  
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.plant-title p {
+  font-size: 18px;  
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #555;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+}
+
+.search-bar {
+  display: flex;
+  max-width: 600px;
+  margin: 20px auto;
+  gap: 10px;
+}
+
+.search-bar input[type="text"] {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px 5px 5px 5px; 
+  font-family: inherit;
+  font-size: 16px;
+  outline: none;
+  height: 42px;
+  box-sizing: border-box;
+}
+
+.search-bar button {
+  background-color: black;
+  color: white;
+  padding: 0 20px;
+  border-radius: 5px 5px 5px 5px; 
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  height: 42px; 
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #333;
+  color: white;
+}
+
+.more-link,
+.Messages-link {
+  text-align: right;
+  padding: 20px 40px;
+}
+
+.more-link a,
+.Messages-link a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.more-link a:hover,
+.Messages-link a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+
+.lasted-plants-title {
+  padding: 0 40px;
+  margin-top: 40px;
+}
+
+.plants-section {
+  max-width: 1600px;
+  margin: 40px auto;
+  padding: 20px 60px;
+  box-sizing: border-box;
+}
+
+.plants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 0 30px 80px;
+  justify-content: center;
+}
+
+.plant-card {
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: left;
+  padding: 20px 15px;
+  background: #fff;
+  margin: auto;
+}
+
+.plant-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.plant-card h3 {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+
+.plant-card p {
+  font-size: 16px;
+  color: #444;
+  margin: 10px 0 15px;
+}
+
+.all-plants-section {
+  padding: 60px 30px;
+}
+
+.all-plants-section h2 {
+  text-align: left;
+  font-size: 30px;
+}
+
+.plant-detail-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 20px 0;
+}
+
+.plant-image img {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.plant-info {
+  flex: 1;
+}
+
+.plant-info h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.plant-info p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}
+
+h3.related-plants-title {
+  padding: 0 40px;
+  margin-top: 40px;
+  font-size: 26px;
+}
+
+.plants-grid.related-plants-grid {
+  padding: 0 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.plants-grid.related-plants-grid .plant-card h4 {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.plant-card a:hover {
+  text-decoration: underline;
+}
+
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+}
+
+
+h2, .page-title, .plant-title h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #000;
+}
+
+
+p.text-muted, .subheading, .plant-title p, .mb-4 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+
+form {
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+form label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  color: #222;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea,
+form select,
+form input[type="file"] {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form textarea:focus,
+form select:focus,
+form input[type="file"]:focus {
+  border-color: #000;
+  outline: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin: 20px 40px 20px 0;
+  max-width: fit-content;
+}
+
+.buttons .btn {
+  width: auto;
+  padding: 8px 20px;
+  font-size: 16px;
+}
+
+.btn:hover, button:hover {
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+}
+
+img.img-fluid {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+.modal-header h1.modal-title {
+  font-size: 24px;
+  font-weight: 700;
+}

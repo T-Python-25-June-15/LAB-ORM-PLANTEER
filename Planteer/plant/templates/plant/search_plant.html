@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="plants-section">
+  <div class="container py-5">
+
+    <div class="mb-4 text-center">
+      <h2 class="search-results-title">Search results for "{{ search_input }}"</h2>
+    </div>
+
+    <form class="search-bar mb-5" role="search" method="get" action="{% url 'plant:search_plant_view' %}">
+      <input type="text" placeholder="Search For Plant..." name="search" value="{{ search_input }}">
+      <button type="submit">Search</button>
+    </form>
+
+    {% if plants %}
+      <div class="plants-grid">
+        {% for plant in plants %}
+          <div class="plant-card">
+            {% if plant.image %}
+              <img src="{{ plant.image.url }}" alt="{{ plant.name }}">
+            {% else %}
+              <img src="{% static 'images/default.jpg' %}" alt="No image">
+            {% endif %}
+            <h3>{{ plant.name }}</h3>
+            <p>{{ plant.about|truncatechars:50 }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center">No plants found</p>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}
