@@ -1,0 +1,22 @@
+.detail-plant {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12rem;
+  padding: 2rem 0;
+  margin: 2rem 3rem;
+}
+
+.detail-image {
+  width: 50%;
+  border-radius: 1rem;
+  object-fit: contain;
+}
+
+.detail-text-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 1rem;
+  width: 50%;
+}

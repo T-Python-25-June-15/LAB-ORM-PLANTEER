@@ -1,0 +1,46 @@
+{% extends 'plants/base.html' %}
+
+{% block title %}
+ddd
+{%endblock%}
+
+{% block content %}
+
+<form class="add-container" method="POST" action="{% url 'plants:plants_edit' plant.id %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <h2>Edit Plant</h2>
+
+  <input class="add-input" type="text" name="name" placeholder="Name" value="{{plant.name}}" required>
+  <textarea class="add-input about" name="about" placeholder="About" required>{{plant.about}}</textarea>
+  <input class="add-input" type="text" name="used_for" value="{{plant.used_for}}" placeholder="Used For" required>
+  <input class="add-input" type="file" name="image" placeholder="Image URL" value="{{plant.image}}" required>
+
+  <select class="add-input" name="category" required>
+    <option value="" disabled selected>Select Category</option>
+    <option {%if plant.category == "flower" %} selected {% endif %} value="flower">Flower</option>
+    <option {%if plant.category == "tree" %} selected {% endif %} value="tree">Tree</option>
+    <option {%if plant.category == "herb" %} selected {% endif %} value="herb">Herb</option>
+    <option {%if plant.category == "succulent" %} selected {% endif %} value="succulent">Succulent</option>
+    <option {%if plant.category == "fruit" %} selected {% endif %} value="fruit">Fruit</option>
+    <option {%if plant.category == "vegetable" %} selected {% endif %} value="vegetable">Vegetable</option>
+    <option {%if plant.category == "medicinal" %} selected {% endif %} value="medicinal">Medicinal</option>
+    <option {%if plant.category == "other" %} selected {% endif %} value="other">Other</option>
+  </select>
+
+  <select class="add-input" name="is_editable" required>
+    <option value="" disabled selected>Select Editability</option>
+    <option value='1' {%if plant.is_editable == True %} selected {% endif %}>Editable</option>
+    <option value='0' {%if plant.is_editable == False %} selected {% endif %}>Not Editable</option>
+  </select>
+
+  <input class="add-input date-input" type="date" name="created_at" placeholder="Created At" required>
+  <button class="btn" type="submit">Update Plant</button>
+
+</form>
+
+
+
+
+
+
+{% endblock %}

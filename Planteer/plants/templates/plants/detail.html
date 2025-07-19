@@ -5,86 +5,75 @@
 
 {% block linkcss %}
 <link rel="stylesheet" href="{% static 'css/home_style.css'%}">
+<link rel="stylesheet" href="{% static 'css/detail.css'%}">
 {% endblock %}
 
 <div class="cards-container">
     <h1>Plants</h1>
     <p>learn more about plants.</p>
 
-    <div class="cards">
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-305821.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1048035.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
+    <div class="detail-plant">
+        <img class="detail-image" src="{{plant_info.image.url}}" alt="">
+        <div class="detail-text-container">
+            <h1>{{plant_info.name}}</h1>
+            <h3 style="color: gray;">{{plant_info.category}}</h3>
+            <p style="color: gray;">{{plant_info.about}}</p>
+
+            {% if plant_info.is_editable %}
+            <p>Is Editable: yes</p>
+            {% else %}
+            <p>Is Editable: no</p>
+            {% endif %}
+            <h3>Used For: <br> {{plant_info.used_for}} </h3>
+
+            <br>
+
+            <a class="btn" href="/plants/{{plant_info.id}}/edit">EDIT</a>
+            <a class="btn" style="background-color: tomato;" href="/plants/{{plant_info.id}}/delete">DELETE</a>
+
         </div>
     </div>
+
+    <div class="cards">
+        {%for plant in plants%}
+        {%if plant.category == plant_info.category%}
+        <div class="card">
+            <a href="/plants/{{plant.id}}/detail">
+                <img src="{{plant.image.url}}" alt="">
+                <h3>{{plant.name}}</h3>
+                <p>{{plant.about}}</p>
+                <h3>{{plant.category}}</h3>
+            </a>
+        </div>
+        {%endif%}
+        {%endfor%}
+    </div>
+
+    <div class="comments-section">
+        <h2>Comments</h2>
+        <ul class="comments-list">
+            {% for comment in comments %}
+            {% if comment.plant_id == plant_info.id %}
+            <li class="comment-item">
+                <div class="comment-header">
+                    <strong class="comment-author">{{ comment.name }}</strong>
+                    <small class="comment-date">{{ comment.created_at}}</small>
+                </div>
+                <p class="comment-text">{{ comment.text }}</p>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+        <h3>Add a Comment</h3>
+        <form method="post" class="comment-form">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Your Name" required class="add-input">
+            <textarea name="text" placeholder="Your Comment" required class="add-input"></textarea>
+            <button type="submit" class="btn submit-btn">Submit</button>
+        </form>
+    </div>
+
 
 </div>
 

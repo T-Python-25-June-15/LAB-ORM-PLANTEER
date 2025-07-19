@@ -12,78 +12,16 @@
     <p>learn more about plants.</p>
 
     <div class="cards">
+        {%for plant in plant%}
         <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-305821.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
+            <a href="/plants/{{plant.id}}/detail">
+                <img src="{{plant.image.url}}" alt="">
+                <h3>{{plant.name}}</h3>
+                <p>{{plant.about}}</p>
+                <h3>{{plant.category}}</h3>
             </a>
         </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1048035.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
-        <div class="card">
-            <a href="">
-                <img src="{% static 'images/pexels-scottwebb-1022922.jpg' %}" alt="">
-                <h3>Plant 2</h3>
-                <p>Brief about plants</p>
-                <h3>frut</h3>
-            </a>
-        </div>
+        {%endfor%}
     </div>
 
 </div>
