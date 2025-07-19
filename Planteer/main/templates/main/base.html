@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Plantter | {%block title%}{% endblock%}</title>
+</head>
+<body class="font-[Poppins] min-h-screen flex flex-col">
+
+    <header class="h-20 w-[90%] content-center self-center mt-8 mb-20 text-base font">
+        <nav class="flex md:flex-row flex-col justify-between items-center mx-auto">
+            <div class="font-bold md:m-0 mt-10">
+                <a href="{% url 'main:home_view'%}">Plantter</a>
+            </div>
+            <div class="min-h-fit left-0 ">
+                <ul class="flex md:flex-row items-center gap-10 md:m-0 mt-3">
+                    <li><a class="hover:text-gray-600" href="{% url 'plants:all_plants_view'%}">All Plants</a></li>
+                    <li><a class="hover:text-gray-600" href="{% url 'contact:contact_view'%}">Contact Us</a></li>
+                    <li>
+                        <a href="{% url 'plants:add_plant_view'%}"><button class="bg-black text-white px-5 py-2 rounded-sm	hover:bg-gray-800">Add Plant</button></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+
+    <main class="flex-grow w-[90%] self-center">
+        <div>
+            <h2 class="text-3xl font-semibold">{% block pageTitle %}{% endblock %}</h2>
+        </div>
+    {% block content %}
+    {% endblock %}
+    </main>
+
+
+    <footer class="w-[90%] content-center  self-center border-t-1 border-gray-200 py-6 my-6">
+        <div class="grid md:grid-flow-col grid-flow-row gap-4">
+            <div class="row-span-2 font-medium text-xl">
+                <span>Plantter</span>
+            </div>
+            <div class="flex gap-6 text-gray-500">
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                <a href=""><i class="fa-brands fa-youtube"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <div class="row-span-3 grid md:grid-flow-col md:justify-self-end gap-12">
+                    <nav>
+                        <ul class="space-y-6 my-4">
+                            <li class="font-medium">About</li>
+                            <li><a href="">About Plantter</a></li>
+                            <li><a href="">Our Mission</a></li>
+                            <li><a href="">The Team</a></li>
+                        </ul>
+                    </nav>
+                    <nav>
+                        <ul class="space-y-6 my-4">
+                            <li class="font-medium">Get Involved</li>
+                            <li><a href="">Submit a Plant</a></li>
+                            <li><a href="">Feedback</a></li>
+                            <li><a href="">Community</a></li>
+                        </ul>
+                    </nav>
+                    <nav>
+                        <ul class="space-y-6 my-4">
+                            <li class="font-medium">Support</li>
+                            <li><a href="{% url 'contact:contact_view' %}">Contact Us</a></li>
+                            <li><a href="{% url 'contact:contact_messages_view' %}">Messages from Users</a></li>
+                            <li><a href="">FAQs</a></li>
+                        </ul>
+                    </nav>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

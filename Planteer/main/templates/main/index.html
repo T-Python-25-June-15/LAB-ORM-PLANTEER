@@ -1,0 +1,45 @@
+{% extends 'main/base.html'%}
+{%load static%}
+
+{% block title%}
+Home
+{% endblock %}
+
+{% block content %}
+<div class="bg-[url({% static 'images/search-banner-01.png' %})] bg-cover bg-no-repeat h-[60vh] content-center my-6">
+    <div>
+        <p class="text-[5.5vw] font-medium justify-self-center">Plantter</p>
+        <p class="text-[3vw] font-medium justify-self-center">Plant Database For Plants Lovers</p>
+        <form method="get" action="{% url 'plants:search_plant_view' %}">
+            <div class="flex justify-self-center md:flex-row flex-col w-[75%] gap-4 my-8">
+                <input class="bg-white w-full p-3 rounded-sm border border-gray-200" type="text" name="search" placeholder="Search For Plant...">
+                <input class="bg-black text-white rounded-sm md:w-32 p-2" type="submit" name="submit" value="Search">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="grid grid-flow-row grid-cols-3 my-8">
+    <div class="col-span-2 content-center">
+        <h2 class="text-3xl font-semibold">Plants</h2>
+        <p class="text-gray-500">Learn more about plants</p>
+    </div>
+    <div class="content-center text-right font-semibold">
+        <a href="{% url 'plants:all_plants_view' %}">More</a>
+        <i class="fa-solid fa-arrow-right"></i>
+    </div>
+</div>
+
+<div class="grid grid-cols-2 sm:grid-cols-3  gap-4">
+    {% for plant in plants %}
+    <div>
+        <div class="bg-[url({{plant.image.url}})] h-48 bg-cover bg-center rounded-md border border-gray-200"></div>
+        <a class="text-base"  href="{% url 'plants:plant_detail_view' plant.id%}">{{plant.name}}</a>
+        <p class="text-sm text-gray-500">{{plant.about}}</p>
+        <p class="text-sm font-base">{{plant.get_category_display}}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+

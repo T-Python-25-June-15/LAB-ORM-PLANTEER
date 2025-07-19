@@ -1,0 +1,43 @@
+{% extends 'main/base.html'%}
+{%load static%}
+
+{% block title%}
+All Plants
+{% endblock %}
+
+{% block pageTitle %}
+All Plants
+{% endblock %}
+
+{% block content %}
+<form method="get" action="{% url 'plants:all_plants_view' %}">
+    <div class="flex md:flex-row flex-col w-full gap-4 my-8 justify-end">
+        <select class="md:w-48 rounded-md border-2 border-black p-3" name="is_edible" id="is_edible">
+            <option value="">(Edibility)</option>
+            <option value="True" {% if request.GET.is_edible == "True" %}selected{% endif %}>Edible</option>
+            <option value="False" {% if request.GET.is_edible == "False" %}selected{% endif %}>Inedible</option>
+        </select>
+        <select class="md:w-48 rounded-md border-2 border-black p-3" name="category" id="category">
+            <option value="">(Category)</option>
+            {% for value, label in plant_form.fields.category.choices %}
+                {% if value %}
+                    <option value="{{value}}" {% if request.GET.category == value %}selected{% endif %}>{{label}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input class="bg-black text-white rounded-sm md:w-32 p-2" type="submit" name="submit" value="Search">
+    </div>
+</form>
+<div class="grid grid-cols md:grid-cols-3  gap-4">
+    {% for plant in plants %}
+    <div>
+        <div class="bg-[url({{plant.image.url}})] h-48 bg-cover bg-center rounded-md border border-gray-200"></div>
+        <a class="text-base" href="{% url 'plants:plant_detail_view' plant.id%}">{{plant.name}}</a>
+        <p class="text-sm text-gray-500">{{plant.about}}</p>
+        <p class="text-sm font-base">{{plant.get_category_display}}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+

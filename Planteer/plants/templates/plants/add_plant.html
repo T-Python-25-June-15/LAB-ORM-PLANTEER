@@ -1,0 +1,68 @@
+{% extends 'main/base.html'%}
+
+{% block title%}
+    New Plant
+{% endblock %}
+
+{% block pageTitle %}
+    Add Plant
+{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" action="{% url 'plants:add_plant_view'%}">
+        {% csrf_token %}
+        <div class="md:w-[75%] w-full justify-self-center">
+            <div class="flex md:flex-row flex-col w-full gap-4 my-4">
+                <label class="md:w-[25%] md:text-end text-center md:p-3" for="name">Plant Name</label>
+                <input class="md:w-[75%] md:text-start text-center rounded-md border-1 border-gray-200 p-3" type="text" name="name" id="name" placeholder="Plant name..." minlength="2" maxlength="64" required>
+            </div>
+        </div>
+        <div class="md:w-[75%] w-full justify-self-center">
+            <div class="flex md:flex-row flex-col w-full gap-4 my-4">
+                <label class="md:w-[25%] md:text-end text-center md:p-3" for="about">Aboth The Plant</label>
+                <textarea class="md:w-[75%] md:text-start text-center rounded-md border-1 border-gray-200 p-3" name="about" id="about" placeholder="Write a short description about the plant..." rows="5" cols="33" required></textarea>
+            </div>
+        </div>
+        <div class="md:w-[75%] w-full justify-self-center">
+            <div class="flex md:flex-row flex-col w-full gap-4 my-4">
+                <label class="md:w-[25%] md:text-end text-center md:p-3" for="used_for">Common Uses</label>
+                <textarea class="md:w-[75%] md:text-start text-center rounded-md border-1 border-gray-200 p-3" name="used_for" id="used_for" placeholder="e.g., Decoration, Cooking, Herbal Remedy..." rows="5" cols="33" required></textarea>
+            </div>
+        </div>
+        <div class="md:w-[75%] w-full justify-self-center">
+            <div class="flex md:flex-row flex-col w-full gap-4 my-4">
+                <label class="md:w-[25%] md:text-end text-center md:p-3" for="category">Category</label>
+                <select class="md:w-[75%] rounded-md border-1 border-gray-200 p-3" name="category" id="category" required>
+                    <option value="">--Please choose an option--</option>
+                    {% for value, label in plant_form.fields.category.choices %}
+                        {% if value %}
+                            <option value="{{value}}">{{label}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="md:w-[75%] w-full justify-self-center">
+            <div class="flex md:flex-row flex-col w-full gap-4 my-4">
+                <label class="md:w-[25%] md:text-end text-center md:p-3" for="is_edible">Edibility</label>
+                <div class="flex gap-4 mt-2 self-center">
+                    <input type="radio" name="is_edible" value="True" class="peer/draft:bg-red-100" checked> Edible
+                    <input type="radio" name="is_edible" value="False"> Not Edible
+                </div>
+            </div>
+        </div>
+        <div class="md:w-[75%] w-full justify-self-center">
+            <div class="flex md:flex-row flex-col w-full gap-4 my-4">
+                <label class="md:w-[25%] md:text-end text-center md:p-3" for="image">Plant Image</label>
+                <input class="file:mr-4 file:rounded-full file:border-0 file:bg-black file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-gray-700 content-center" type="file" name="image" id="image"  accept="image/png, image/jpeg" required>
+            </div>
+        </div>
+        <div class="md:w-[75%] w-full justify-self-center">
+            <div class="flex md:flex-row flex-col w-full gap-4 my-4 md:justify-end ">
+                <input class="bg-black text-white w-[75%] text-center p-2 rounded-md my-6 self-center" type="submit" value="Add New Plant">
+            </div>
+        </div>
+    </form>
+
+{% endblock%}
+
