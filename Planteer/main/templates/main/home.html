@@ -1,10 +1,11 @@
 {% extends 'main/base.html' %}
+{% load static %}
 {% block hero %}
 <section class="relative bg-cover bg-center text-center py-20 px-6 rounded-xl mx-4 md:mx-12 mt-6 shadow-sm" style="background-image: url('https://www.stodels.com/wp-content/uploads/2008/10/98-1.jpg');">
     <div class="bg-white bg-opacity-40 backdrop-blur-md rounded-2xl p-10 md:p-16 mx-auto max-w-4xl shadow-lg">
-        <h1 class="text-5xl font-extrabold text-gray-900 mb-4">Planteer</h1>
-        <p class="text-2xl text-gray-800 font-medium mb-8">Plant Database For Plants Lovers</p>
-        <form action="/plants/search/" method="GET" class="w-full max-w-3xl mx-auto flex">
+        <h1 class="text-5xl font-extrabold text-gray-900 mb-4 fadein-hero">Planteer</h1>
+        <p class="text-2xl text-gray-800 font-medium mb-8 fadein-hero delay-hero-200">Plant Database For Plants Lovers</p>
+        <form action="/plants/search/" method="GET" class="w-full max-w-3xl mx-auto flex fadein-hero delay-hero-500">
             <input type="text" name="query" placeholder="Search For Plant..."
                 class="w-full text-xl p-3 rounded-l-xl border border-gray-300 shadow-md focus:outline-none focus:ring-4 focus:ring-green-400 placeholder:text-gray-500">
             <button type="submit"
@@ -29,7 +30,7 @@
         <div class="bg-white shadow rounded overflow-hidden">
             <img src="{{ plant.image.url }}" class="w-full h-48 object-cover rounded-t-xl" alt="{{ plant.name }}">
             <div class="p-4">
-                <h3 class="font-semibold text-lg">{{ plant.name }}</h3>
+                <a href = "{% url 'plants:plant_detail' plant.id %}" ><h3 class="font-semibold text-lg">{{ plant.name }}</h3></a>
                 <p class="text-gray-600 text-sm mb-2">{{ plant.about|truncatechars:30 }}</p>
                 <p class="text-sm text-gray-500 font-medium">{{ plant.category }}</p>
                 <div class="mt-2 text-sm text-gray-700">

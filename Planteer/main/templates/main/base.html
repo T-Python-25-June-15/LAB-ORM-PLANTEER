@@ -10,6 +10,25 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <style>
+        @keyframes fadein-hero {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fadein-hero {
+            animation: fadein-hero 1s ease-out both;
+        }
+        .delay-hero-200 {
+            animation-delay: 0.2s;
+            animation-fill-mode: both;
+        }
+        .delay-hero-500 {
+            animation-delay: 0.5s;
+            animation-fill-mode: both;
+        }
+        </style>
+        
+
 
 </head>
 <body class="bg-white text-gray-800">
