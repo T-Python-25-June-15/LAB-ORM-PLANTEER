@@ -1,8 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpRequest, HttpResponse
-from .models import Plant
-from .forms import PlantForm
-from django.shortcuts import get_object_or_404
+from .models import Plant, Comment
+from .forms import PlantForm , CommentForm
 
 # All Page 
 def all_view (request:HttpRequest):
@@ -11,7 +10,22 @@ def all_view (request:HttpRequest):
 
 # Detail Page
 def detail_view (request:HttpRequest, plant_id: int):
-    return render(request, "plants/detail.html")
+
+    plant = get_object_or_404(Plant,pk = plant_id)
+
+    related_plants = Plant.objects.filter(category=plant.category).exclude(id=plant.id)[:3]
+
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.plant = plant
+            comment.save()
+    else:
+        comment_form = CommentForm()
+        
+    return render(request, "plants/detail.html", context={"plant" : plant, "comment_form" : comment_form, "related_plants" : related_plants})
+
 
 # Search Page
 def search_view (request:HttpRequest):
@@ -32,7 +46,7 @@ def new_view (request:HttpRequest):
 
 # Update Page
 def update_view (request:HttpRequest, plant_id: int):
-    plant = Plant.objects.get(pk=plant_id)
+    plant = get_object_or_404(Plant, pk=plant_id)
 
     if request.method == "POST":
         plant_form = PlantForm(request.POST, request.FILES, instance=plant)
@@ -48,6 +62,14 @@ def update_view (request:HttpRequest, plant_id: int):
 
 # Delete Page
 def delete_view (request:HttpRequest, plant_id: int):
-    return render(request, "plants/delete.html")
+
+    plant = get_object_or_404(Plant, pk=plant_id)
+
+    if request.method == "POST":
+        plant.delete()
+        return redirect("plants:all_view")
+    
+    return render(request, "plants/delete_confirm.html", {"plant": plant})
+
 
 

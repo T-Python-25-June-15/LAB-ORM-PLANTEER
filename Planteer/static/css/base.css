@@ -100,6 +100,7 @@ footer {
     height: 170px;
     border-top: 1px solid rgba(0, 0, 0, 0.138);
     padding-top: 15px;
+    margin-bottom: 40px;
 }
 
 footer a {

@@ -16,7 +16,7 @@
         <div class="card">
             <img src="{{plant.poster.url}}" alt="Image 1">
             <div class="texts">
-                <a href="{% url 'plants:update_view' plant.id %}"><h5>{{plant.title}}</h5></a>
+                <a href="{% url 'plants:detail_view' plant.id %}"><h5>{{plant.title}}</h5></a>
                 <p>{{plant.description}}</p>
                 <strong>{{plant.category}}</strong>
             </div>
