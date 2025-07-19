@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>planter</title>
+</head>
+<body>
+    <div class="page-content">
+    <header class="header-nav"> 
+         <h1><a href="{% url 'main:home_view' %}">planter</a></h1>
+        <nav class="nav-bar">
+            <div class="nav-link">
+                 <a href="{% url 'plant:all_plants_view' %}"> All Plants</a>
+                <a href="{% url 'main:contact_view' %}">Contact us</a> 
+                <div class="nav-add">
+                    <a href="{% url 'plant:add_plant_view' %}">Add Plant</a>
+                </div>
+            </div> 
+        </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+    
+    <footer>
+        <p> Planter</p>
+    </footer>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</html>
