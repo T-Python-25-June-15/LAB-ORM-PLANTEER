@@ -1,1 +1,1 @@
-DELETE FROM plant_plant;
+DELETE FROM plant_comment where id = 2
