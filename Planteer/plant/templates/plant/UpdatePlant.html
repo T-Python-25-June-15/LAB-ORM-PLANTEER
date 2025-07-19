@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Update Page
+{% endblock %}
+
+{% block content %}
+<!--Update Page -->
+<h1> Update {{plant.name}} Plant</h1>
+<div class="row"> 
+  <div class="col-6">
+    <form class="d-flex flex-column gap-2" action="{% url 'plant:update_view' plant.id %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <input type="text" placeholder="name" name="name" class="form-control" value="{{plant.name}}" required/>
+      <textarea placeholder="about" name="about" class="form-control" required>{{plant.about}}</textarea>
+      <textarea placeholder="used for" name="used_for" class="form-control" required>{{plant.used_for}}</textarea>
+      <div class="row"> 
+        <div class="col-3"> 
+            <img src="{{plant.image.url}}" class="w-100" >
+        </div>
+      </div>
+      <input type="file" name="image" class="form-control"/> 
+
+    <h5 class="m-0 p-0">Category: </h5>
+    <div class="category"> 
+    {% for val, label in CategoryChoices %}
+        <input type="radio" id="{{ val }}" name="category" value="{{ val }}"
+        {% if plant.category == val %}checked{% endif %}>
+        <label for="{{ val }}">{{ label }}</label>
+    {% endfor %}
+    </div>
+      <label for="is_edible"> is edible? </label>
+      <select class="form-control" aria-label="is edible?" name="is_edible" value=""required>
+        <option value="True" {% if plant.is_edible %} selected {% endif %} selected>Yes </option>
+        <option value="False" {% if not plant.is_edible %} selected {% endif %} >No</option>
+      </select>
+      <button type="submit" class="btn btn-primary btn-dark" >Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

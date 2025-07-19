@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Add Plants Page
+{% endblock %}
+
+{% block content %}
+<!--Add Plant Page-->
+<h1> Add Plant</h1>
+<div class="row"> 
+  <div class="col-6">
+    <!--Form for add plant-->
+    <form class="d-flex flex-column gap-2" action="{% url 'plant:newPlant_view' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <input type="text" placeholder="name" name="name" class="form-control" required/>
+      <textarea placeholder="about" name="about" class="form-control"required></textarea>
+      <textarea placeholder="used for" name="used_for" class="form-control" required></textarea>
+      <input type="file" name="image" class="form-control" required/>
+        <div class="d-flex gap-2 align-items-center"> 
+          <h5 class="m-0 p-0">Category: </h5>
+          <div class="category"> 
+            {% for val, label in CategoryChoices %}
+            <input type="radio" id="{{val}}" name="category" value="{{val}}">
+            <label for="{{val}}" title="text">{{label}}</label>
+            {% endfor %}
+          </div>
+        </div> 
+      <label for="is_edible"> is edible? </label>
+      <select class="form-control" aria-label="is edible?" name="is_edible" required>
+        <option value="True" selected>Yes </option>
+        <option value="False">No</option>
+      </select>
+      
+
+      <button type="submit" class="btn btn-primary btn-dark" >Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+All Plants Page
+{% endblock %}
+
+{% block content %}
+
+<!--All Plants Page -->
+<h2>All Plants</h2>
+<form method="get" class="row g-3 mb-4" action="{% url 'plant:AllPlant_view' %}">
+  <div class="col-md-4">
+    <label for="category" class="form-label">Category</label>
+    <select class="form-select" id="category" name="category">
+      <option value="all">All Categories</option>
+      {% for value, label in  CategoryChoices%}
+        <option value="{{ value }}" {% if value == selected_category %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label for="is_edible" class="form-label">Is Edible?</label>
+    <select class="form-select" id="is_edible" name="is_edible">
+      <option value="">All</option>
+      <option value="true" {% if is_edible == 'true' %}selected{% endif %}>Yes</option>
+      <option value="false" {% if is_edible == 'false' %}selected{% endif %}>No</option>
+    </select>
+  </div>
+
+  <div class="col-md-4 d-flex align-items-end">
+    <button type="submit" class="btn btn-success btn-dark w-60">Filter</button>
+  </div>
+</form>
+  <div class="row">
+    {% for plants in plant %}
+    <div class="col-md-4 col-lg-3 mb-4 d-flex align-items-stretch">
+      <div class="card border-0">
+        <img src="{{ plants.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+        <div class="card-body">
+          <a href="{%url 'plant:detail_view' plants.id %}" class="text-decoration-none" ><h6 class="fw-bold mb-1 text-decoration-none fw-semibold text-dark">{{ plants.name }}</h6></a>
+          <p class="text-muted mb-1">
+            {{ plants.about|truncatewords:5 }}...
+            <a href="{% url 'plant:detail_view' plants.id %}" class="text-decoration-none text-dark">Read more</a>
+            </p>
+          <p class="fw-semibold">{{ plants.category }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
