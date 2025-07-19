@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<section class="max-w-xl mx-auto p-6 text-center">
+    <h2 class="text-2xl font-bold text-red-600 mb-4">Are you sure?</h2>
+    <p class="mb-6 text-gray-700">You are about to delete <strong>{{ plant.name }}</strong>. This action cannot be undone.</p>
+    <form method="POST">
+        {% csrf_token %}
+        <a href="{% url 'plants:plant_detail' plant.id %}" class="ml-4 text-gray-600 hover:underline">Cancel</a>
+        <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700">Yes, Delete</button>
+    </form>
+</section>
+{% endblock %}

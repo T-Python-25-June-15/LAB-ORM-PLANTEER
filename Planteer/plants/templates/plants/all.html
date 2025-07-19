@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<section class="max-w-7xl mx-auto p-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+        <h2 class="text-3xl font-bold text-green-800">All Plants</h2>
+    
+        <!-- Filters -->
+        <form method="GET" class="flex flex-col md:flex-row gap-4">
+            <select name="category" class="p-2 border rounded text-gray-700 w-full md:w-auto">
+                <option value="All">All Categories</option>
+                {% for key, label in categories %}
+                    <option value="{{ key }}" {% if current_category == key %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+    
+            <select name="is_edible" class="p-2 border rounded text-gray-700 w-full md:w-auto">
+                <option value="">All Types</option>
+                <option value="true" {% if current_edible == 'true' %}selected{% endif %}>Edible</option>
+                <option value="false" {% if current_edible == 'false' %}selected{% endif %}>Not Edible</option>
+            </select>
+    
+            <button type="submit" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition w-full md:w-auto">Filter</button>
+        </form>
+    </div>
+    <!-- all plants  -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {% for plant in plants %}
+        <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition">
+            <img src="{{ plant.image.url }}" alt="{{ plant.name }}" class="w-full h-48 object-cover rounded-t-xl">
+            <div class="p-4">
+                <h3 class="text-xl font-semibold text-gray-800">{{ plant.name }}</h3>
+                <p class="text-gray-600 text-sm mb-1 truncate">{{ plant.about }}</p>
+                <p class="text-sm text-gray-500 font-medium">{{ plant.category }} | 
+                    {% if plant.is_edible %} Edible{% else %} Not Edible{% endif %}
+                </p>
+                <a href="{% url 'plants:plant_detail' plant.id %}" class="text-green-700 hover:underline text-sm mt-2 inline-block">View Details →</a>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-gray-600 col-span-full">No plants found for the selected filters.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

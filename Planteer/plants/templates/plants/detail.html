@@ -1,0 +1,101 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<section class="max-w-6xl mx-auto p-6">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-12">
+       
+        <div>
+            <img src="{{ plant.image.url }}" alt="{{ plant.name }}"
+                 class="w-full h-[400px] object-cover rounded-xl shadow">
+        </div>
+
+        
+        <div>
+            <h2 class="text-3xl font-bold mb-2 text-gray-900">{{ plant.name }}</h2>
+            <p class="text-gray-500 text-lg font-medium mb-2">{{ plant.category }}</p>
+            <p class="text-gray-700 mb-2">{{ plant.about }}</p>
+            
+            <div class="mt-4 space-y-2">
+                <p><strong class="text-gray-800">Native to:</strong> {{ plant.native_to }}</p>
+                <p><strong class="text-gray-800">Is Edible:</strong> {% if plant.is_edible %}Yes{% else %}No{% endif %}</p>
+                <p><strong class="text-gray-800">Used For:</strong> {{ plant.used_for }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-6 flex justify-end space-x-4">
+        <a href="{% url 'plants:update_plant' plant.id %}" 
+           class="bg-green-800/60 hover:bg-green-800/80 text-white px-4 py-2 rounded-xl font-medium transition duration-200">
+             Update
+        </a>
+        <!-- <form action="{% url 'plants:delete_plant' plant.id %}" method="POST" 
+              onsubmit="return confirm('Are you sure you want to delete this plant?');">
+            {% csrf_token %}
+            <button type="submit" 
+                    class="bg-green-800/60 hover:bg-green-800/80 text-white px-4 py-2 rounded-xl font-medium transition duration-200">
+                 Delete
+            </button>
+        </form> -->
+
+        <a href="{% url 'plants:delete_plant' plant.id %}"
+           class="block text-center bg-green-800/60 hover:bg-green-800/80 text-white px-4 py-2 rounded-xl font-medium transition duration-200">
+             Delete
+        </a>
+    </div>
+
+    <!-- filtering -->
+    <div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Related Plants</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for related in related_plants %}
+                <div class="bg-white shadow rounded-xl overflow-hidden">
+                    <img src="{{ related.image.url }}" alt="{{ related.name }}" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-semibold text-gray-900">{{ related.name }}</h4>
+                        <p class="text-gray-500 text-sm">{{ related.about|truncatechars:50 }}</p>
+                        <p class="text-sm text-gray-600 mt-1 font-medium">{{ related.category }}</p>
+                        <a href="{% url 'plants:plant_detail' related.id %}" class="text-green-700 text-sm hover:underline mt-2 inline-block">View Details →</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-gray-600 col-span-full">No related plants found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="mt-16 max-w-3xl mx-auto bg-purple-50 p-6 rounded-xl shadow">
+    <h2 class="text-2xl font-bold text-green-800 mb-4">🌱 Reviews</h2>
+
+   
+    {% for review in reviews %}
+    <div class="bg-white p-4 mb-3 rounded shadow-sm border">
+        <div class="flex justify-between items-center">
+            <h4 class="font-semibold text-green-900">{{ review.name }}</h4>
+            <span class="text-gray-800 text-sm">★ {{ review.rating }}/5</span>
+        </div>
+        <p class="text-gray-700 mt-1 italic">"{{ review.comment }}"</p>
+        <p class="text-sm text-gray-500">{{ review.created_at|date:"M d, Y" }}</p>
+    </div>
+    {% empty %}
+    <p class="text-gray-600">No reviews yet. Be the first to comment!</p>
+    {% endfor %}
+
+    <!-- comments form -->
+    <h3 class="text-xl font-bold text-green-700 mt-6">Add a Review</h3>
+    <form method="POST" action="{% url 'plants:add_review' plant.id %}" class="space-y-4 mt-4">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Your Name" required
+            class="w-full p-2 border rounded focus:ring-2 focus:ring-green-400" />
+        <textarea name="comment" placeholder="Your comment..." required minlength="3"
+            class="w-full p-2 border rounded focus:ring-2 focus:ring-green-400"></textarea>
+        <select name="rating" required class="w-full p-2 border rounded">
+            <option value="">Select Rating</option>
+            {% for i in "12345" %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Submit Review</button>
+    </form>
+</section>
+{% endblock %}
