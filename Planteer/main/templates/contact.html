@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Contact us {% endblock %}
+
+{% block main %}
+<div class="container-fluid px-3 px-md-5 mt-5">
+  <div class="row">
+    <div class="col-lg-6">
+      <h1><strong>Contact Us</strong></h1>
+
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="row mb-3">
+          <div class="col-md-6 mb-3">
+            <label for="id_first_name" class="form-label">First name</label>
+            {{ form.first_name }}
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="id_last_name" class="form-label">Last name</label>
+            {{ form.last_name }}
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="id_email" class="form-label">Email address</label>
+          {{ form.email }}
+        </div>
+
+        <div class="mb-3">
+          <label for="id_message" class="form-label">Your message</label>
+          {{ form.message }}
+        </div>
+
+        <button type="submit" class="btn btn-dark w-100">Submit</button>
+      </form>
+    </div>
+
+    <div class="col-lg-6 d-flex justify-content-center align-items-start mt-4 mt-lg-0">
+      <img src="{% static 'images/contact-plant.jpg' %}" alt="" class="img-fluid rounded" style="max-height: 600px; margin-bottom: 5rem;">
+    </div>
+  </div>
+</div>
+{% endblock %}
