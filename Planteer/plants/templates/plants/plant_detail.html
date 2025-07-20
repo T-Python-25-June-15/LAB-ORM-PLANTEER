@@ -30,7 +30,7 @@ All Plants
 </div>
 
 <div class="my-6">
-    <h2 class="text-xl">Related Plants</h2>
+    <h2 class="text-xl font-semibold">Related Plants</h2>
 </div>
 
 <div class="grid grid-cols-2 sm:grid-cols-3  gap-4">
@@ -43,6 +43,38 @@ All Plants
     </div>
     {% endfor %}
 </div>
+
+<div class="mb-6 mt-12">
+    <h2 class="text-xl font-semibold">Comments</h2>
+</div>
+
+{% for comment in comments %}
+    <div class="border border-gray-200 p-4 my-2 rounded-md">
+        <p class="font-semibold">{{ comment.full_name }}</p>
+        <p class="text-gray-600 text-sm">{{ comment.created_at }}</p>
+        <p class="mt-2">{{ comment.content }}</p>
+    </div>
+{% endfor %}
+
+
+<div class="my-12">
+    <h2 class="text-xl font-semibold">Add Comment</h2>
+</div>
+
+<form method="post" enctype="multipart/form-data" action="{% url 'plants:add_comment_view' plant.id%}">
+    {% csrf_token %}
+    <div class="flex md:flex-row flex-col w-full gap-4 my-4">
+        <label class="md:w-[25%] md:text-end text-center md:p-3" for="full_name">Full Name</label>
+        <input class="md:w-[75%] md:text-start text-center rounded-md border-1 border-gray-200 p-3" type="text" name="full_name" id="full_name" placeholder="Full name..." minlength="2" maxlength="64" required>
+    </div>
+    <div class="flex md:flex-row flex-col w-full gap-4 my-4">
+        <label class="md:w-[25%] md:text-end text-center md:p-3" for="content">Comment</label>
+        <textarea class="md:w-[75%] md:text-start text-center rounded-md border-1 border-gray-200 p-3" name="content" id="content" placeholder="Write a short comment about the plant..." rows="5" cols="33" required></textarea>
+    </div>
+    <div class="flex md:flex-row flex-col w-full gap-4 my-4 md:justify-end ">
+        <input class="bg-black text-white w-[75%] text-center p-2 rounded-md my-6 self-center" type="submit" value="Add New Plant">
+    </div>
+</form>
 
 {% endblock %}
 
