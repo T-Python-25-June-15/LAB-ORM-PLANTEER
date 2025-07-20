@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
-from .models import Plant
-from .forms import PlantForm
+from .models import Plant, Comment
+from .forms import PlantForm, CommentForm
 from django.contrib import messages
 # Create your views here.
 
@@ -24,9 +24,11 @@ def create_plant_view(request:HttpRequest):
 
 def detail_plant_view(request:HttpRequest, plant_id:int):
     plant = Plant.objects.get(pk = plant_id)
-    related_plants = Plant.objects.filter(category=plant.category).exclude(id=plant.id)[:3] 
+    related_plants = Plant.objects.filter(category=plant.category).exclude(id=plant.id)[:3]
+    comments = Comment.objects.filter(plant=plant)
+    
 
-    return render(request, "plants/detail_plant.html", {"plant" : plant, "related_plants" : related_plants})
+    return render(request, "plants/detail_plant.html", {"plant" : plant, "related_plants" : related_plants, "comments": comments})
 
 
 # def update_plant_view(request:HttpRequest, plant_id:int):
@@ -53,7 +55,7 @@ def update_plant_view(request: HttpRequest, plant_id: int):
         form = PlantForm(request.POST, request.FILES, instance=plant)
         if form.is_valid():
             form.save()
-            messages.success(request, "Plant updated successfully.")
+            messages.success(request, "Plant added successfully.")
             return redirect("plants:detail_plant_view", plant_id=plant.id)
         else:
             messages.error(request, "Form is not valid.")
@@ -97,4 +99,20 @@ def search_plants_view(request: HttpRequest):
         plants = []
 
     return render(request, 'plants/search_plants.html', {"plants" : plants})
+
+
+
+def add_comment_view(request: HttpRequest, plant_id: int):
+
+    if request.method == "POST":
+        plant_object = Plant.objects.get(pk=plant_id)
+        new_comment = Comment(
+            plant=plant_object,
+            full_name=request.POST["full_name"],
+            content=request.POST["content"]
+        )
+        new_comment.save()
+
+    return redirect("plants:detail_plant_view", plant_id=plant_id)
+
 
