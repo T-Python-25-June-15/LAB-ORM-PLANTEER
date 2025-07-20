@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Add Plant{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <h2 class="mb-4 text-center">Add a New Plant</h2>
+
+    <form action="{% url 'plants:create_plant_view' %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-3 w-75 mx-auto" >
+
+        {% csrf_token %}
+
+        <div>
+            <label for="name" class="form-label">Plant Name</label>
+            <input type="text" name="name" id="name" placeholder="Plant Name" class="form-control" required />
+        </div>
+
+        <div>
+            <label for="about" class="form-label">About</label>
+            <textarea name="about" id="about" placeholder="About the plant" rows="3" class="form-control" required></textarea>
+        </div>
+
+        <div>
+            <label for="used_for" class="form-label">Used For</label>
+            <textarea name="used_for" id="used_for" placeholder="Used For" rows="3" class="form-control" required></textarea>
+        </div>
+
+        <div>
+            <label for="category" class="form-label">Category</label>
+            <select name="category" id="category" class="form-select" required>
+                <option disabled selected>Select Category</option>
+                {% for value, label in CategoryChoices %}
+                <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-check">
+            <input type="checkbox" name="is_edible" class="form-check-input" id="is_edible" />
+            <label class="form-check-label" for="is_edible">Is Edible</label>
+        </div>
+
+        
+        <div>
+            <label for="image" class="form-label">Image</label>
+            <input type="file" name="image" id="image" class="form-control" required accept="image/*" />
+        </div>
+
+        <input type="submit" value="Add Plant" class="btn btn-dark" />
+    </form>
+</div>
+{% endblock %}

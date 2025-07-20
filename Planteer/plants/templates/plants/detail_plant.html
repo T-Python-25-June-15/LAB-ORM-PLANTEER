@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Detail Plant{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row g-5 align-items-start">
+
+
+        <div class="col-md-6">
+            <img src="{{ plant.image.url }}" class="img-fluid rounded-4" alt="{{ plant.name }}" style="width: 100%; height: 500px; object-fit: fill;">
+        </div>
+
+
+        <div class="col-md-6">
+            <h2 class="fw-bold">{{ plant.name }}</h2>
+            <p class="text-muted mb-2 fs-5">{{ plant.get_category_display }}</p>
+            <p class="mb-3">{{ plant.about }}</p>
+            <p class="mb-1"><strong>Is Edible:</strong> {{ plant.is_edible|yesno:"Yes,No" }}</p>
+            <p class="mb-1"><strong>Used For:</strong> {{ plant.used_for }}</p>
+            <div class="gap-2">
+                <a href="{% url 'plants:update_plant_view' plant.id %}" class="btn btn-info mt-3">Update</a>
+                <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>       
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="mt-5">
+    <h4 class="mb-4 fw-bold">Related Plants</h4>
+    <div class="row g-4">
+        {% for related in related_plants %}
+        <div class="col-md-4">
+            <a href="{% url 'plants:detail_plant_view' related.id %}" class="text-decoration-none d-block h-100">
+
+            <div class="card h-150 border-0 ">
+                <img src="{{ related.image.url }}" class="card-img-top rounded-3 mb-3" alt="{{ related.name }}" style="object-fit: fill; height: 200px;">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-1 text-dark">{{ related.name }}</h6>
+                    <p class="text-muted small mb-1">{{ related.about|truncatechars:50 }}</p>
+                    <p class="fw-bold small mb-0 text-dark">{{ related.get_category_display }}</p>
+                </div>
+            </div>
+            </a>
+        </div>
+        {% empty %}
+        <p class="bg-warning p-3 rounded" >No related plants found.</p>
+        {% endfor %}
+    
+    </div>
+    </div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Plant</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete {{ plant.name }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="{% url 'plants:delete_plant_view' plant.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

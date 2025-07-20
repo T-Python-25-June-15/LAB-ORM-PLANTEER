@@ -22,5 +22,6 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("main.urls")), #main
-    path("plants/", include("plants.urls")), #plants
+    path('plants/', include("plants.urls")), #plants
+    path('contact/', include("contact.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
