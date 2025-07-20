@@ -20,6 +20,6 @@ def contact_view(request: HttpRequest):
             print("not valid form")
     return render(request, "main/contact.html", {"contact_form": contact_form})
 
-def contact_messages_view(request: HttpRequest) -> HttpResponse:
+def contact_messages_view(request: HttpRequest):
     messages = Contact.objects.all().order_by('-created_at')
     return render(request, "main/contact_messages.html", {"messages": messages})

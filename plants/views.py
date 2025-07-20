@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
-from .models import Plant
+from .models import Plant, Comment
 from .forms import PlantForm
 
 # Create your views here.
@@ -36,10 +36,11 @@ def add_plant_view(request: HttpRequest):
             print("not valid form")
     return render(request, "plants/plant_form.html", {"plant_form": plant_form})
 
-def plant_detail_view(request: HttpRequest, plant_id: int):
+def plant_detail_view(request: HttpRequest, plant_id: int) -> HttpResponse:
     plant = Plant.objects.get(pk=plant_id)
     related_plants = Plant.objects.filter(category=plant.category).exclude(pk=plant_id)[:3]
-    return render(request, "plants/plant_detail.html", {"plant": plant, "related_plants": related_plants})
+    comments = plant.comments.order_by('-created_at')
+    return render(request, "plants/plant_detail.html", {"plant": plant,"related_plants": related_plants,"comments": comments})
 
 
 def update_plant_view(request: HttpRequest, plant_id: int):
@@ -68,3 +69,11 @@ def search_plants_view(request: HttpRequest):
     else:
         plants = []
     return render(request, "plants/search.html", {"plants": plants})
+
+def add_comment_view(request: HttpRequest, plant_id: int):
+    if request.method == "POST":
+        plant_object = Plant.objects.get(pk=plant_id)
+        new_comment = Comment(plant=plant_object,full_name=request.POST["full_name"],content=request.POST["content"])
+        new_comment.save()
+
+    return redirect('plants:plant_detail_view', plant_id=plant_id)

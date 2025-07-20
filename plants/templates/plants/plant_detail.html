@@ -7,12 +7,13 @@
     </div>
     <div class="col-md-6">
         <h2 class="mb-2">{{plant.name}}</h2>
-        <div class="mb-2 text-secondary">{{plant.category}}</div>
+        <div class="mb-2 text-secondary">{{plant.categor }}</div>
         <div class="mb-2 text-muted small">{{plant.about}}</div>
         <div class="mb-2"><strong>Used for:</strong> {{plant.used_for}}</div>
         {% if plant.is_edible %}
             <span class="badge bg-info text-dark mb-2">Edible</span>
         {% endif %}
+        <div class="text-muted small mb-2">Added: {{ plant.created_at}}</div>
         <div class="mt-3">
             <a href="{% url 'plants:update_plant_view' plant.id %}" class="btn btn-warning">Edit</a>
             <a href="{% url 'plants:delete_plant_view' plant.id %}" class="btn btn-danger ms-2">Delete</a>
@@ -26,10 +27,10 @@
     {% for related in related_plants %}
     <div class="col">
         <div class="card h-100 p-2 d-flex flex-column align-items-center text-center">
-            <img src="{{ related.image.url }}" class="card-img-top mb-2" alt="{{related.name}}" style="max-width: 220px; max-height: 180px; object-fit:cover; margin:auto;">
+            <img src="{{ related.image.url }}" class="card-img-top mb-2" alt="{{ related.name }}" style="max-width: 220px; max-height: 180px; object-fit:cover; margin:auto;">
             <div class="card-body p-2">
-                <div class="fw-bold">{{related.name}}</div>
-                <div class="text-secondary small mb-1">{{related.category}}</div>
+                <div class="fw-bold">{{ related.name }}</div>
+                <div class="text-secondary small mb-1">{{ related.category }}</div>
                 {% if related.is_edible %}
                     <span class="badge bg-info text-dark">Edible</span>
                 {% endif %}
@@ -45,4 +46,28 @@
     </div>
     {% endfor %}
 </div>
+
+<hr>
+<h4 class="mt-5">Comments ({{comments.count}})</h4>
+<div class="d-flex flex-column gap-3 mb-4">
+    {% for comment in comments %}
+        <div class="d-flex flex-column p-3 shadow rounded bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">{{comment.full_name}}</h5>
+                <span class="text-muted small">{{comment.created_at}}</span>
+            </div>
+            <p class="mb-1">{{comment.content}}</p>
+        </div>
+    {% empty %}
+        <div class="alert alert-info">No comments yet.</div>
+    {% endfor %}
+</div>
+
+<h4 class="mt-5">Add Comment</h4>
+<form class="d-flex flex-column gap-2 mb-5" action="{% url 'plants:add_comment_view' plant.id %}" method="post">
+    {% csrf_token %}
+    <input class="form-control" name="full_name" required minlength="3" placeholder="Your name" />
+    <textarea class="form-control" name="content" required minlength="3" placeholder="Your comment..."></textarea>
+    <input type="submit" class="btn btn-primary" value="Add Comment" />
+</form>
 {% endblock %} 
