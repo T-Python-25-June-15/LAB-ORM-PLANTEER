@@ -7,9 +7,6 @@ class Plant(models.Model):
         HOUSEPLANT = 'Houseplant', 'Houseplant'
         HERB = 'Herb', 'Herb'
         TREE = 'Tree', 'Tree'
-        SHRUB = 'Shrub', 'Shrub'
-        SUCCULENT = 'Succulent', 'Succulent'
-        OTHER = 'Other', 'Other'
 
     name = models.CharField(max_length=100)
     about = models.TextField()
