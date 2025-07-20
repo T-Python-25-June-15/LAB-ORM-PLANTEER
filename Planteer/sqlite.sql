@@ -1,0 +1,1 @@
+DELETE FROM plant_comment where id = 2

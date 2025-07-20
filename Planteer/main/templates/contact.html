@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Contact us {% endblock %}
+
+{% block main %}
+<div class="container-fluid px-3 px-md-5 mt-5">
+  <div class="row">
+    <div class="col-lg-6">
+      <h1><strong>Contact Us</strong></h1>
+
+      <form method="post">
+          {% csrf_token %}
+
+          <div class="row">
+              <div class="col-md-6 mb-3">
+                  <label for="id_first_name">First name</label>
+                  {{ form.first_name }}
+                  {% if form.first_name.errors %}
+                      <div class="text-danger">{{ form.first_name.errors.0 }}</div>
+                  {% endif %}
+              </div>
+
+              <div class="col-md-6 mb-3">
+                  <label for="id_last_name">Last name</label>
+                  {{ form.last_name }}
+                  {% if form.last_name.errors %}
+                      <div class="text-danger">{{ form.last_name.errors.0 }}</div>
+                  {% endif %}
+              </div>
+          </div>
+
+          <div class="mb-3">
+              <label for="id_email">Email address</label>
+              {{ form.email }}
+              {% if form.email.errors %}
+                  <div class="text-danger">{{ form.email.errors.0 }}</div>
+              {% endif %}
+          </div>
+
+          <div class="mb-3">
+              <label for="id_message">Your message</label>
+              {{ form.message }}
+              {% if form.message.errors %}
+                  <div class="text-danger">{{ form.message.errors.0 }}</div>
+              {% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-dark w-100">Submit</button>
+
+      </form>
+
+    </div>
+
+    <div class="col-lg-6 d-flex justify-content-center align-items-start mt-4 mt-lg-0">
+      <img src="{% static 'images/contact-plant.jpg' %}" alt="" class="img-fluid rounded" style="max-height: 600px; margin-bottom: 5rem;">
+    </div>
+  </div>
+</div>
+{% endblock %}
