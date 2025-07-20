@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Search Results for "{{ query }}"</h2>
+  <h2>Search Results for "{{ request.GET.search }}"</h2>
 <form method="get" action="{% url 'plants:plant_search' %}" class="d-flex mb-4" role="search">
-  <input class="form-control me-2" type="search" name="query" placeholder="Search plants..." value="{{ query }}">
+  <input class="form-control me-2" type="search" name="search" placeholder="Search plants..." value="{{ request.GET.search }}">
   <button class="btn btn-dark-custom" type="submit">Search</button>
 </form>
 

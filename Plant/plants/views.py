@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Plant
 from .forms import PlantForm
 from django.shortcuts import get_object_or_404
-from django.db.models import Q
+
 
 # Create your views here.
 
@@ -65,9 +65,10 @@ def plant_delete(request, plant_id):
 
 
 def plant_search(request):
-    query = request.GET.get('q', '')
-    results = Plant.objects.filter(
-        Q(name__icontains=query) | Q(description__icontains=query)
-    ) if query else Plant.objects.none()
+    if 'search' in request.GET:
+        query = request.GET['search']
+        plants = Plant.objects.filter(name__icontains=query)
+    else:
+        plants = Plant.objects.none()
 
-    return render(request, 'plants/plant_search.html', {'results': results, 'query': query})
+    return render(request, 'plants/plant_search.html', {'results': plants})
