@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="hero mb-5">
+    <div class="hero-content">
+        <h1>Planteer</h1>
+        <h2>Plant Database For Plant Lovers</h2>
+        <form action="{% url 'plants:search_plants_view' %}" method="get" class="search-bar mt-4 mb-3 d-flex justify-content-center">
+            <input type="text" name="search" class="form-control" placeholder="Search For Plant..." style="max-width: 350px;">
+            <button type="submit" class="btn btn-success ms-2">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="mb-4 d-flex justify-content-between align-items-center">
+    <div>
+        <h2 class="mb-0">Plants</h2>
+        <small class="text-muted">Learn more about plants</small>
+    </div>
+    <a href="{% url 'plants:all_plants_view' %}" class="fw-bold text-black text-decoration-none" style="font-size:1.1rem;">More &rarr;</a>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for plant in plants|slice:":3" %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{ plant.image.url }}" class="card-img-top" alt="{{plant.name}}" style="object-fit:cover; max-height:180px;">
+            <div class="card-body">
+                <h5 class="card-title">{{plant.name}}</h5>
+                <span class="badge bg-success">{{plant.category}}</span>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col">
+        <div class="alert alert-warning w-100">No plants found.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 
