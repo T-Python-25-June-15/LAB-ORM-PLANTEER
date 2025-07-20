@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" >
+    <head>
+        <title>{% block title %} My Website {% endblock %}</title>
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+<body class="d-flex flex-column vh-100">
+
+    <header class="border-bottom">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <a href="{% url 'main:home_view' %}" class="h2 text-decoration-none text-dark">Planteer</a>
+                <nav class="d-flex align-items-center gap-3">
+                    <a href="{% url 'plants:display_all_plants' %}">All Plants</a>
+                    <a href="{% url 'contact:create_form_contact' %}">Contact Us</a>
+                    <a href="{% url 'plants:create_new_plant' %}" class="btn btn-dark">Add Plant</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+        <div class="container py-4">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="border-top">
+        <div class="container py-4">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex flex-column justify-content-between">
+                    <h3>Site name</h3>
+                    <nav class="d-flex justify-content-between gap-3">
+                        <a href="#" class="text-secondary" aria-label="Facebook"><i class="bi bi-facebook fs-4"></i></a>
+                        <a href="#" class="text-secondary" aria-label="LinkedIn"><i class="bi bi-linkedin fs-4"></i></a>
+                        <a href="#" class="text-secondary" aria-label="YouTube"><i class="bi bi-youtube fs-4"></i></a>
+                        <a href="#" class="text-secondary" aria-label="Instagram"><i class="bi bi-instagram fs-4"></i></a>
+                    </nav>
+                </div>
+                <div class="d-flex gap-5">
+                    
+                    <div class="d-flex flex-column">
+                        <h6>Topic</h6>
+                        <a href="#">page</a>
+                        <a href="#">page</a>
+                        <a href="#">page</a>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <h6>Topic</h6>
+                        <a href="#">page</a>
+                        <a href="#">page</a>
+                        <a href="#">page</a>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <h6>Topic</h6>
+                        <a href="#">page</a>
+                        <a href="#">page</a>
+                        <a href="#">page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
