@@ -4,7 +4,74 @@
     <h2>Add New Plant</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-outline-secondary btn-sm">Save Plant</button>
+        
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Plant Name</label>
+            {{ form.name }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.about.id_for_label }}">About the Plant</label>
+            {{ form.about }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.used_for.id_for_label }}">Used For</label>
+            {{ form.used_for }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.image.id_for_label }}">Plant Image</label>
+            {{ form.image }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.category.id_for_label }}">Category</label>
+            {{ form.category }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.is_edible.id_for_label }}">Is Edible?</label>
+            {{ form.is_edible }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Save Plant</button>
     </form>
+   <style>
+form {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input, .form-group textarea, .form-group select {
+   width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button.btn:hover {
+    background-color: #0056b3;
+}
+
+   </style>
 {% endblock %}
