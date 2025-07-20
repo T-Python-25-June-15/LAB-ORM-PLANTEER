@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Add New Plant - Planteer {% endblock %}
+
+{% block content %}
+<div class="container mt-5 add-plant-container">
+    <div class="section-header mb-4">
+        <h2 class="text-primary shadow-text">🌱 Register Your Plant</h2>
+        <p class="text-muted">Fill in the details below to add a new plant to our collection.</p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="plant-form">
+        {% csrf_token %}
+        
+        <div class="mb-4">
+            <label for="name" class="form-label fw-semibold">Plant Name:</label>
+            <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter plant name" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="about" class="form-label fw-semibold">Description:</label>
+            <textarea id="about" name="about" class="form-control" rows="4" placeholder="Write about the plant" required></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="used_for" class="form-label fw-semibold">Uses:</label>
+            <textarea id="used_for" name="used_for" class="form-control" rows="3" placeholder="How is this plant used?" required></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="category" class="form-label fw-semibold">Category:</label>
+            <select id="category" name="category" class="form-select" required>
+                <option disabled selected value="">Select a category</option>
+                <option value="tree">Tree</option>
+                <option value="fruit">Fruit</option>
+                <option value="vegetable">Vegetable</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="image" class="form-label fw-semibold">Upload Image:</label>
+            <input type="file" id="image" name="image" class="form-control">
+        </div>
+
+        <div class="form-check mb-4">
+            <input type="checkbox" id="is_edible" name="is_edible" class="form-check-input">
+            <label for="is_edible" class="form-check-label fw-semibold">Is this plant edible?</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-100">Add Plant</button>
+    </form>
+</div>
+{% endblock %}

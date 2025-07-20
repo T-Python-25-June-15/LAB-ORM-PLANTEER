@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
+  <h2 class="mb-0 text-success">Discover Our Plants Collection</h2>
+  <form method="get" class="d-flex gap-3 flex-wrap align-items-end filter-form">
+    <div>
+      <label for="category" class="form-label fw-semibold">Filter by Category</label>
+      <select name="category" id="category" class="form-select">
+        <option value="">All Categories</option>
+        {% for cat in categories %}
+          <option value="{{ cat }}" {% if request.GET.category == cat %}selected{% endif %}>{{ cat|title }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label for="is_edible" class="form-label fw-semibold">Edibility</label>
+      <select name="is_edible" id="is_edible" class="form-select">
+        <option value="">All Plants</option>
+        <option value="true" {% if request.GET.is_edible == "true" %}selected{% endif %}>Edible</option>
+        <option value="false" {% if request.GET.is_edible == "false" %}selected{% endif %}>Non-Edible</option>
+      </select>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-success btn-gradient">Apply</button>
+      <a href="{% url 'main:all_plant_view' %}" class="btn btn-outline-success">Clear Filters</a>
+    </div>
+  </form>
+</div>
+
+<div class="row mt-3 row-cols-1 row-cols-md-3 g-4">
+  {% for plant in plants %}
+    <div class="col">
+      <div class="card h-100 plant-card shadow-sm rounded-3">
+        <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}" style="height: 250px; object-fit: cover; border-radius: 12px 12px 0 0;">
+        <div class="card-body">
+          <h5 class="card-title text-success fw-bold">{{ plant.name }}</h5>
+          <p class="card-text text-muted">{{ plant.about|truncatechars:100 }}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center bg-light rounded-bottom">
+          <small class="text-success fst-italic">Category: {{ plant.category|title }}</small>
+          <a href="{% url 'main:plant_detail_view' plant.id %}" class="btn btn-success btn-sm btn-gradient">Details</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p class="text-center text-muted">No plants found matching your criteria.</p>
+  {% endfor %}
+</div>
+{% endblock %}

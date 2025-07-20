@@ -1,0 +1,96 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+
+<div class="row align-items-start my-4">
+
+    <div class="col-md-5 mb-3">
+        <img src="{{ plant.image.url }}" class="img-fluid rounded bg-black w-100" alt="{{ plant.name }}">
+    </div>
+
+    <div class="col-md-7">
+        <h2 class="mb-3">{{ plant.name }}</h2>
+
+        <div class="mb-2">
+            <strong>Category:</strong> {{ plant.category }}
+        </div>
+        <div class="mb-2">
+            <strong>About:</strong> {{ plant.about }}
+        </div>
+        <div class="mb-2">
+            <strong>Used For:</strong> {{ plant.used_for }}
+        </div>
+        <div class="mb-2">
+            <strong>Is Edible:</strong> {{ plant.is_edible }}
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+            <a href="{% url 'main:plant_update_view' plant.id %}" class="btn btn-primary">Update</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Plant</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete "{{ plant.name }}"?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="{% url 'main:plant_delete_view' plant.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<h3>Related Plants</h3>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+
+    {% for related in related_plants %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <img src="{{ related.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ related.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ related.name }}</h5>
+                <p class="card-text small">{{ related.about|truncatewords:12 }}</p>
+                <a href="{% url 'main:plant_detail_view' related.id %}" class="btn btn-dark btn-sm">View</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">No related plants found.</p>
+    {% endfor %}
+
+</div>
+<hr class="my-5">
+<h2>Comments ({{reviews.count}})</h2>
+
+<div class="d-flex flex-column gap-3">
+    {% for review in reviews %}
+        <div class="d-flex flex-column p-3 shadow">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4>{{review.name}}</h4>
+            </div>
+            <p>{{review.comment}}</p>
+            <p class="text-muted">{{review.created_at}}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<h2 class="mt-5">Add Comment</h2>
+<form class="d-flex flex-column gap-2" action="{% url 'main:add_review_view' plant.id %}" method="post">
+    {% csrf_token %}
+    <input class="form-control" name="name" required minlength="3" placeholder="name"/>
+    <textarea class="form-control" name="comment" required minlength="3" placeholder="Comment..."></textarea>
+    <input type="submit" class="btn btn-primary" value="Add Review" />
+</form>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f0f9f4;
+  color: #2c3e50;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-custom {
+  background-color: #27ae60;
+  color: white !important;
+  border-radius: 20px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+  background-color: #1e8449;
+  color: white !important;
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 0 8px rgba(30, 132, 73, 0.7);
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(39, 174, 96, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(39, 174, 96, 0.5);
+}
+
+.hero-section {
+  position: relative;
+  text-align: center;
+  margin: 3rem auto;
+  max-width: 1000px;
+}
+
+.hero-image {
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(39, 174, 96, 0.2);
+  max-height: 400px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.hero-overlay h1 {
+  color: #27ae60;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-weight: 700;
+}
+
+.hero-overlay p {
+  color: #145a32;
+  font-weight: 500;
+}
+
+.search-form-box form {
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.25);
+}
+
+.search-form-box input {
+  border: none;
+  padding-left: 1rem;
+  font-size: 1rem;
+}
+
+.search-form-box input:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.search-form-box button {
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.More {
+  color: #27ae60;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.3s ease;
+}
+
+.More:hover {
+  color: #1e8449;
+  text-decoration: underline;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: #000 !important; 
+}
+
+.navbar-nav .nav-link {
+  color: #145a32 !important;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #1e8449 !important;
+}
+
+.container {
+  max-width: 1140px;
+}
+
+@media (max-width: 768px) {
+  .hero-overlay {
+    max-width: 90%;
+  }
+}
