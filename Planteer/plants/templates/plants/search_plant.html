@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} Search Results {% endblock %}
+
+{% block content %}
+
+<h1>Search Results for "{{ request.GET.search }}"</h1>
+
+<form action="{% url 'plants:search_plant' %}" method="get" class="d-flex gap-2 mb-5">
+    <input type="search" name="search" class="form-control" value="{{ request.GET.search }}" placeholder="Search again...">
+    <button class="btn btn-dark" type="submit">Search</button>
+</form>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for plant in search_result %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.name }}">
+            <div class="card-body d-flex flex-column">
+                <a href="{% url 'plants:show_plant_details' plant.id %}" class="text-decoration-none text-dark">
+                    <h5 class="card-title">{{ plant.name }}</h5>
+                </a>
+                <p class="card-text">{{ plant.about }}</p>
+                <p class="card-text mt-auto"><small class="text-muted">{{ plant.category }}</small></p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+
+        <div class="col-12">
+            <div class="alert alert-warning" role="alert">
+                Sorry, no plants were found matching your search. Please try another keyword.
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+/* base.html */
+a{
+     color: #212529;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #0d6efd; 
+}
+
+/* index.html */
+#cover-img{
+    background-image: url('../images/Plant-Holder-4.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+
+#about-plant{
+    width: 100%;
+}
+
+
+/* plant_details.html */
+.details-img{
+    height: 10vh;
+    width:100vw
+}
+
+
+/* contact form  */

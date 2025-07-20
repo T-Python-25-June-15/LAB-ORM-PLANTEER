@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Add New Palent {% endblock %}
+
+{% block content %}
+
+<h1>Add New Plant</h1>
+<form action="{% url 'plants:create_new_plant' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-3 w-50">
+
+
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="name" class="form-control" required>
+    <textarea type="text" name="about" placeholder="about" class="form-control"></textarea>
+    <input type="text" name="used_for" placeholder="used for" class="form-control">
+    
+    <div>
+        <label>Category of plants</label>
+        <select name="category" class="form-control">
+            <!-- <option value="" selected>------</option> -->
+            {% for val, label in CategoryChoices %}
+            <option value="{{val}}">{{label}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="d-flex flex-column gap-1 ">
+        <label>Is a plant edibles? </label>
+        <div class="d-flex gap-1">
+            <label for="is_edible_yes">yes</label><br><input type="radio" name="is_edible" value="True" id="is_edible_yes">
+            <label for="is_edible_no">no</label><input type="radio" name="is_edible" value="False" id="is_edible_no" checked>
+        </div>
+    </div>
+    <input type="file" name="image" class="form-control">
+    <input type="submit" class="btn btn-dark" value="Add New Plant">
+</form>
+{% endblock %}

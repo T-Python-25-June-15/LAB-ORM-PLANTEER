@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Contact {% endblock %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+        <form class="d-flex flex-column gap-3" action="{% url 'contact:create_form_contact' %}" method="post">
+            {% csrf_token %}
+            <h1>Contact us</h1>
+            <p> Subhaeading for description or instructions</p>
+            <div class="row g-2">
+                <div class="col">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" name="first_name" placeholder="Hesham" id="firstName" class="form-control" required>
+                </div>
+                <div class="col">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" name="last_name" placeholder="Alsadan" id="lastName" class="form-control" >
+                </div>
+            </div>
+            <div>
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" name="email" placeholder="email@gmail.com" id="Email" class="form-control" required>
+            </div>
+            <div>
+                <label for="Message" class="form-label">Message</label>
+                <textarea name="message" class="form-control" placeholder="Enter your question or message" id="Message" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark" >Submit</button>
+        </form>
+    </div>
+    <div class="col">
+            <img src="{% static 'contact/images/contact_image.jpg' %}" class="img-fluid rounded">
+    </div>
+</div>
+{% endblock %}
