@@ -1,0 +1,42 @@
+{% extends 'main/base.html'%}
+{%load static%}
+
+{% block title%}
+    Contact Us
+{% endblock %}
+
+{% block pageTitle %}
+    Contact Us
+{% endblock %}
+
+{% block content %}
+<div class="flex md:flex-row flex-col gap-8">
+    <div class="md:w-[50%]">
+        <form method="post" enctype="multipart/form-data" action="{% url 'contact:contact_view'%}">
+            {% csrf_token %}
+            <div class="flex md:flex-row flex-col gap-4 ">
+                <div class="flex flex-col md:w-[50%] w-full">
+                    <label class="md:text-start text-center md:p-3" for="first_name">First name</label>
+                    <input class="md:text-start text-center rounded-md border-1 border-gray-200 p-3" type="text" name="first_name" id="first_name" placeholder="First name..." minlength="1" maxlength="64" required>
+                </div>
+                <div class="flex flex-col md:w-[50%] w-full">
+                    <label class="md:text-start text-center md:p-3" for="last_name">Last name</label>
+                    <input class="md:text-start text-center rounded-md border-1 border-gray-200 p-3" type="text" name="last_name" id="last_name" placeholder="Last name..." minlength="1" maxlength="64" required>
+                </div>
+            </div>
+            <div class="flex flex-col my-4">
+                <label class="md:text-start text-center md:p-3" for="email">Email address</label>
+                <input class="md:text-start text-center rounded-md border-1 border-gray-200 p-3" type="email" name="email" id="email" placeholder="E-mail address..." size="96" required>
+            </div>
+            <div class="flex flex-col my-4">
+                <label class="md:text-start text-center md:p-3" for="message">Your Message</label>
+                <textarea class="md:text-start text-center rounded-md border-1 border-gray-200 p-3" name="message" id="message" rows="5" cols="33" placeholder="Enter your question or message..."  required></textarea>
+            </div>
+            <input class="bg-black text-white w-full text-center p-2 rounded-md my-6 self-center" type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="bg-[url({% static 'images/contact_image.png' %})] bg-cover bg-no-repeat content-center h-[50vh] md:w-[50%] w-full rounded-sm"></div>
+</div>
+
+{% endblock%}
+
