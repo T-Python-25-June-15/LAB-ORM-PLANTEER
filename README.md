@@ -7,7 +7,11 @@
 ## 📸 Screenshots
 
 ![Home Page](screenshots/home.png)  
+
+---
 ![Plant Detail](screenshots/detail.png)  
+
+---
 ![Contact](screenshots/contact.png)
 
 ---
