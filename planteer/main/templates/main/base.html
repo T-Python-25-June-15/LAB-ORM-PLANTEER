@@ -19,9 +19,9 @@
     <a class="navbar-brand fw-bold" href="{% url 'home' %}">Planteer</a>
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav mx-2">
-        <li class=" text-dark fw-bold"><a href="{% url 'all_plant' %}" class="nav-link">All Plants</a></li>
+        <li class=" text-dark fw-bold"><a href="{% url 'plants:all_plant' %}" class="nav-link">All Plants</a></li>
         <li class=" text-dark fw-bold"><a href="{% url 'contact_us' %}" class="nav-link">Contact Us</a></li>
-        <li class=" text-dark fw-bold"><a href="{% url 'add_plant' %}" class="btn btn-dark">Add Plant</a></li>
+        <li class=" text-dark fw-bold"><a href="{% url 'plants:add_plant' %}" class="btn btn-dark">Add Plant</a></li>
       </ul>
     </div>
   </nav>

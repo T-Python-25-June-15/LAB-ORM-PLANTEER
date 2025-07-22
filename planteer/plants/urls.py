@@ -4,7 +4,7 @@ from plants import views
 from contact import views as contact_views
 from django.urls import include
 
-
+app_name = "plants"
 urlpatterns = [
     path('', views.home, name='home'),
     path('all/', views.all_plants, name='all_plant'),
