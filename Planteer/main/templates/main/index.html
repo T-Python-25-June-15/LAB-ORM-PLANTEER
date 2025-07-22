@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="hero-section text-center d-flex flex-column justify-content-center align-items-center">
+      <h1 class="fw-bold display-2">Planteer</h1>
+      <h1 class="fw-bold display-5">Plant Database For Plants Lovers</h1>
+
+      <form role="search" method="GET" action="{% url 'plants:search_plants_view'%}" class="d-flex justify-content-center mt-4 w-75 gap-4">
+        <input type="text" name="search" class="form-control w-75 rounded-start" placeholder="Search For Plant..." required minlength="3"/>
+        <button type="submit" class="btn btn-add-plant ">Search</button>
+      </form>
+    </div>
+
+
+
+    <div class="mt-5 d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="fw-bold mb-1">Plants</h2>
+            <p class="text-muted mb-0">Learn more about plants</p>
+        </div>
+        <a href="{% url 'plants:all_plant_view'%}" class="more-link text-dark fw-medium text-decoration-none">More →</a>   
+    </div>
+
+
+    <div class="row g-4 mt-5">
+        {% for plant in plants %}
+        <div class="col-md-4">
+            <a href="{% url 'plants:detail_plant_view' plant.id %}" class="text-decoration-none d-block h-100">
+
+            <div class="card h-150 border-0 ">
+                <img src="{{ plant.image.url }}" class="card-img-top rounded-3 mb-3" alt="{{ plant.name }}" style="object-fit: fill; height: 200px;">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-1 text-dark">{{ plant.name }}</h6>
+                    <p class="text-muted small mb-1">{{ plant.about|truncatewords:"6" }}</p>
+                    <p class="fw-bold small mb-0 text-dark">{{ plant.get_category_display }}</p>
+                </div>
+            </div>
+            </a>
+        </div>
+        {% empty %}
+        <p>No plants found.</p>
+        {% endfor %}
+    
+    
+    </div>
+
+</div>
+{% endblock %}

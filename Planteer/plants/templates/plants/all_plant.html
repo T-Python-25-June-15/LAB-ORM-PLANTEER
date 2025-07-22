@@ -1,0 +1,61 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mt-5 mb-4 flex-wrap">
+        <h2 class="fw-bold">All plant</h2>
+
+        <form method="get" class="d-flex gap-2">
+            <select name="category" class="form-select" style="width: 200px;">
+                <option value="all">All Categories</option>
+                {% for value, label in CategoryChoices %}
+                    <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="is_edible" class="form-select" style="width: 120px;">
+                <option value="">All</option>
+                <option value="true" {% if request.GET.is_edible == 'true' %}selected{% endif %}>Edible</option>
+                <option value="false" {% if request.GET.is_edible == 'false' %}selected{% endif %}>Not Edible</option>
+            </select>
+
+            <button type="submit" class="btn btn-dark">Filter</button>
+        </form>
+
+    </div>
+
+        <form method="GET" action="{% url 'plants:search_plants_view' %}" class="d-flex mb-4 mt-4 mx-auto">
+            <input type="text" name="search" class="form-control me-2" placeholder="Search For Plant ..." required minlength="3" />
+            <button type="submit" class="btn btn-dark">Search</button>
+        </form>
+    </div>
+
+
+    <div class="row g-4">
+        {% for plant in plants %}
+        <div class="col-md-4">
+            <a href="{% url 'plants:detail_plant_view' plant.id %}" class="text-decoration-none d-block h-100">
+
+            <div class="card h-150 border-0 ">
+                <img src="{{ plant.image.url }}" class="card-img-top rounded-3 mb-3" alt="{{ plant.name }}" style="object-fit: fill; height: 200px;">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-1 text-dark">{{ plant.name }}</h6>
+                    <p class="text-muted small mb-1">{{ plant.about|truncatewords:"6" }}</p>
+                    <p class="fw-bold small mb-0 text-dark">{{ plant.get_category_display }}</p>
+                </div>
+            </div>
+            </a>
+        </div>
+        {% empty %}
+        <p class="bg-warning p-3 rounded">No plants found.</p>
+        {% endfor %}
+    
+    </div>
+    
+</div>
+{% endblock %}
